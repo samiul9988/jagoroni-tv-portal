@@ -1,0 +1,35 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic');
+
+// Variables
+@import 'variables';
+
+// Bootstrap Icon
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+//Select2
+@import 'select2/dist/css/select2.min.css';
+
+//Select2 Bootstrap
+@import '@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css';
+
+// AdminLTE
+@import '../../public/vendor/adminlte/dist/css/adminlte.css';
+
+// Fontawesome
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+// Pace Progress
+@import '/node_modules/@lgaitan/pace-progress/dist/themes/blue/pace-theme-minimal.css';
+
+// Toastr
+@import '/node_modules/toastr/build/toastr.css';
+
+// Sweetalert
+@import '/node_modules/sweetalert2/dist/sweetalert2.css';
+
+// Icheck Bootstrap
+@import 'icheck-bootstrap';
+
+// Custom
+@import 'custom';

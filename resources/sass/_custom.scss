@@ -1,0 +1,47 @@
+// CUSTOM retenvi test
+.form-control-custom {
+    height: calc(1.5rem + 2px);
+    background-color: #fff;
+    color: #495057;
+    font-size: 1rem;
+    font-weight: 400;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    &:focus {
+        border: 1px solid #80bdff;
+        outline: 0;
+        box-shadow: inset 0 0 0 rgb(0 0 0 / 0%);
+    }
+}
+
+.dark-mode, .retenvi{
+    hr {
+        border-color: #6c757d
+    }
+    .form-control-custom {
+        height: calc(1.5rem + 2px);
+        background-color: #343a40;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 400;
+        border: 1px solid #6c757d;
+        border-radius: 0.25rem;
+        &:focus {
+            border: 1px solid #80bdff;
+            outline: 0;
+            box-shadow: inset 0 0 0 rgb(0 0 0 / 0%);
+        }
+    }
+
+    .select2-selection {
+        background: #454d55
+    }
+
+    .select2-container--bootstrap4 {
+        .select2-selection--multiple {
+            .select2-selection__choice {
+                color: #ced4c1;
+            }
+        }
+    }
+}

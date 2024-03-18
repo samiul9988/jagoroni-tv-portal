@@ -1,0 +1,253 @@
+aside .aside-title:after {
+    left: unset;
+    right: 0;
+}
+
+aside .aside-title {
+    right: unset;
+    left: 0
+}
+
+aside .aside-title .all {
+    left: 0 !important;
+    right: unset;
+}
+
+.skin-purple aside .aside-title .all,
+.skin-blue aside .aside-title .all,
+.skin-orange aside .aside-title .all {
+    left: 0 !important;
+    right: unset;
+}
+
+.title-col:after {
+    right: 0;
+}
+
+.aside-title .carousel-nav,
+.title-col .carousel-nav,
+.best-of-the-week .carousel-nav {
+    float: left
+}
+
+.article-list figure {
+    float: right;
+}
+
+.article-mini figure {
+    float: right;
+}
+
+.article-mini .padding {
+    margin-left: unset;
+    margin-right: 85px;
+}
+
+footer.footer .block .block-title:after {
+    right: 0;
+}
+
+.demo-setting {
+    left: unset;
+    right: 20px
+}
+
+.breadcrumb-item+.breadcrumb-item {
+    padding-left: unset;
+    padding-right: .5rem;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    float: right;
+    padding-right: unset;
+    padding-left: .5rem;
+}
+
+section.single article.main-article header .details li {
+    float: right;
+    margin-right: unset;
+    margin-left: 30px;
+}
+
+section.single footer .tags li {
+    float: right;
+}
+
+section.single footer .col-m:last-child {
+    text-align: left;
+}
+
+.sharing ul li {
+    float: right;
+}
+
+.article-list .details {
+    margin-left: unset;
+    margin-right: 315px;
+}
+
+.author figure {
+    float: right;
+}
+
+.author .details {
+    margin-left: unset;
+    margin-right: 120px;
+}
+
+section.single article.related .detail .category {
+    margin-left: unset;
+    margin-right: 0 !important;
+}
+
+.article-mini .detail .category {
+    margin-left: unset;
+    margin-right: 0 !important;
+}
+
+.headline .nav {
+    float: right;
+    margin-right: unset;
+    margin-left: 20px;
+}
+
+.tags-list {
+    margin: 0;
+    padding: 0;
+    padding-left: unset;
+    padding-right: 15px;
+}
+
+
+
+/*Menu*/
+
+.menu ul>li {
+    float: right;
+}
+
+.float-end {
+    float: left !important;
+}
+
+@media (min-width: 992px) {
+    .offset-lg-2 {
+        margin-left: unset;
+        margin-right: 16.66666667%;
+    }
+}
+
+.page .page-title {
+    text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.line div {
+    text-align: right;
+}
+
+article footer {
+    text-align: left;
+}
+
+.love {
+    float: right;
+}
+
+.menu ul {
+    margin: auto 0;
+}
+
+.dropdown-menu {
+    text-align: right;
+}
+
+aside .aside-title .all i {
+    margin-left: unset;
+    margin-right: 5px;
+}
+
+aside .aside-title .all i.ion-ios-arrow-right:before {
+    content: "\f3d3";
+    transform: scaleX(-1) !important;
+}
+
+.mobile-toggle a i.ion-ios-arrow-left:before {
+    content: "\f3d2";
+    transform: scaleX(-1) !important;
+}
+
+.ion-ios-arrow-thin-right:before {
+    content: "\f3d6";
+    transform: scaleX(-1) !important;
+}
+
+section.single footer .col-m:last-child .love i {
+    float: right;
+}
+
+.love div {
+    margin-right: 5px;
+}
+
+section.single article.main-article header .details li:after {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .menu .brand {
+        float: right
+    }
+
+    .menu .mobile-toggle {
+        float: left;
+        margin-left: unset;
+        margin-right: 20px;
+    }
+
+    nav.menu ul.nav-list.active,
+    .sidebar.active {
+        right: unset;
+        left: 0;
+    }
+
+    nav.menu ul.nav-list,
+    .sidebar {
+        right: unset;
+        left: -320px;
+    }
+
+    header.primary.up nav.menu ul.nav-list {
+        margin-left: unset;
+        margin-right: 40px;
+    }
+
+    header.primary.up nav.menu ul.nav-list li:first-child {
+        margin-left: unset;
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .article-list .details {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+footer.footer .footer-nav-horizontal li:not(:last-child):after{
+    content: "";
+    float: unset;
+    line-height: unset;
+}
+
+footer.footer .footer-nav-horizontal li:not(:first-child):after{
+    content: "/";
+    float: left;
+    line-height: 14px;
+}

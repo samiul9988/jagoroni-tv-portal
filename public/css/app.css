@@ -1,0 +1,50 @@
+#icon_sun {
+    display: none;
+}
+
+#icon_moon {
+    display: none;
+}
+
+#icon_system {
+    display: none;
+}
+
+html[color-theme=dark] #icon_moon {
+    display: block;
+}
+
+html[color-theme=light] #icon_sun {
+    display: block;
+}
+
+html[color-theme=system] #icon_system {
+    display: block;
+}
+
+.list-flags li {
+    padding: 0 3px 0 3px;
+    cursor: pointer;
+}
+
+.list-flags li.active {
+    border: 1px solid #afafaf;
+    background: #ced4da;
+}
+
+.list-flags li:hover {
+    background: #ced4da;
+    padding: 0 3px 0 3px;
+}
+
+._properties {
+    background: #e3e3e3;
+}
+
+.dark-mode ._properties {
+    background: #454d55;
+}
+
+.dark-mode .static {
+    background: #454d55;
+}
