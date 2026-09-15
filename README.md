@@ -1,14 +1,14 @@
-<p align="center"><img src="https://res.cloudinary.com/dvkfmbfct/image/upload/v1593146311/logo-dhakawatch-_h3gnfo.svg" width="400"></p>
+<p align="center"><img src="https://res.cloudinary.com/dvkfmbfct/image/upload/v1593146311/logo-jagoronitv-_h3gnfo.svg" width="400"></p>
 
-## About dhakawatch
+## About jagoronitv
 
-dhakawatch is website based laravel
+jagoronitv is website based laravel
 
 <p align="center"><img src="https://res.cloudinary.com/dvkfmbfct/image/upload/v1691303107/cover-magz_l6regk.png"></p>
 
-## dhakawatch Documentation
+## jagoronitv Documentation
 
-Please read it at [https://docs-dhakawatch.netlify.app](https://docs-dhakawatch.netlify.app/)
+Please read it at [https://docs-jagoronitv.netlify.app](https://docs-jagoronitv.netlify.app/)
 
 ### The packages used
 
@@ -38,12 +38,12 @@ Please read it at [https://docs-dhakawatch.netlify.app](https://docs-dhakawatch.
 
 ## License
 
-**dhakawatch** is licensed under the CodeCanyon's [Standard License](https://codecanyon.net/licenses/terms/regular) & [Extended License](https://codecanyon.net/licenses/terms/extended)
+**jagoronitv** is licensed under the CodeCanyon's [Standard License](https://codecanyon.net/licenses/terms/regular) & [Extended License](https://codecanyon.net/licenses/terms/extended)
 
 ## Edit file .env
 
 ```
-APP_NAME=dhakawatch
+APP_NAME=jagoronitv
 APP_URL=https://domain.com
 
 APP_TIMEZONE=UTC
@@ -100,3 +100,4 @@ password: admin123
 username/email: author / <author@retenvi.com>
 password: author123
 ```
+# jagoroni-tv-portal
