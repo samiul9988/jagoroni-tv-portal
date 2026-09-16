@@ -11,10 +11,10 @@
             @if($widgetData['title'] && Arr::exists($widgetData['title'], LaravelLocalization::getCurrentLocale()))
             <div class="title text-center">{{ $widgetData['title'][LaravelLocalization::getCurrentLocale()] }}</div>
             @else
-            <div class="title text-center">{{ __('dhakawatch::magz.newsletter') }}</div>
+            <div class="title text-center">{{ __('jagoronitv::magz.newsletter') }}</div>
             @endif
             <div class="input-group">
-                <input type="email" name="email" class="form-control email" placeholder="{{ __('dhakawatch::magz.your_mail') }}">
+                <input type="email" name="email" class="form-control email" placeholder="{{ __('jagoronitv::magz.your_mail') }}">
                 <div class="input-group-btn">
                     <button class="btn btn-primary" aria-label="email-submit"><i class="fa-regular fa-paper-plane"></i></button>
                 </div>
@@ -22,7 +22,7 @@
             @if($widgetData['description'] && Arr::exists($widgetData['description'], LaravelLocalization::getCurrentLocale()))
             <p>{{ $widgetData['description'][LaravelLocalization::getCurrentLocale()] }}</p>
             @else 
-            <p>{{ __('dhakawatch::magz.newsletter_description') }}</p>
+            <p>{{ __('jagoronitv::magz.newsletter_description') }}</p>
             @endif
         </form>
     </div>

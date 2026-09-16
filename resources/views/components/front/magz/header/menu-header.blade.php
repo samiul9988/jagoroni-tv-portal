@@ -1,11 +1,10 @@
 @inject('imageHelper', 'App\Helpers\ImageHelper')
 
-<nav class="menu">
-    <div class="container">
+<nav class="menu jtv-main-nav">
+    <div class="container jtv-nav-container">
         <div class="brand">
             <a href="/">
-                <img class="logo_dark" src="{{ $imageHelper::webLogoLight() }}" alt="Web Logo">
-                <img class="logo_light" src="{{ $imageHelper::webLogoDark() }}" alt="Web Logo">
+                <img class="jtv-nav-logo" src="{{ $imageHelper::webLogoLight() }}" alt="Jagoroni TV">
             </a>
         </div>
         <div class="mobile-toggle">
@@ -14,7 +13,7 @@
         <div class="mobile-toggle">
             <a href="#" data-toggle="sidebar" data-target="#sidebar"><i class="arrow-left"></i></a>
         </div>
-        <div id="menu-list">
+        <div id="menu-list" class="jtv-nav-list-wrap">
             @php $menus = $menuHeader @endphp
             @if($menus)
                 <ul class="nav-list">
@@ -29,8 +28,15 @@
                 </ul>
             @endif
             <ul class="float-end">
+                <li class="jtv-nav-live"><a href="#">Live</a></li>
+                <li class="jtv-nav-search">
+                    <form class="jtv-search-form" action="{{ route('search') }}" method="GET" role="search">
+                        <input type="search" name="q" value="{{ request('q') }}" placeholder="খুঁজুন" aria-label="Search">
+                        <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </li>
                 @if($displayLanguage == 'y')
-                <li class="dropdown magz-dropdown">  
+                <li class="dropdown magz-dropdown">
                     <a href="javascript:;"><span class="flag-icon flag-icon-{{ \App\Helpers\LocalizationHelper::getCurrentLocaleFlag(LaravelLocalization::getCurrentLocaleRegional()) }} mr-1"></span> <span class="d-none d-sm-inline">{{ LaravelLocalization::getCurrentLocaleName() }}</span></a>
                     @if(count($languages) > 1)
                     <ul class="dropdown-menu">

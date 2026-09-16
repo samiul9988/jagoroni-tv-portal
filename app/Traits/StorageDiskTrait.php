@@ -12,7 +12,7 @@ trait StorageDiskTrait
      */
     public function diskName()
     {
-        return env('FILESYSTEM_DRIVER');
+        return env('FILESYSTEM_DRIVER') ?: 'public';
     }
 
     /**

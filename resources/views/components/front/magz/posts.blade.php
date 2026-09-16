@@ -29,7 +29,7 @@
                             </div>
                         @endif
                         <div class="time">{{ $post->created_at->locale(LaravelLocalization::getCurrentLocale())->isoFormat('LL') }}</div>
-                        <div class="view">{{ $post->post_hits }} {{ __('dhakawatch::magz.views') }} &nbsp; {{ $post->like }} {{ __('dhakawatch::magz.likes') }}</div>
+                        <div class="view">{{ $post->post_hits }} {{ __('jagoronitv::magz.views') }} &nbsp; {{ $post->like }} {{ __('jagoronitv::magz.likes') }}</div>
                     </div>
                     <h1><a href="{{ $postHelper::getUriPost($post) }}">{{ $post->post_title }}</a></h1>
                     <p>

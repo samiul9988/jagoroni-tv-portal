@@ -31,9 +31,9 @@ class TagController extends Controller
             $posts = $tag->posts()->where('post_language', $id)->paginate(8);
 
             if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
-                $title = $tag->name . " :" . __('dhakawatch::magz.category') . " - " . config('settings.site_name');
+                $title = $tag->name . " :" . __('jagoronitv::magz.category') . " - " . config('settings.site_name');
             } else {
-                $title = config('settings.site_name') . " - " . __('dhakawatch::magz.tag') . ": " . $tag->name;
+                $title = config('settings.site_name') . " - " . __('jagoronitv::magz.tag') . ": " . $tag->name;
             }
 
             SeoHelper::getMeta($title, $description, null, route('tag.show', $tag));

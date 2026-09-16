@@ -24,7 +24,7 @@ use ZipArchive;
 class SettingController extends Controller
 {
     private $settingService;
-    
+
     /**
      * __construct
      *
@@ -222,7 +222,7 @@ class SettingController extends Controller
 
         return response()->json(['success' => __('message.saved_successfully')]);
     }
-    
+
     /**
      * changeCommentReqApproval
      *
@@ -240,7 +240,7 @@ class SettingController extends Controller
 
         return response()->json(['success' => $msg]);
     }
-    
+
     /**
      * changeSendCommentReplyEmail
      *
@@ -292,7 +292,7 @@ class SettingController extends Controller
 
         return response()->json(['success' => $msg]);
     }
-    
+
     /**
      * setConfig
      *
@@ -328,7 +328,7 @@ class SettingController extends Controller
     {
         Cache::forget('settings');
 
-        
+
         $currentUser = Auth::User();
 
         if(!$currentUser->hasRole(['super-admin', 'admin'])) {
@@ -355,7 +355,7 @@ class SettingController extends Controller
         }
 
         $this->settingService->modify('email_verification', request('active'));
-        
+
         if (request('active') === 'y') {
             $msg = __('message.email_verification_enabled');
         } else {
@@ -621,7 +621,7 @@ class SettingController extends Controller
             $dataArr = json_decode(config('settings.links'), true);
 
             $recentLinks = Arr::last($dataArr);
-    
+
             $newItem = [
                 'id'    => $recentLinks ? $recentLinks['id'] + 1 : 1,
                 'name'  => $request->label,
@@ -629,9 +629,9 @@ class SettingController extends Controller
                 'icon'  => $request->icon,
                 'color' => $request->color
             ];
-    
+
             array_push($dataArr, $newItem);
-    
+
             Cache::forget('settings');
             $this->settingService->modify('links', json_encode($dataArr));
         }
@@ -975,23 +975,50 @@ class SettingController extends Controller
      * @return void
      */
     public function uploadProperties(Request $request)
-    {   
+    {
         // validate data
         $validator = Validator::make($request->all(), [
-            'file' => 'mimes:png,jpg,jpeg,gif,webp|max:5000'
+            'asset' => [
+                'required',
+                'string',
+                Rule::in([
+                    'logo_web_light',
+                    'logo_web_dark',
+                    'favicon',
+                    'logo_dashboard',
+                    'logo_auth',
+                    'ogi_homepage',
+                    'ogi_article_post',
+                    'ogi_page',
+                    'ogi_video_post',
+                    'ogi_audio_post',
+                    'ogi_category',
+                    'ogi_tag',
+                    'ogi_posts',
+                    'ogi_popular_post',
+                    'ogi_contact',
+                    'ogi_search',
+                ]),
+            ],
+            'file' => ['required', 'file', 'mimes:png,jpg,jpeg,gif,webp', 'max:5000'],
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
+            return response()->json([
+                'asset' => $request->input('asset'),
+                'errors' => $validator->errors(),
+            ], 422);
         }
 
+        $filename = $this->settingService->uploadFile('assets', $request->file('file'));
+        $this->settingService->modify($request->input('asset'), $filename);
         Cache::forget('settings');
 
-        $filename = $this->settingService->uploadFile('assets', $request->file('file'));
-        $this->settingService->modify($request->asset, $filename);
-
-        return response()->json(['asset' => $request->asset, 'success' => __('message.image_uploaded_successfully')]);  
-    } 
+        return response()->json([
+            'asset' => $request->input('asset'),
+            'success' => __('message.image_uploaded_successfully'),
+        ]);
+    }
 
     /**
      * webConfig
@@ -1010,7 +1037,7 @@ class SettingController extends Controller
         $sendCommentReplyEmail = config('settings.send_comment_reply_email') === 'y' ? 'checked' : '';
         $numberNestedComments = [2,3,4,5,6,7,8,9,10];
 
-        return view('admin.settings.web-config', compact('propertyId', 
+        return view('admin.settings.web-config', compact('propertyId',
             'emailVerification',
             'showLanguage',
             'languages',
@@ -1022,7 +1049,7 @@ class SettingController extends Controller
         ));
     }
 
-    
+
     /**
      * updateWebConfig
      *

@@ -30,7 +30,7 @@
                                     </a>
                                 </div>
                             @endif
-                            <div class="view">{{ $post->post_hits }} {{ __('dhakawatch::magz.views') }} &nbsp; {{ $post->like }} {{ __('dhakawatch::magz.likes') }}</div>
+                            <div class="view">{{ $post->post_hits }} {{ __('jagoronitv::magz.views') }} &nbsp; {{ $post->like }} {{ __('jagoronitv::magz.likes') }}</div>
                         </div>
                         <h2><a href="{{ $audioHelper->getUriPost($post) }}">{{ $post->post_title }}</a></h2>
                         <p>{!! \Str::limit(strip_tags($post->post_content), 150) !!}</p>

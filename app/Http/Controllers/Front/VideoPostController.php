@@ -33,11 +33,11 @@ class VideoPostController extends Controller
         $posts = $query->latest()->paginate(8);
 
         if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
-            $attr = ($posts->currentPage() == 1) ? "" : __('dhakawatch::magz.page') . " " . $posts->currentPage() . " - ";
-            $seoTitle = "$attr " . __('dhakawatch::magz.latest_videos') . " - " . config('settings.site_name');
+            $attr = ($posts->currentPage() == 1) ? "" : __('jagoronitv::magz.page') . " " . $posts->currentPage() . " - ";
+            $seoTitle = "$attr " . __('jagoronitv::magz.latest_videos') . " - " . config('settings.site_name');
         } else {
-            $attr = ($posts->currentPage() == 1) ? "" : " - " . __('dhakawatch::magz.page') . " " . $posts->currentPage();
-            $seoTitle = config('settings.site_name') . " - " . __('dhakawatch::magz.latest_videos') . " $attr";
+            $attr = ($posts->currentPage() == 1) ? "" : " - " . __('jagoronitv::magz.page') . " " . $posts->currentPage();
+            $seoTitle = config('settings.site_name') . " - " . __('jagoronitv::magz.latest_videos') . " $attr";
         }
 
         SeoHelper::getPage('video_post', $seoTitle);

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\{File, Schema};
 use Intervention\Image\Facades\Image;
 
 Class PostHelper
-{   
+{
     /**
      * @param $postLangCode
      * @param $translations
@@ -64,9 +64,22 @@ Class PostHelper
         $image = asset('img/noimage.webp');
 
         $path = $size ?  '/' . $size . '/' : '/';
-        
-        if ($post->post_image AND ImageHelper::isExists('images', $post->post_image) AND $size) {
-            (new class { use PostTrait; })->generateAnotherSizePostThumbnailIfNotExists($post, $size);
+
+        if ($post->post_image && ImageHelper::isExists('images', $post->post_image) && $size) {
+            $extension = strtolower(pathinfo($post->post_image, PATHINFO_EXTENSION));
+
+            // Intervention Image cannot decode SVG files, but browsers can render
+            // them directly. Do not try to create raster thumbnails for SVGs.
+            if ($extension === 'svg') {
+                return asset('storage/images/' . $post->post_image);
+            }
+
+            try {
+                (new class { use PostTrait; })->generateAnotherSizePostThumbnailIfNotExists($post, $size);
+            } catch (\Throwable $exception) {
+                // A damaged or unsupported image must not take down the homepage.
+                return $image;
+            }
         }
 
         if (!empty($post->post_image)) {
@@ -80,7 +93,7 @@ Class PostHelper
 
             if ($postImageMeta) {
                 $image = json_decode($post->post_image_meta)->image_url;
-            } else {         
+            } else {
                 preg_match_all('/src="([^"]*)"/', $post->post_content, $result);
 
                 if (empty($result[1][0])) {
@@ -157,7 +170,7 @@ Class PostHelper
         }
 
         $size = $size ?  '/' . $size . '/' : '/';
-        
+
         if (!empty($post_image) && ImageHelper::isExists('images' . $size, $post_image)) {
             $image = asset('storage/images'. $size . $post_image);
         }
@@ -171,7 +184,7 @@ Class PostHelper
      * @param mixed $postImageMeta
      * @return void
      */
-    public static function getPostThumbnailUrl($postImageMeta) 
+    public static function getPostThumbnailUrl($postImageMeta)
     {
         return $postImageMeta ? json_decode($postImageMeta)->image_url : null;
     }
@@ -180,7 +193,7 @@ Class PostHelper
      * @param $request
      * @return string
      */
-    public static function getPostThumbnailCaption($postImageMeta) 
+    public static function getPostThumbnailCaption($postImageMeta)
     {
         return $postImageMeta ? json_decode($postImageMeta)->caption : null;
     }

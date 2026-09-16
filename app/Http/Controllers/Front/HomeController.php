@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         SeoHelper::getAll(config('settings.site_name'));
-        return view(SettingHelper::activeTheme('page/home'));
+        return view(SettingHelper::activeTheme('page/jamuna-home'));
     }
 
     /**
@@ -44,7 +44,7 @@ class HomeController extends Controller
             } else {
                 $rpost = Post::videoAudioPost()->wherePostName($slug)->first();
                 return (new ArticleController)->show($rpost);
-            }  
+            }
         } else if (Post::page()->wherePostName($slug)->exists()) {
             if (config('settings.page_permalink_type') == 'page_name') {
                 $rpage = Post::page()->wherePostName($slug)->first();
@@ -52,12 +52,12 @@ class HomeController extends Controller
             } else {
                 return redirect('/page/' . $slug);
             }
-            
+
         } else if (Term::Category()->where('slug', $slug)->exists()) {
-        
+
             if (config('settings.category_permalink_type') == 'with_prefix_category') {
                 return redirect('/category/' . $slug);
-            } else {    
+            } else {
                 $rcategory = Term::Category()->where('slug', $slug)
                     ->where('language_id', $id)->first();
 
@@ -74,11 +74,11 @@ class HomeController extends Controller
                 $data  = ThemeHelper::getConfigContact('magz', 'contact', 'body')['config'];
                 return redirect($data['url'][$locale]);
             }
-            SeoHelper::getAll(__('dhakawatch::magz.contact'), null, null, null, url("/contact"));
+            SeoHelper::getAll(__('jagoronitv::magz.contact'), null, null, null, url("/contact"));
             return view(SettingHelper::activeTheme('page/contact'));
         } else {
             return abort(404);
-        } 
-        
+        }
+
     }
 }

@@ -15,10 +15,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">{{ __('dhakawatch::magz.home') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('dhakawatch::magz.all_news') }}</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('jagoronitv::magz.home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('jagoronitv::magz.all_news') }}</li>
                         </ol>
-                        <h1 class="page-title">{{ __('dhakawatch::magz.all_news') }}</h1>
+                        <h1 class="page-title">{{ __('jagoronitv::magz.all_news') }}</h1>
                     </div>
                 </div>
                 <div class="line"></div>
@@ -42,7 +42,7 @@
                                     </div>
                                     @endif
                                     <div class="time">{{ $post->created_at->locale(LaravelLocalization::getCurrentLocale())->isoFormat('LL') }}</div>
-                                    <div class="view">{{ $post->post_hits }} {{ __('dhakawatch::magz.views') }} &nbsp; {{ $post->like }} {{ __('dhakawatch::magz.likes') }}</div>
+                                    <div class="view">{{ $post->post_hits }} {{ __('jagoronitv::magz.views') }} &nbsp; {{ $post->like }} {{ __('jagoronitv::magz.likes') }}</div>
                                 </div>
                                 <h1><a href="{{ $postHelper->getUriPost($post) }}">{{ $post->post_title }}</a></h1>
                                 <p>{!! \Str::limit(strip_tags($post->post_content), 150) !!}</p>

@@ -7,11 +7,11 @@
     <div class="nav" id="headline-nav">
         <a class="left carousel-control carousel-control-prev" role="button" data-slide="prev">
             <span class="arrow-left"></span>
-            <span class="sr-only">{{ __('dhakawatch::magz.previous') }}</span>
+            <span class="sr-only">{{ __('jagoronitv::magz.previous') }}</span>
         </a>
         <a class="right carousel-control carousel-control-next" role="button" data-slide="next">
             <span class="arrow-right"></span>
-            <span class="sr-only">{{ __('dhakawatch::magz.next') }}</span>
+            <span class="sr-only">{{ __('jagoronitv::magz.next') }}</span>
         </a>
     </div>
     <div class="owl-carousel owl-theme" id="headline" data-autoplay="{{ $autoPlay }}">

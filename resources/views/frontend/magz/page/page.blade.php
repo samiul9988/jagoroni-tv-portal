@@ -13,7 +13,7 @@
             <div class="col-lg-8 @if($sidebarActive === false) offset-lg-2 @endif">
                 @if($pages->post_title)
                 <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="/">{{ __('dhakawatch::magz.home') }}</a></li>
+                    <li class="breadcrumb-item"><a href="/">{{ __('jagoronitv::magz.home') }}</a></li>
                     <li class="breadcrumb-item active">{{ $pages->post_title }}</li>
                 </ol>
                 @endif

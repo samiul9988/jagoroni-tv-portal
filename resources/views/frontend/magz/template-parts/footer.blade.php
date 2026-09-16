@@ -1,6 +1,6 @@
 @inject('themeHelper', 'App\Helpers\ThemeHelper')
 
-<div class="container-md">
+<div class="jtv-modern-footer-inner container-md">
     @if($footerActive)
     <div class="row">
         @foreach($footer as $index => $column)
@@ -18,7 +18,7 @@
     @endif
     <div class="row">
         <div class="col-lg-12">
-            <div class="copyright border-top-0 mt-0">
+            <div class="jtv-footer-copyright copyright border-top-0 mt-0">
                 @include('frontend.magz.inc._credit-footer')
             </div>
         </div>

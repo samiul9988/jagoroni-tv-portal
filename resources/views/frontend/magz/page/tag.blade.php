@@ -17,11 +17,11 @@
                     @if($tag)
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">{{ __('dhakawatch::magz.home') }}</a></li>
+                            <li class="breadcrumb-item"><a href="/">{{ __('jagoronitv::magz.home') }}</a></li>
                             <li class="breadcrumb-item active">{{ $tag->name }}</li>
                         </ol>
-                        <h1 class="page-title">{{ __('dhakawatch::magz.tag') }}: {{ $tag->name }}</h1>
-                        <p class="page-subtitle">{{ __('dhakawatch::magz.showing_all_posts_with_tag') }} <i>{{ $tag->name }}</i></p>
+                        <h1 class="page-title">{{ __('jagoronitv::magz.tag') }}: {{ $tag->name }}</h1>
+                        <p class="page-subtitle">{{ __('jagoronitv::magz.showing_all_posts_with_tag') }} <i>{{ $tag->name }}</i></p>
                     </div>
                     @endif
                 </div>
@@ -54,7 +54,7 @@
                                     </div>
                                     @endif
                                     <div class="time">{{ $post->created_at->locale(LaravelLocalization::getCurrentLocale())->isoFormat('LL') }}</div>
-                                    <div class="view">{{ $post->post_hits }} {{ __('dhakawatch::magz.views') }} &nbsp; {{ $post->like }} {{ __('dhakawatch::magz.likes') }}</div>
+                                    <div class="view">{{ $post->post_hits }} {{ __('jagoronitv::magz.views') }} &nbsp; {{ $post->like }} {{ __('jagoronitv::magz.likes') }}</div>
                                 </div>
                                 <h1><a href="{{ $postHelper->getUriPost($post) }}">{{ $post->post_title }}</a></h1>
                                 <p>{!! \Str::limit(strip_tags($post->post_content), 150) !!}</p>

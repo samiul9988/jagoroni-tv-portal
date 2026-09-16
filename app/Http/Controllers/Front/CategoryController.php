@@ -30,9 +30,9 @@ class CategoryController extends Controller
             $image = ImageHelper::ogImageCategory($category->image);
 
             if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
-                $title = $category->name . " :" . __('dhakawatch::magz.category') . " - " . config('settings.site_name');
+                $title = $category->name . " :" . __('jagoronitv::magz.category') . " - " . config('settings.site_name');
             } else {
-                $title = config('settings.site_name') . " - ".__('dhakawatch::magz.category') . ": " . $category->name;
+                $title = config('settings.site_name') . " - ".__('jagoronitv::magz.category') . ": " . $category->name;
             }
 
             SeoHelper::getMeta($title, $description, null, route('category.show', $category->slug));

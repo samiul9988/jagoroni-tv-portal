@@ -31,7 +31,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('frontend.magz.page.home', HomeComposer::class);
+        View::composer(['frontend.magz.page.home', 'frontend.magz.page.jamuna-home'], HomeComposer::class);
         View::composer('frontend.magz.page.single', SingleComposer::class);
         View::composer('frontend.magz.page.posts', postsComposer::class);
         View::composer('frontend.magz.page.videos', VideosComposer::class);

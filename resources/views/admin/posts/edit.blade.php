@@ -92,6 +92,9 @@
                     </div>
                     <div class="form-group">
                         <label for="">{{ __('form.translations') }}</label>
+                        @php
+                            $translationValue = $post->translations->first()?->value;
+                        @endphp
                         @foreach(LocalizationHelper::languageWithFlag() as $trans)
                             @if($trans->language != $language->language)
                                 <div class="input-group mb-3">
@@ -99,8 +102,8 @@
                                         <span class="input-group-text">
                                             <img src="{{ asset('img/flags/4x3/'.strtolower($trans->country_code).'.svg') }}" width="25">
                                         </span>
-                                        @if($postHelper->checkExistsTrans($trans->language, $post->translations->first()->value))
-                                            <a class="btn btn-outline-secondary" href="{{ route('posts.edit', \App\Helpers\PostHelper::getTransPostId($trans->id, $post->translations->first()->value)) }}">
+                                        @if($translationValue && $postHelper->checkExistsTrans($trans->language, $translationValue))
+                                            <a class="btn btn-outline-secondary" href="{{ route('posts.edit', \App\Helpers\PostHelper::getTransPostId($trans->id, $translationValue)) }}">
                                                 <i class="fa fa-pencil-alt"></i>
                                             </a>
                                         @else
@@ -109,7 +112,7 @@
                                             </a>
                                         @endif
                                     </div>
-                                    <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ \App\Helpers\PostHelper::showTransPostTitle($trans->id, $post->translations->first()->value) }}" disabled>
+                                    <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ $translationValue ? \App\Helpers\PostHelper::showTransPostTitle($trans->id, $translationValue) : '' }}" disabled>
                                 </div>
                             @endif
                         @endforeach
@@ -330,7 +333,7 @@
                             <span id="showDateTimePublish">{{ $post->created_at->locale($language->language)->isoFormat('LLL') }}</span>
                             <span id="displayDateTimePublish">{{ __('button.edit') }}</span>
                             <span id="closeDateTimePublish" class="d-none">{{ __('button.close') }}</span>
-                        </div> 
+                        </div>
                         <div id="displayDateTimeEdit" class="d-none">
                             <div class="row mb-3">
                                 <div class="col-6">
@@ -338,7 +341,7 @@
                                     @for ($m=1; $m<=12; $m++)
                                         @if ($m == $post->created_at->locale($language->language)->isoFormat('M') )
                                         <option value="{{ $m }}" selected>{{ date('F', mktime(0,0,0,$m, 1, date('Y'))) }}</option>
-                                        @else 
+                                        @else
                                         <option value="{{ $m }}">{{ date('F', mktime(0,0,0,$m, 1, date('Y'))) }}</option>
                                         @endif
                                     @endfor
@@ -365,7 +368,7 @@
                                 <div class="col-8">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-info">
-                                        <input type="radio" name="timeFormat" id="time-am" autocomplete="off" @if($post->created_at->isoFormat('A') == "AM") checked @endif value="AM"> AM 
+                                        <input type="radio" name="timeFormat" id="time-am" autocomplete="off" @if($post->created_at->isoFormat('A') == "AM") checked @endif value="AM"> AM
                                     </label>
                                     <label class="btn btn-info">
                                         <input type="radio" name="timeFormat" id="time-pm" autocomplete="off" @if($post->created_at->isoFormat('A') == "PM") checked @endif value="PM"> PM

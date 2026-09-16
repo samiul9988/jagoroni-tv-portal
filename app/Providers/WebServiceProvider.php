@@ -82,6 +82,6 @@ class WebServiceProvider extends ServiceProvider
 
         View::share('hashids', new Hashids());
 
-        $this->loadTranslationsFrom(base_path('lang/vendor/theme'), 'dhakawatch');
+        $this->loadTranslationsFrom(base_path('lang/vendor/theme'), 'jagoronitv');
     }
 }

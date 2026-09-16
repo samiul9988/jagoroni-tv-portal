@@ -13,7 +13,7 @@
             @endif
             <div class="col-lg-8 col-md-12 col-sm-12 col-12 @if($sidebarActive === false) offset-lg-2 @endif">
                 <div class="search-result">
-                    {{ __('dhakawatch::magz.search_keyword') }} "{{ $keyword }}" {{ __('dhakawatch::magz.search_found_in') }} {{ $countResults }} {{ __('dhakawatch::magz.posts') }}.
+                    {{ __('jagoronitv::magz.search_keyword') }} "{{ $keyword }}" {{ __('jagoronitv::magz.search_found_in') }} {{ $countResults }} {{ __('jagoronitv::magz.posts') }}.
                 </div>
                 <div class="row">
                     @foreach( $posts as $post )
@@ -34,7 +34,7 @@
                                     </div>&nbsp;
                                     @endif
                                     <time> {{ $post->created_at->locale(LaravelLocalization::getCurrentLocale())->isoFormat('LL') }}</time>
-                                    <div class="view">{{ $post->post_hits }} {{ __('dhakawatch::magz.views') }} &nbsp; {{ $post->like }} {{ __('dhakawatch::magz.likes') }}</div>
+                                    <div class="view">{{ $post->post_hits }} {{ __('jagoronitv::magz.views') }} &nbsp; {{ $post->like }} {{ __('jagoronitv::magz.likes') }}</div>
                                 </div>
                                 <h1><a href="{{ $postHelper->getUriPost($post) }}">{{ $post->post_title }}</a></h1>
                                 <p>{!! \Str::limit(strip_tags($post->post_content), 150) !!}</p>

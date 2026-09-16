@@ -14,7 +14,7 @@
             <div class="col-lg-8 @if($sidebarActive === false) offset-lg-2 @endif">
             @if($post->post_title)
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">{{ __('dhakawatch::magz.home') }}</a></li>
+                    <li class="breadcrumb-item"><a href="/">{{ __('jagoronitv::magz.home') }}</a></li>
                     @if($post->categories->first() AND $post->categories->first()->name)
                         <li class="breadcrumb-item active" aria-current="page">{{ $post->terms()->category()->first()->name }}</li>
                     @endif
@@ -23,7 +23,7 @@
                     <header>
                         <h1>{{ $post->post_title }}</h1>
                         <ul class="details">
-                            <li>{{ __('dhakawatch::magz.posted_on') }} {{ $post->created_at->locale(LaravelLocalization::getCurrentLocale())->isoFormat('LL') }}</li>
+                            <li>{{ __('jagoronitv::magz.posted_on') }} {{ $post->created_at->locale(LaravelLocalization::getCurrentLocale())->isoFormat('LL') }}</li>
                             @if($post->categories->first() AND $post->categories->first()->name)
                                 <li>
                                     <a href="{{ $termHelper->resolveUrl($post, $post->terms()->category()->first()->slug) }}">
@@ -31,8 +31,8 @@
                                     </a>
                                 </li>
                             @endif
-                            <li>{{ __('dhakawatch::magz.by') }} <span>{{ $post->user->name }}</span></li>
-                            <li>{{ $post->post_hits }} {{ __('dhakawatch::magz.views') }}</li>
+                            <li>{{ __('jagoronitv::magz.by') }} <span>{{ $post->user->name }}</span></li>
+                            <li>{{ $post->post_hits }} {{ __('jagoronitv::magz.views') }}</li>
                         </ul>
                     </header>
                     <div class="main">
@@ -139,7 +139,7 @@
                     </footer>
                 </article>
                 <div class="sharing">
-                    <div class="title"><i class="ion-android-share-alt"></i> {{ __('dhakawatch::magz.sharing_is_caring') }}</div>
+                    <div class="title"><i class="ion-android-share-alt"></i> {{ __('jagoronitv::magz.sharing_is_caring') }}</div>
                     {!! Share::page(request()->url(), $post->post_title, [], '<ul class="social">', '</ul>')
                     ->facebook()
                     ->twitter()
@@ -148,7 +148,7 @@
                     ->telegram()!!}
                 </div>
                 <div class="line">
-                    <div>{{ __('dhakawatch::magz.author') }}</div>
+                    <div>{{ __('jagoronitv::magz.author') }}</div>
                 </div>
                 <div class="author">
                     <figure>
@@ -157,13 +157,13 @@
                                 @if(\App\Helpers\ImageHelper::isExists('avatar', $post->user->photo))
                                     <img src="{{ asset('storage/avatar/'.$post->user->photo) }}" alt="{{ $post->user->name }}" width="100" height="100">
                                 @else
-                                    <img src="{{ asset('img/noavatar.png') }}" alt="{{ __('dhakawatch::magz.no_image') }}" width="100" height="100">
+                                    <img src="{{ asset('img/noavatar.png') }}" alt="{{ __('jagoronitv::magz.no_image') }}" width="100" height="100">
                                 @endif
                             @else
-                                <img src="{{ asset('img/noavatar.png') }}" alt="{{ __('dhakawatch::magz.no_image') }}" width="100" height="100">
+                                <img src="{{ asset('img/noavatar.png') }}" alt="{{ __('jagoronitv::magz.no_image') }}" width="100" height="100">
                             @endif
                         @else
-                            <img src="{{ asset('img/noavatar.png') }}" alt="{{ __('dhakawatch::magz.no_image') }}" width="100" height="100">
+                            <img src="{{ asset('img/noavatar.png') }}" alt="{{ __('jagoronitv::magz.no_image') }}" width="100" height="100">
                         @endif
                     </figure>
                     <div class="details">
@@ -226,7 +226,7 @@
             $('.comment-form').attr('action', url);
             $('.comment-form').attr('data-action', '');
             $('.form-control').removeClass('is-invalid');
-            $('#comment-submit').html("{{ __('dhakawatch::magz.send_response') }}");
+            $('#comment-submit').html("{{ __('jagoronitv::magz.send_response') }}");
             $(".spinner-grow").attr("hidden");  
         })
     </script>

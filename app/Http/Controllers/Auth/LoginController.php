@@ -48,15 +48,19 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => ['required', 'string'],
+            'email' => ['nullable', 'email', 'required_without:username'],
+            'username' => ['nullable', 'string', 'required_without:email'],
             'password' => ['required', 'string', 'min:6']
         ]);
 
-        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $loginValue = $request->input('email') ?: $request->input('username');
+        $fieldType = $request->filled('email') || filter_var($loginValue, FILTER_VALIDATE_EMAIL)
+            ? 'email'
+            : 'username';
         $remember = $request->has('remember') ? $request->remember : null;
 
         $credentials = [
-            $fieldType => $request->username,
+            $fieldType => $loginValue,
             'password' => $request->password,
             'active' => 1
         ];
@@ -70,7 +74,7 @@ class LoginController extends Controller
         return back()
             ->withInput()
             ->withErrors([
-                'username' => __('auth.failed'),
+                $fieldType => __('auth.failed'),
             ]);
     }
 }

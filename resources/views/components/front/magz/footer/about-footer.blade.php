@@ -9,6 +9,6 @@
         {{ config('settings.site_description') }}
     </p>
     @if($widgetData['link'] == 'true')
-    <a href="{{ route('page.show', 'about') }}" class="btn btn-magz white" aria-label="{{ __('dhakawatch::magz.about_us') }}">{{ __('dhakawatch::magz.about_us') }} &#8594;</a>
+    <a href="{{ route('page.show', 'about') }}" class="btn btn-magz white" aria-label="{{ __('jagoronitv::magz.about_us') }}">{{ __('jagoronitv::magz.about_us') }} &#8594;</a>
     @endif
 </div>

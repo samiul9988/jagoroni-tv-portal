@@ -15,8 +15,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ArticleController extends Controller
-{    
-    
+{
+
     /**
      * index
      *
@@ -29,11 +29,11 @@ class ArticleController extends Controller
         $posts = $postService->latest()->paginate(8);
 
         if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
-            $attr = ($posts->currentPage() == 1) ? "" : __('dhakawatch::magz.page')." " . $posts->currentPage() . " - ";
-            $seoTitle = "$attr " . __('dhakawatch::magz.latest_news') . " - " . config('settings.site_name');
+            $attr = ($posts->currentPage() == 1) ? "" : __('jagoronitv::magz.page')." " . $posts->currentPage() . " - ";
+            $seoTitle = "$attr " . __('jagoronitv::magz.latest_news') . " - " . config('settings.site_name');
         } else {
-            $attr = ($posts->currentPage() == 1) ? "" : " - ".__('dhakawatch::magz.page')." " . $posts->currentPage();
-            $seoTitle = config('settings.site_name') . " - " .__('dhakawatch::magz.latest_news') ." $attr";
+            $attr = ($posts->currentPage() == 1) ? "" : " - ".__('jagoronitv::magz.page')." " . $posts->currentPage();
+            $seoTitle = config('settings.site_name') . " - " .__('jagoronitv::magz.latest_news') ." $attr";
         }
 
         SeoHelper::getPage('posts', $seoTitle);
@@ -58,19 +58,23 @@ class ArticleController extends Controller
 
             $id = LocalizationHelper::getCurrentLocaleId();
 
-            $value = $post->translations->first()->value;
+            $translation = $post->translations->first();
+            $translationValue = $translation?->value;
+            $translatedPostIds = $translationValue ? json_decode($translationValue, true) : null;
 
-            if (count(json_decode($value, true)) > 1) {
-                $postId = data_get(json_decode($value, true), $getCurrentLocale);
-            } else {
-                if ($post->post_language == $id) {
-                    $postId = $post->id;
-                } else {
+            if (is_array($translatedPostIds) && count($translatedPostIds) > 1) {
+                $postId = data_get($translatedPostIds, $getCurrentLocale);
+
+                if (!$postId) {
                     abort(404);
                 }
+            } elseif ($post->post_language == $id) {
+                $postId = $post->id;
+            } else {
+                abort(404);
             }
 
-            $post = Post::with('terms')->find($postId);
+            $post = Post::with('terms')->findOrFail($postId);
 
             if ($post->post_visibility != "public" || $post->post_status == "draft") {
                 if (!Auth::check() || $post->post_author != Auth::id()) {
@@ -85,7 +89,7 @@ class ArticleController extends Controller
 
             preg_match_all('/src="([^"]*)"/', $post->post_content, $result);
 
-            
+
             if (!empty($post->post_image)) {
                 $image = route('ogi.display', $post->post_image);
             } else {
@@ -102,7 +106,7 @@ class ArticleController extends Controller
                         }
                     } else if ($post->post_type == 'video_url' || $post->post_type == 'video_embed' || $post->post_type == 'video_file') {
                         $ogImage = (config('settings.ogi_video_post')) ? route('ogi.display', config('settings.ogi_video_post')) : asset('img/cover.webp');
-                        
+
                         if (config('settings.ogi_video_post')) {
                             $image = route('ogi.display', config('settings.ogi_video_post'));
                         } else {
@@ -117,7 +121,7 @@ class ArticleController extends Controller
                             $image = $ogImage;
                         }
                     }
-                    
+
                 }
             }
 
@@ -193,7 +197,7 @@ class ArticleController extends Controller
         $comments->load('reply');
 
         return view(SettingHelper::activeTheme('page/single'), compact(
-            'post', 'tags', 'comments' 
+            'post', 'tags', 'comments'
         ));
     }
 
@@ -206,11 +210,11 @@ class ArticleController extends Controller
         $posts = $query->orderBy('post_hits','DESC')->paginate(8);
 
         if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
-            $attr = ($posts->currentPage() == 1) ? "" : $posts->currentPage() . " " . __('dhakawatch::magz.page') . " - ";
-            $seoTitle = "$attr " . __('dhakawatch::magz.all_popular_news') . " - " . config('settings.site_name');
+            $attr = ($posts->currentPage() == 1) ? "" : $posts->currentPage() . " " . __('jagoronitv::magz.page') . " - ";
+            $seoTitle = "$attr " . __('jagoronitv::magz.all_popular_news') . " - " . config('settings.site_name');
         } else {
-            $attr = ($posts->currentPage() == 1) ? "" : " - ".__('dhakawatch::magz.page') . " " . $posts->currentPage();
-            $seoTitle = config('settings.site_name') . " - " . __('dhakawatch::magz.all_popular_news') . " $attr";
+            $attr = ($posts->currentPage() == 1) ? "" : " - ".__('jagoronitv::magz.page') . " " . $posts->currentPage();
+            $seoTitle = config('settings.site_name') . " - " . __('jagoronitv::magz.all_popular_news') . " $attr";
         }
 
         SeoHelper::getPage('popular_post', $seoTitle);
@@ -230,7 +234,7 @@ class ArticleController extends Controller
         $like    = ($request->val == "true") ? $post->like += 1 : $post->like -= 1;
         $post->update(['like' => $like]);
     }
-    
+
     /**
      * postQuery
      *
@@ -245,7 +249,7 @@ class ArticleController extends Controller
             ->publish();
 
         if (Auth::check()) {
-            /** @var object User */ 
+            /** @var object User */
             $currentUser = Auth::user();
             if ($currentUser->hasRole('super-admin')) {
                 return $query;

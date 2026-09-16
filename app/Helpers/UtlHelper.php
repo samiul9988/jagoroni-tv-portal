@@ -167,11 +167,11 @@ class UtlHelper
                         <div class="time">'.Carbon::parse($comment->created_at)->ago().'</div>
                         <div class="description">'.$comment->comment.'</div>
                         <footer>
-                            <a class="reply">'.__('dhakawatch::magz.reply').'</a>';
+                            <a class="reply">'.__('jagoronitv::magz.reply').'</a>';
         
                 if(Auth::check() && Auth::id() == $comment->user_id) {
-                    $html .= '<a class="edit-reply" data-edit-url="'.route('comment.edit', $comment->id).'">'. __('dhakawatch::magz.edit') .'</a>';
-                    $html .= '<a class="delete-reply">'. __('dhakawatch::magz.delete') .'</a>';
+                    $html .= '<a class="edit-reply" data-edit-url="'.route('comment.edit', $comment->id).'">'. __('jagoronitv::magz.edit') .'</a>';
+                    $html .= '<a class="delete-reply">'. __('jagoronitv::magz.delete') .'</a>';
                 }
         
                 $html .= '</footer>
@@ -220,12 +220,12 @@ class UtlHelper
                     <div class="description">'.$comment->comment.'</div>
                     <footer>';
                     if ($level < config('settings.number_nested_comments')) {
-                        $html .= '<a class="reply">'.__('dhakawatch::magz.reply') .'</a>';
+                        $html .= '<a class="reply">'.__('jagoronitv::magz.reply') .'</a>';
                     }
                         
                     if(Auth::check() && Auth::id() == $comment->user_id) {
-                        $html .= '<a class="edit-reply">'. __('dhakawatch::magz.edit') .'</a>';
-                        $html .= '<a class="delete-reply">'. __('dhakawatch::magz.delete') .'</a>';
+                        $html .= '<a class="edit-reply">'. __('jagoronitv::magz.edit') .'</a>';
+                        $html .= '<a class="delete-reply">'. __('jagoronitv::magz.delete') .'</a>';
                     }
             
                     $html .= '</footer>

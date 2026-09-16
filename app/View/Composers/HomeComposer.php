@@ -4,7 +4,7 @@ namespace App\View\Composers;
 
 use App\Helpers\ThemeHelper;
 use App\Helpers\LocalizationHelper;
-use App\Models\Theme;
+use App\Models\{Post, Theme};
 use App\Services\ArticleService;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
@@ -13,7 +13,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class HomeComposer
 {
     protected $article, $term, $articleService, $termService;
-    
+
     /**
      * __construct
      *
@@ -28,7 +28,7 @@ class HomeComposer
         $this->articleService = $articleService;
 
     }
-    
+
     /**
      * compose
      *
@@ -47,7 +47,7 @@ class HomeComposer
 
         $sidebarActive   = $sidebarCustom ? $setting->sidebar['config']['active'] == 'true' : $generalLayout->sidebar['config']['active'] == 'true';
         $sidebarPosition = $sidebarCustom ? $setting->sidebar['config']['position'] : $generalLayout->sidebar['config']['position'];
-        
+
         $footerActive =  $footerCustom ? $setting->footer['config']['active'] == 'true' : $generalLayout->footer['config']['active'] == 'true';
         $bottomPostActive = $setting->body['widget']['bottom_post']['active'] == 'true';
 
@@ -56,6 +56,20 @@ class HomeComposer
         $sidebar    = $sidebarCustom ? $setting->sidebar['widget'] : $generalLayout->sidebar['widget'];
         $footer = $footerCustom ?  $setting->footer['widget']['section'] :  $generalLayout->footer['widget']['section'];
 
-        $view->with(compact('body', 'bottomPost', 'sidebar', 'footer', 'sidebarActive', 'footerActive', 'bottomPostActive', 'sidebarPosition', 'page'));
+        $jamunaPosts = Post::post()
+            ->with('categories')
+            ->latest('created_at')
+            ->take(80)
+            ->get();
+
+        $jamunaVideos = Post::video()
+            ->with('categories')
+            ->wherePostLanguage(LocalizationHelper::getCurrentLocaleId())
+            ->wherePostStatus('publish')
+            ->latest('created_at')
+            ->take(6)
+            ->get();
+
+        $view->with(compact('body', 'bottomPost', 'sidebar', 'footer', 'sidebarActive', 'footerActive', 'bottomPostActive', 'sidebarPosition', 'page', 'jamunaPosts', 'jamunaVideos'));
     }
 }

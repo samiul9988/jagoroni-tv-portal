@@ -22,7 +22,7 @@
                 </article>
             @endforeach
             <div class="d-grid gap-2">
-                <a href="{{ route('articles.latest') }}" class="btn btn-magz white btn-block">{{ __('dhakawatch::magz.see_all') }} &#8594;</a>
+                <a href="{{ route('articles.latest') }}" class="btn btn-magz white btn-block">{{ __('jagoronitv::magz.see_all') }} &#8594;</a>
             </div>
         </div>
     </div>

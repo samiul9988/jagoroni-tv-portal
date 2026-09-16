@@ -40,9 +40,9 @@
         <input type="hidden" name="userid" value="{{ Auth::id() }}">
         <div class="form-group col-md-12 mb-3 ">
             <label for="comment" class="col-form-label">{{ __('form.reply_to_comment') }} <span class="required"></span></label>
-            <textarea id="comment" class="form-control" rows="3" name="comment" placeholder="{{ __('dhakawatch::magz.write_your_response') }}" required></textarea>
+            <textarea id="comment" class="form-control" rows="3" name="comment" placeholder="{{ __('jagoronitv::magz.write_your_response') }}" required></textarea>
             <div id="validationComment" class="invalid-feedback">
-              {{ __('dhakawatch::magz.cannot_be_empty') }}
+              {{ __('jagoronitv::magz.cannot_be_empty') }}
             </div>
         </div>
     </form>

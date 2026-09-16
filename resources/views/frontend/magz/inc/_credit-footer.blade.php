@@ -1,1 +1,1 @@
-&copy; 2024 retenvi.com
+&copy; {{ date('Y') }} Jagoroni TV. All rights reserved.

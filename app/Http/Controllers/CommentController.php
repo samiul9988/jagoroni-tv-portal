@@ -114,7 +114,7 @@ class CommentController extends Controller
                 'reply_id' => (int) $comment->reply_id,
                 'user_id'  => $comment->user_id,
                 'status'   => $comment->status,
-                'count'    => $count .' '. __('dhakawatch::magz.response')
+                'count'    => $count .' '. __('jagoronitv::magz.response')
             ];
 
             $depth = $comment->getDepth();
@@ -124,11 +124,11 @@ class CommentController extends Controller
             $response = [
                 'data' => $data,
                 'action' => [
-                    'reply' => __('dhakawatch::magz.reply'),
-                    'edit' => __('dhakawatch::magz.edit'),
-                    'delete' => __('dhakawatch::magz.delete'),
+                    'reply' => __('jagoronitv::magz.reply'),
+                    'edit' => __('jagoronitv::magz.edit'),
+                    'delete' => __('jagoronitv::magz.delete'),
                 ],
-                'messageModeration' => __('dhakawatch::magz.message_pending'),
+                'messageModeration' => __('jagoronitv::magz.message_pending'),
                 'isReply' => $isReply,
                 'status' => true,
                 'message' => __('message.comment_has_been_sent')
@@ -194,9 +194,9 @@ class CommentController extends Controller
         $response = [
             'data' => $comment,
             'action' => [
-                'reply' => __('dhakawatch::magz.reply'),
-                'edit' => __('dhakawatch::magz.edit'),
-                'delete' => __('dhakawatch::magz.delete'),
+                'reply' => __('jagoronitv::magz.reply'),
+                'edit' => __('jagoronitv::magz.edit'),
+                'delete' => __('jagoronitv::magz.delete'),
             ],
             'message' => __('message.updated_successfully')
         ];
@@ -242,7 +242,7 @@ class CommentController extends Controller
 
         return response()->json([
             'success' => __('message.deleted_successfully'),
-            'count' => $count .' '. __('dhakawatch::magz.response')
+            'count' => $count .' '. __('jagoronitv::magz.response')
         ]);
     }
 }

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TermSeeder::class,
             PostSeeder::class,
+            BanglaDummyContentSeeder::class,
             MenuSeeder::class,
             MenuItemSeeder::class,
             ThemeSeeder::class,

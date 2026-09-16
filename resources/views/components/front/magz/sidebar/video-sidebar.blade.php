@@ -8,7 +8,7 @@
         @if($widgetData['title'] && Arr::exists($widgetData['title'], LaravelLocalization::getCurrentLocale()))
         <h1 class="aside-title">
             {{ $widgetData['title'][LaravelLocalization::getCurrentLocale()] }}
-            <a href="{{ route('article.popular') }}" class="all">{{ __('dhakawatch::magz.see_all') }} <i class="arrow-right"></i></a></h1>
+            <a href="{{ route('article.popular') }}" class="all">{{ __('jagoronitv::magz.see_all') }} <i class="arrow-right"></i></a></h1>
         @endif
             <div class="aside-body">
             @foreach($posts as $post)

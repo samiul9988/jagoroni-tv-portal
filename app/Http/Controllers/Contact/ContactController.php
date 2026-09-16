@@ -29,7 +29,7 @@ class ContactController extends Controller
                 $data  = ThemeHelper::getConfigContact('magz', 'contact', 'body')['config'];
                 return redirect($data['url'][$getCurrentLanguage]);
             }
-            SeoHelper::getPage('contact', __('dhakawatch::magz.contact'), null, null, null, url("/contact"));
+            SeoHelper::getPage('contact', __('jagoronitv::magz.contact'), null, null, null, url("/contact"));
             return view(SettingHelper::activeTheme('page/contact'));
         } else {
             return Redirect::route('show', ['slug' => last(request()->segments())]);

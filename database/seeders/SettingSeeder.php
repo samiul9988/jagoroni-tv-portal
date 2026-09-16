@@ -17,8 +17,8 @@ class SettingSeeder extends Seeder
     {
         Cache::forget('settings');
 
-        Setting::create(['group' => 'site_information', 'key' => 'company_name', 'value' => 'dhakawatch']);
-        Setting::create(['group' => 'site_information', 'key' => 'site_name', 'value' => 'dhakawatch']);
+        Setting::create(['group' => 'site_information', 'key' => 'company_name', 'value' => 'jagoronitv']);
+        Setting::create(['group' => 'site_information', 'key' => 'site_name', 'value' => 'jagoronitv']);
         Setting::create(['group' => 'site_information', 'key' => 'site_url', 'value' => 'http://localhost:8000']);
         Setting::create(['group' => 'site_information', 'key' => 'site_email', 'value' => 'example@mail.com']);
         Setting::create(['group' => 'site_information', 'key' => 'site_phone', 'value' => fake('en_US')->phoneNumber()]);
@@ -27,7 +27,7 @@ class SettingSeeder extends Seeder
         Setting::create(['group' => 'site_information', 'key' => 'postal_code', 'value' => '11743']);
         Setting::create(['group' => 'site_information', 'key' => 'state', 'value' => 'New York']);
         Setting::create(['group' => 'site_information', 'key' => 'country', 'value' => 'United States']);
-        Setting::create(['group' => 'site_information', 'key' => 'site_description', 'value' => 'dhakawatch is a Content Management System (CMS) built on the Laravel framework']);
+        Setting::create(['group' => 'site_information', 'key' => 'site_description', 'value' => 'jagoronitv is a Content Management System (CMS) built on the Laravel framework']);
         Setting::create(['group' => 'site_information', 'key' => 'contact_description', 
                 'value' => json_encode([
                     'id' => "Hubungi kami dengan mudah untuk pertanyaan, informasi tambahan, atau untuk terhubung langsung dengan tim kami. Kami di sini untuk membantu Anda dengan layanan terbaik. Jangan ragu untuk mengirim pesan, email kepada kami, atau menghubungi melalui saluran media sosial kami. Kami menantikan kabar dari Anda!",

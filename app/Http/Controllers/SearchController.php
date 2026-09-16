@@ -50,11 +50,11 @@ class SearchController extends Controller
         $countResults  = $query_search->count();
 
         if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
-            $attr = ($posts->currentPage() == 1) ? "" : __('dhakawatch::magz.page')." " . $posts->currentPage() . " - ";
-            $seoTitle = "$attr " . __('dhakawatch::magz.latest_news') . " - " . config('settings.site_name');
+            $attr = ($posts->currentPage() == 1) ? "" : __('jagoronitv::magz.page')." " . $posts->currentPage() . " - ";
+            $seoTitle = "$attr " . __('jagoronitv::magz.latest_news') . " - " . config('settings.site_name');
         } else {
-            $attr = ($posts->currentPage() == 1) ? "" : " - ".__('dhakawatch::magz.page')." " . $posts->currentPage();
-            $seoTitle = config('settings.site_name') . " - " .__('dhakawatch::magz.latest_news') ." $attr";
+            $attr = ($posts->currentPage() == 1) ? "" : " - ".__('jagoronitv::magz.page')." " . $posts->currentPage();
+            $seoTitle = config('settings.site_name') . " - " .__('jagoronitv::magz.latest_news') ." $attr";
         }
 
         SeoHelper::getPage('search', $seoTitle);

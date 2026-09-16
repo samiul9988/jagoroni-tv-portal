@@ -1,0 +1,110 @@
+/* Jagoroni TV signature logo area. Loaded after all theme overrides. */
+body.skin-magz header.primary nav.jtv-main-nav .brand {
+  position: relative !important;
+  flex: 0 0 206px !important;
+  width: 206px !important;
+  height: 68px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+}
+
+body.skin-magz header.primary nav.jtv-main-nav .brand::before {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 190px;
+  height: 50px;
+  content: "";
+  border: 1px solid rgba(247, 223, 170, .38);
+  border-radius: 15px;
+  background: linear-gradient(105deg, rgba(0, 38, 21, .5), rgba(255, 255, 255, .1));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 7px 18px rgba(0, 0, 0, .16);
+}
+
+body.skin-magz header.primary nav.jtv-main-nav .brand::after {
+  position: absolute;
+  top: 15px;
+  left: 2px;
+  width: 4px;
+  height: 38px;
+  content: "";
+  border-radius: 4px;
+  background: linear-gradient(180deg, #f7dfaa, #e8b44c);
+  box-shadow: 0 0 12px rgba(232, 180, 76, .72);
+}
+
+body.skin-magz header.primary nav.jtv-main-nav .brand a {
+  position: relative !important;
+  z-index: 3 !important;
+  display: flex !important;
+  width: auto !important;
+  height: 50px !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  margin-left: 12px !important;
+  padding: 0 15px 0 8px !important;
+  border-radius: 11px !important;
+  background: rgba(0, 45, 25, .28) !important;
+}
+
+body.skin-magz header.primary nav.jtv-main-nav .brand a::after {
+  content: "JAGORONI TV";
+  color: #f7dfaa;
+  font: 800 13px Arial, sans-serif;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+body.skin-magz header.primary nav.jtv-main-nav .jtv-nav-logo {
+  display: block !important;
+  flex: 0 0 42px !important;
+  width: 42px !important;
+  max-width: 42px !important;
+  height: 42px !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .4));
+}
+
+@media (max-width: 767px) {
+  body.skin-magz header.primary nav.jtv-main-nav .brand {
+    flex-basis: 126px !important;
+    width: 126px !important;
+    height: 56px !important;
+  }
+
+  body.skin-magz header.primary nav.jtv-main-nav .brand::before {
+    top: 7px;
+    width: 112px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  body.skin-magz header.primary nav.jtv-main-nav .brand::after {
+    top: 11px;
+    height: 34px;
+  }
+
+  body.skin-magz header.primary nav.jtv-main-nav .brand a {
+    height: 42px !important;
+    gap: 6px !important;
+    margin-left: 8px !important;
+    padding: 0 7px 0 4px !important;
+  }
+
+  body.skin-magz header.primary nav.jtv-main-nav .brand a::after {
+    content: "JTV";
+    font-size: 10px;
+    letter-spacing: .5px;
+  }
+
+  body.skin-magz header.primary nav.jtv-main-nav .jtv-nav-logo {
+    flex-basis: 34px !important;
+    width: 34px !important;
+    max-width: 34px !important;
+    height: 34px !important;
+  }
+}

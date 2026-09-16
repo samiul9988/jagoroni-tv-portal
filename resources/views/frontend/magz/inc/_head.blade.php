@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <meta name="author" content="{{ config('settings.company_name') }}">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0B6B3A">
 <meta name="color-scheme" content="light">
 {!! SEO::generate() !!}
 @empty(config('settings.favicon'))
@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicons/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('favicons/site.webmanifest') }}">
     <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
-    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#0B6B3A">
 @else
     <link rel="icon" sizes="32x32" href="{{ \App\Helpers\ImageHelper::webIcon() }}">
 @endempty
@@ -26,6 +26,8 @@
 <link href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('themes/magz/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('themes/magz/css/darkmode.css') }}" rel="stylesheet">
+<link href="{{ asset('themes/magz/css/jagoroni-redesign.css') }}" rel="stylesheet">
+<link href="{{ asset('themes/magz/css/jagoroni-logo.css') }}" rel="stylesheet">
 @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
 <link href="{{ asset('themes/magz/css/rtl.css') }}" rel="stylesheet">
 @endif
@@ -60,4 +62,3 @@
 @stack('scripts_head')
 
 @include('frontend.magz.inc._theme')
-

@@ -11,7 +11,7 @@ use Intervention\Image\Facades\Image;
 trait PostTrait
 {
     use ImageTrait, LanguageTrait;
-    
+
     /**
      * storeGalleryFileAndGetJson
      *
@@ -44,7 +44,7 @@ trait PostTrait
             ]
         ];
     }
-    
+
     /**
      * storePostThumbAndGetFileName
      *
@@ -113,13 +113,17 @@ trait PostTrait
             File::makeDirectory((new class { use StorageDiskTrait; })->pathLocal('images') . $path);
         }
 
-        return Image::make($this->diskStorage()->get('images/' . $post->post_image))
-            ->resize($size, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->resizeCanvas($size, round($size/$ratio), 'center', false, '#181818')
-            ->save($this->pathLocal('images') . $path . $post->post_image);
+        try {
+            return Image::make($this->diskStorage()->get('images/' . $post->post_image))
+                ->resize($size, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->resizeCanvas($size, round($size/$ratio), 'center', false, '#181818')
+                ->save($this->pathLocal('images') . $path . $post->post_image);
+        } catch (\Throwable $exception) {
+            return null;
+        }
     }
-    
+
     /**
      * addTranslation
      *
@@ -202,7 +206,7 @@ trait PostTrait
             }
         }
     }
-    
+
     /**
      * syincTerms
      *
@@ -240,7 +244,7 @@ trait PostTrait
 
         return $terms;
     }
-    
+
     /**
      * getPostTitleById
      *
@@ -251,7 +255,7 @@ trait PostTrait
     {
         return Post::find($id)->post_title;
     }
-    
+
     /**
      * deletePost
      *

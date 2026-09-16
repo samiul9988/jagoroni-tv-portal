@@ -15,10 +15,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">{{ __('dhakawatch::magz.home') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('dhakawatch::magz.all_audios') }}</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('jagoronitv::magz.home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('jagoronitv::magz.all_audios') }}</li>
                         </ol>
-                        <h1 class="page-title">{{ __('dhakawatch::magz.all_audios') }}</h1>
+                        <h1 class="page-title">{{ __('jagoronitv::magz.all_audios') }}</h1>
                     </div>
                 </div>
                 <div class="line"></div>
