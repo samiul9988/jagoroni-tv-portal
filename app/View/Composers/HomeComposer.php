@@ -70,6 +70,15 @@ class HomeComposer
             ->take(6)
             ->get();
 
-        $view->with(compact('body', 'bottomPost', 'sidebar', 'footer', 'sidebarActive', 'footerActive', 'bottomPostActive', 'sidebarPosition', 'page', 'jamunaPosts', 'jamunaVideos'));
+        $mostReadPosts = Post::post()
+            ->with('categories')
+            ->wherePostLanguage(LocalizationHelper::getCurrentLocaleId())
+            ->wherePostStatus('publish')
+            ->orderByDesc('post_hits')
+            ->latest('created_at')
+            ->take(12)
+            ->get();
+
+        $view->with(compact('body', 'bottomPost', 'sidebar', 'footer', 'sidebarActive', 'footerActive', 'bottomPostActive', 'sidebarPosition', 'page', 'jamunaPosts', 'jamunaVideos', 'mostReadPosts'));
     }
 }

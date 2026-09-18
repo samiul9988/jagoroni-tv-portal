@@ -4,7 +4,7 @@
         @include('frontend.magz.inc._head')
 	</head>
 
-	<body class="skin-magz">
+	<body class="skin-magz @if(($page ?? null) === 'home') jtv-homepage @endif">
         <!-- Header -->
 		<header class="primary">
             @include('frontend.magz.template-parts.header')

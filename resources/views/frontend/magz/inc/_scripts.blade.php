@@ -25,6 +25,58 @@ function toLightMode() {
 }
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.querySelector('.jtv-search-form');
+
+    if (!searchForm) {
+        return;
+    }
+
+    const searchInput = searchForm.querySelector('.jtv-search-form input[type="search"]');
+    const searchToggle = searchForm.querySelector('.jtv-search-toggle');
+
+    if (!searchInput || !searchToggle) {
+        return;
+    }
+
+    const setSearchState = (isOpen) => {
+        searchForm.classList.toggle('is-open', isOpen);
+        searchToggle.setAttribute('aria-expanded', String(isOpen));
+        searchToggle.setAttribute('aria-label', isOpen ? 'Close search' : 'Open search');
+    };
+
+    searchToggle.addEventListener('click', function (event) {
+        event.preventDefault();
+        const isOpen = searchForm.classList.contains('is-open');
+
+        if (isOpen && searchInput.value.trim() !== '') {
+            searchForm.requestSubmit();
+            return;
+        }
+
+        setSearchState(true);
+        searchInput.focus();
+    });
+
+    searchInput.addEventListener('focus', () => setSearchState(true));
+
+    searchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            searchInput.value = '';
+            searchInput.blur();
+            setSearchState(false);
+        }
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!searchForm.contains(event.target) && searchInput.value.trim() === '') {
+            setSearchState(false);
+        }
+    });
+});
+</script>
+
 @if(session('success'))
 <script>
 swal("Success", "{{ session('success') }}", "success");

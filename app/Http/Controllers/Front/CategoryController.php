@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Helpers\{ImageHelper, LocalizationHelper, SeoHelper, SettingHelper};
 use App\Http\Controllers\Controller;
-use App\Models\Term;
+use App\Models\{Post, Term};
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\Factory;
@@ -27,6 +27,23 @@ class CategoryController extends Controller
 
             $posts = $category->posts()->where('post_language', $id)->paginate(8);
 
+            $latestPosts = Post::query()
+                ->publish()
+                ->where('post_language', $id)
+                ->with('categories')
+                ->latest()
+                ->take(5)
+                ->get();
+
+            $mostReadPosts = Post::query()
+                ->publish()
+                ->where('post_language', $id)
+                ->with('categories')
+                ->orderByDesc('post_hits')
+                ->latest()
+                ->take(5)
+                ->get();
+
             $image = ImageHelper::ogImageCategory($category->image);
 
             if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
@@ -44,8 +61,10 @@ class CategoryController extends Controller
         } else {
             $posts = [];
             $category = [];
+            $latestPosts = collect();
+            $mostReadPosts = collect();
         }
 
-        return view(SettingHelper::activeTheme('page/category'), compact('posts', 'category'));
+        return view(SettingHelper::activeTheme('page/category'), compact('posts', 'category', 'latestPosts', 'mostReadPosts'));
     }
 }

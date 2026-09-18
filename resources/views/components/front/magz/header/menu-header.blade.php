@@ -1,12 +1,5 @@
-@inject('imageHelper', 'App\Helpers\ImageHelper')
-
 <nav class="menu jtv-main-nav">
     <div class="container jtv-nav-container">
-        <div class="brand">
-            <a href="/">
-                <img class="jtv-nav-logo" src="{{ $imageHelper::webLogoLight() }}" alt="Jagoroni TV">
-            </a>
-        </div>
         <div class="mobile-toggle">
             <a href="#" data-toggle="menu" data-target="#menu-list"><i class="fa-solid fa-bars"></i></a>
         </div>
@@ -17,8 +10,12 @@
             @php $menus = $menuHeader @endphp
             @if($menus)
                 <ul class="nav-list">
+                    <li class="jtv-nav-home-link">
+                        <a href="{{ url('/') }}" title="Home" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+                    </li>
                     @foreach($menus as $menu)
-                        <li class="@if($menu['child'])dropdown magz-dropdown @endif">
+                        @php($isCurrentMenu = !empty($menu['link']) && url()->current() === url($menu['link']))
+                        <li class="@if($menu['child'])dropdown magz-dropdown @endif @if($isCurrentMenu)active current-menu-item @endif">
                             <a href="{{ $menu['link'] }}" title="">{{ $menu['label'] }} @if($menu['child'])<i class="arrow-right"></i>@endif</a>
                             @if($menu['child'])
                                 @include('frontend.magz.inc._child', ['childs'=>$menu['child']])
@@ -30,9 +27,11 @@
             <ul class="float-end">
                 <li class="jtv-nav-live"><a href="#">Live</a></li>
                 <li class="jtv-nav-search">
-                    <form class="jtv-search-form" action="{{ route('search') }}" method="GET" role="search">
-                        <input type="search" name="q" value="{{ request('q') }}" placeholder="খুঁজুন" aria-label="Search">
-                        <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <form class="jtv-search-form" action="{{ url('/search') }}" method="GET" role="search">
+                        <input id="jtv-search-input" type="search" name="q" value="{{ request('q') }}" placeholder="খুঁজুন" aria-label="Search">
+                            <button type="button" class="jtv-search-toggle" aria-label="Open search" aria-expanded="false" aria-controls="jtv-search-input">
+                                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            </button>
                     </form>
                 </li>
                 @if($displayLanguage == 'y')

@@ -49,6 +49,10 @@ class ArticleController extends Controller
      */
     public function show($post)
     {
+        if (!$post instanceof Post) {
+            abort(404);
+        }
+
         $post->load('terms', 'comments');
 
         if($post) {
