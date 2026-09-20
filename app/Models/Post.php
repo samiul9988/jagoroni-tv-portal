@@ -42,7 +42,10 @@ class Post extends Model
         'post_image_meta',
         'meta_description',
         'meta_keyword',
-        'post_source'
+        'post_source',
+        'division',
+        'district',
+        'upazila'
     ];
 
     /**

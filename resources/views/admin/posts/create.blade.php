@@ -72,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+                @include('admin.posts._location-fields')
                 <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('form.categories') }}</h3>

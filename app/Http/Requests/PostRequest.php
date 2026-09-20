@@ -26,7 +26,10 @@ class PostRequest extends FormRequest
         return [
             'post_title' => 'required|min:3',
             'slug'  => 'sometimes|required',
-            'image_url' => 'nullable|url:http,https'
+            'image_url' => 'nullable|url:http,https',
+            'division' => 'nullable|string|max:100',
+            'district' => 'nullable|string|max:100',
+            'upazila' => 'nullable|string|max:100'
         ];
     }
 }

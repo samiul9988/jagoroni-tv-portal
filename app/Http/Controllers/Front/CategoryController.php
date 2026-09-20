@@ -19,6 +19,14 @@ class CategoryController extends Controller
      */
     public function __invoke($category)
     {
+        if (is_string($category)) {
+            $id = LocalizationHelper::getCurrentLocaleId();
+            $category = Term::Category()
+                ->where('slug', $category)
+                ->where('language_id', $id)
+                ->first() ?? Term::Category()->firstWhere('slug', $category);
+        }
+
         if($category){
             $id = LocalizationHelper::getCurrentLocaleId();
             $category->load('posts');

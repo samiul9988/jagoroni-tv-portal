@@ -14,7 +14,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class SearchController extends Controller
 {
     private $postService;
-    
+
     /**
      * __construct
      *
@@ -33,21 +33,49 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $hashids = new Hashids();
-        $keyword = $request->get('q');
+        $keyword = trim((string) $request->get('q', ''));
+        $division = trim((string) $request->get('division', ''));
+        $district = trim((string) $request->get('district', ''));
+        $upazila = trim((string) $request->get('upazila', ''));
 
         $query = $this->postService->postQuery();
 
-        $query_search = $query->where(function($query) use ($keyword) {
-            $query->where('post_title', 'like', "%".$keyword."%")
-            ->orWhere('post_content', 'like', "%".$keyword."%")
-            ->orWhere('post_image', 'like', "%".$keyword."%")
-            ->orWhereHas('terms', function ($query) use ($keyword) {
-                $query->where('name', $keyword);
+        $query_search = $query;
+
+        if ($keyword !== '') {
+            $query_search->where(function ($query) use ($keyword) {
+                $query->where('post_title', 'like', "%{$keyword}%")
+                    ->orWhere('post_content', 'like', "%{$keyword}%")
+                    ->orWhere('post_image', 'like', "%{$keyword}%")
+                    ->orWhereHas('terms', function ($query) use ($keyword) {
+                        $query->where('name', 'like', "%{$keyword}%");
+                    });
             });
-        });
+        }
+
+        $location = collect([$upazila, $district, $division])
+            ->first(fn ($value) => $value !== '');
+
+        if ($division !== '') {
+            $query_search->where('division', $division);
+        }
+
+        if ($district !== '') {
+            $query_search->where('district', $district);
+        }
+
+        if ($upazila !== '') {
+            $query_search->where('upazila', $upazila);
+        }
 
         $posts       = $query_search->paginate(4);
         $countResults  = $query_search->count();
+        $locationLabel = collect([$division, $district, $upazila])
+            ->filter()
+            ->implode(' / ');
+        $searchLabel = collect([$keyword, $locationLabel])
+            ->filter()
+            ->implode(' — ');
 
         if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') {
             $attr = ($posts->currentPage() == 1) ? "" : __('jagoronitv::magz.page')." " . $posts->currentPage() . " - ";
@@ -62,6 +90,11 @@ class SearchController extends Controller
         return view(SettingHelper::activeTheme('page/search'), compact(
             'posts',
             'keyword',
+            'division',
+            'district',
+            'upazila',
+            'location',
+            'searchLabel',
             'countResults',
             'hashids'));
     }

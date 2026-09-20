@@ -13,7 +13,7 @@
             @endif
             <div class="col-lg-8 col-md-12 col-sm-12 col-12 @if($sidebarActive === false) offset-lg-2 @endif">
                 <div class="search-result">
-                    {{ __('jagoronitv::magz.search_keyword') }} "{{ $keyword }}" {{ __('jagoronitv::magz.search_found_in') }} {{ $countResults }} {{ __('jagoronitv::magz.posts') }}.
+                    {{ __('jagoronitv::magz.search_keyword') }} "{{ $searchLabel }}" {{ __('jagoronitv::magz.search_found_in') }} {{ $countResults }} {{ __('jagoronitv::magz.posts') }}.
                 </div>
                 <div class="row">
                     @foreach( $posts as $post )
@@ -43,7 +43,12 @@
                     </article>
                     @endforeach
                     <div class="col-lg-12 text-center">
-                        {{ $posts->appends(['q' => $keyword])->links('frontend.magz.inc._pagination') }}
+                        {{ $posts->appends([
+                            'q' => $keyword,
+                            'division' => $division,
+                            'district' => $district,
+                            'upazila' => $upazila,
+                        ])->links('frontend.magz.inc._pagination') }}
                     </div>
                 </div>
             </div>

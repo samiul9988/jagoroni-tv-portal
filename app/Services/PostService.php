@@ -14,7 +14,7 @@ Class PostService
     use PostTrait;
 
     protected $post;
-    
+
     /**
      * __construct
      *
@@ -25,7 +25,7 @@ Class PostService
     {
         $this->post = $post;
     }
-    
+
     /**
      * save
      *
@@ -55,7 +55,7 @@ Class PostService
        }
 
         $postContent = str_replace(['<iframe', '</iframe>'], ['<div class="ratio ratio-16x9"><iframe', '</iframe></div>'], $request->post_content);
-        
+
         $post = $this->post->create([
             'post_title'       => strip_tags($request->post_title),
             'post_summary'     => $request->post_summary,
@@ -69,7 +69,10 @@ Class PostService
             'post_language'    => $request->integer('post_language'),
             'post_type'        => 'post',
             'post_image'       => $request->image_name ?: null,
-            'post_image_meta'  => $postImageMeta
+            'post_image_meta'  => $postImageMeta,
+            'division'         => $request->input('division'),
+            'district'         => $request->input('district'),
+            'upazila'          => $request->input('upazila')
         ]);
 
         $this->addTranslation($post, $request);
@@ -78,7 +81,7 @@ Class PostService
 
         return $post;
     }
-    
+
     /**
      * modify
      *
@@ -111,6 +114,9 @@ Class PostService
             'post_visibility'  => $request->post_visibility,
             'meta_description' => strip_tags($request->meta_description),
             'meta_keyword'     => strip_tags($request->meta_keyword),
+            'division'         => $request->input('division'),
+            'district'         => $request->input('district'),
+            'upazila'          => $request->input('upazila'),
             'created_at'       => $this->createDateTimeFromRequest($request),
             'updated_at'       => Carbon::now()
         );
@@ -163,7 +169,7 @@ Class PostService
             $post->terms()->sync($terms);
         }
     }
-    
+
     /**
      * getPostCategories
      *
@@ -187,7 +193,7 @@ Class PostService
 
         return $categories;
     }
-    
+
     /**
      * getPostTags
      *
@@ -208,7 +214,7 @@ Class PostService
 
         return $tags;
     }
-    
+
     /**
      * getTransPostId
      *
@@ -221,8 +227,8 @@ Class PostService
         $language = Language::find($lang)->language_code;
         return Arr::get(json_decode($translations, true), $language);
     }
-    
-    
+
+
     /**
      * postQuery
      *
@@ -314,20 +320,20 @@ Class PostService
 
         return $this->post->whereIn('id', $post_id_array);
     }
-    
+
     /**
      * postCount
      *
      * @return void
      */
-    public function postCount() 
+    public function postCount()
     {
         /** @var object Post */
         $post = $this->postQuery();
 
         return $post->count();
     }
-    
+
     /**
      * galleryCount
      *

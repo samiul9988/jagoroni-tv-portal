@@ -53,7 +53,7 @@ Route::prefix(LaravelLocalization::setLocale())->middleware('public', 'XSS', 'lo
     Route::get('/videos/latest', [VideoPostController::class, 'index'])->name('videos.latest');
     Route::get('/audios/latest', [AudioPostController::class, 'index'])->name('audios.latest');
     Route::get('/tag/{tag}', [TagController::class, 'index'])->name('tag.show');
-    Route::get('/categories/{category}', [CategoryController::class])->name('categories.show');
+    Route::get('/categories/{category}', [CategoryController::class, '__invoke'])->name('categories.show');
     Route::patch('/post/react', [ArticleController::class, 'react'])->name('sendreact');
 
     // Article Route
@@ -168,8 +168,8 @@ Route::prefix(LaravelLocalization::setLocale())->middleware('public', 'XSS', 'lo
             $rpage = Post::page()->wherePostName($page)->first();
 
             return app('App\Http\Controllers\Front\PageController')->show($rpage);
-            
-            
+
+
         } elseif (config('settings.page_permalink_type') == 'page_name') {
             return redirect('/' . $page);
         }
@@ -215,9 +215,9 @@ Route::prefix(LaravelLocalization::setLocale())->middleware('public', 'XSS', 'lo
                     // return abort(404);
                     return app('App\Http\Controllers\Front\CategoryController')->__invoke($term);
                 }
-                
+
             }
-            
+
         }
     })->name('category.show');
 
@@ -234,4 +234,3 @@ Route::prefix(LaravelLocalization::setLocale())->middleware('public', 'XSS', 'lo
         }
     })->name('subcategory.show');
 });
-
