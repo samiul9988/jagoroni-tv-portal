@@ -10,7 +10,8 @@
             @php $menus = $menuHeader @endphp
             @if($menus)
                 <ul class="nav-list">
-                    <li class="jtv-nav-home-link">
+                    @php($isHome = request()->is('/') || request()->is(''))
+                    <li class="jtv-nav-home-link @if($isHome)active current-menu-item @endif">
                         <a href="{{ url('/') }}" title="Home" aria-label="Home"><i class="fa-solid fa-house"></i></a>
                     </li>
                     @foreach($menus as $menu)

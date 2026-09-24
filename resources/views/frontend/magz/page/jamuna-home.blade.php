@@ -1060,11 +1060,33 @@
         background: #d61f26 !important;
     }
 
+    body.skin-magz.jtv-homepage button.jtv-home-video-tab {
+        margin: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        cursor: pointer !important;
+    }
+
+    body.skin-magz.jtv-homepage button.jtv-home-video-tab:hover,
+    body.skin-magz.jtv-homepage button.jtv-home-video-tab:focus-visible {
+        color: #fff !important;
+        background: #d61f26 !important;
+        outline: 0 !important;
+    }
+
     body.skin-magz.jtv-homepage .jtv-home-video-layout {
         display: grid !important;
         grid-template-columns: minmax(0, 1.42fr) minmax(230px, .95fr) !important;
         gap: 12px !important;
         padding: 10px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-video-layout[hidden] {
+        display: none !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-video-layout.is-video-panel-hidden {
+        display: none !important;
     }
 
     body.skin-magz.jtv-homepage .jtv-home-video-feature-thumb {
@@ -1150,8 +1172,7 @@
     }
 
     body.skin-magz.jtv-homepage .jtv-home-promo-inner strong,
-    body.skin-magz.jtv-homepage .jtv-home-promo-inner span,
-    body.skin-magz.jtv-homepage .jtv-home-promo-inner em {
+    body.skin-magz.jtv-homepage .jtv-home-promo-inner span {
         display: block !important;
         font-style: normal !important;
     }
@@ -1162,10 +1183,30 @@
         font-weight: 800 !important;
     }
 
-    body.skin-magz.jtv-homepage .jtv-home-promo-inner em {
-        margin-top: 6px !important;
-        color: #ffe4b3 !important;
+    body.skin-magz.jtv-homepage .jtv-home-promo-live-link {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-top: 7px !important;
+        padding: 6px 12px !important;
+        border: 2px solid #d71e27 !important;
+        border-radius: 3px !important;
+        color: #fff !important;
+        background: #d71e27 !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 13px !important;
         font-weight: 800 !important;
+        line-height: 1.2 !important;
+        text-decoration: none !important;
+        transition: background .2s ease, border-color .2s ease, transform .2s ease !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-promo-live-link:hover,
+    body.skin-magz.jtv-homepage .jtv-home-promo-live-link:focus {
+        color: #fff !important;
+        background: #b9151d !important;
+        border-color: #b9151d !important;
+        transform: translateY(-1px) !important;
     }
 
     body.skin-magz.jtv-homepage .jtv-home-connect-box h3 {
@@ -1587,6 +1628,31 @@
     body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li > a:focus {
         color: #fff !important;
         background: #d71e27 !important;
+    }
+
+    /* Only the current page receives the red active state. */
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li > a {
+        color: #fff !important;
+        background: transparent !important;
+    }
+
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.active > a,
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.current-menu-item > a,
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.current_page_item > a,
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-home-link.active > a {
+        color: #fff !important;
+        background: #9f1219 !important;
+    }
+
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li:not(.active):not(.current-menu-item):not(.current_page_item):hover > a,
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li:not(.active):not(.current-menu-item):not(.current_page_item):focus-within > a {
+        color: #f7dfaa !important;
+        background: rgba(0, 45, 25, .28) !important;
+    }
+
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-home-link:not(.active) > a {
+        color: #fff !important;
+        background: transparent !important;
     }
 
     /* Fluid full-width layout for desktop, tablet, mobile, and browser zoom. */
@@ -2284,7 +2350,7 @@
     }
 
     body.skin-magz.jtv-homepage .jtv-reference-news-card figure {
-        height: 126px !important;
+        height: 175px !important;
         margin: 0 0 8px !important;
         overflow: hidden !important;
         border-radius: 4px !important;
@@ -2389,6 +2455,50 @@
         color: #6e7d75 !important;
         font-size: 12px !important;
         line-height: 1.5 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-reference-live-news {
+        display: grid !important;
+        grid-template-columns: 108px minmax(0, 1fr) !important;
+        height: 100% !important;
+        gap: 12px !important;
+        align-items: center !important;
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-reference-live-news img {
+        width: 108px !important;
+        height: 154px !important;
+        object-fit: cover !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-reference-live-news span {
+        display: block !important;
+        min-width: 0 !important;
+        padding: 12px 12px 12px 0 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-reference-live-news strong,
+    body.skin-magz.jtv-homepage .jtv-reference-live-news b {
+        display: block !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-reference-live-news strong {
+        margin-bottom: 9px !important;
+        color: #d71e27 !important;
+        font-size: 12px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-reference-live-news b {
+        display: -webkit-box !important;
+        overflow: hidden !important;
+        color: #183f2c !important;
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 4 !important;
     }
 
     body.skin-magz.jtv-homepage .jtv-reference-live-button {
@@ -2660,6 +2770,15 @@
 
         body.skin-magz.jtv-homepage .jtv-reference-live-grid {
             grid-template-columns: 1fr !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-reference-live-news {
+            grid-template-columns: 112px minmax(0, 1fr) !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-reference-live-news img {
+            width: 112px !important;
+            height: 154px !important;
         }
     }
 
@@ -2991,6 +3110,467 @@
             height: clamp(175px, 48vw, 235px) !important;
         }
     }
+
+    /* Attachment-inspired Live TV panel. */
+    body.skin-magz.jtv-homepage .jtv-live-tv-section {
+        margin: 24px 0 !important;
+        padding: 22px !important;
+        overflow: hidden !important;
+        border: 1px solid #e8eee9 !important;
+        border-radius: 22px !important;
+        background: linear-gradient(145deg, #ffffff 0%, #f7faf8 100%) !important;
+        box-shadow: 0 12px 32px rgba(23, 72, 46, .08) !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-heading {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 18px !important;
+        margin-bottom: 18px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-title-wrap {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-icon {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 45px !important;
+        height: 45px !important;
+        border-radius: 14px !important;
+        color: #fff !important;
+        background: #d71924 !important;
+        box-shadow: 0 7px 16px rgba(215, 25, 36, .2) !important;
+        font-size: 19px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-title-wrap h2 {
+        margin: 0 0 2px !important;
+        color: #173e2c !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 25px !important;
+        font-weight: 900 !important;
+        line-height: 1.2 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-title-wrap p {
+        margin: 0 !important;
+        color: #839188 !important;
+        font-size: 12px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-all {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 7px !important;
+        color: #d71924 !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        text-decoration: none !important;
+        white-space: nowrap !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-all i {
+        transition: transform .2s ease !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-all:hover i {
+        transform: translateX(4px) !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1.15fr) minmax(390px, .85fr) !important;
+        gap: 18px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured,
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-card {
+        overflow: hidden !important;
+        border: 1px solid #e4ebe6 !important;
+        border-radius: 16px !important;
+        background: #fff !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured-media {
+        display: block !important;
+        position: relative !important;
+        height: 330px !important;
+        overflow: hidden !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        background: #173e2c !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured-media::after {
+        position: absolute !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        height: 52% !important;
+        content: "" !important;
+        background: linear-gradient(transparent, rgba(7, 29, 19, .9)) !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured-media img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transition: transform .35s ease !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured-media:hover img,
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-thumb:hover img {
+        transform: scale(1.04) !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-live-badge {
+        position: absolute !important;
+        z-index: 2 !important;
+        top: 14px !important;
+        left: 14px !important;
+        padding: 5px 9px !important;
+        border-radius: 5px !important;
+        color: #fff !important;
+        background: #d71924 !important;
+        font-size: 10px !important;
+        font-weight: 900 !important;
+        letter-spacing: .05em !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-live-badge i {
+        margin-right: 3px !important;
+        font-size: 7px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-play,
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-play {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        color: #d71924 !important;
+        background: #fff !important;
+        box-shadow: 0 7px 18px rgba(0, 0, 0, .2) !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-play {
+        position: absolute !important;
+        z-index: 2 !important;
+        top: 50% !important;
+        left: 50% !important;
+        width: 58px !important;
+        height: 58px !important;
+        transform: translate(-50%, -50%) !important;
+        font-size: 17px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-play i {
+        margin-left: 3px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured-caption {
+        display: flex !important;
+        position: absolute !important;
+        z-index: 2 !important;
+        right: 20px !important;
+        bottom: 17px !important;
+        left: 20px !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        padding-left: 12px !important;
+        border-left: 3px solid #d71924 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured-caption b {
+        display: -webkit-box !important;
+        overflow: hidden !important;
+        color: #fff !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 18px !important;
+        line-height: 1.45 !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 2 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-featured-caption small {
+        color: rgba(255, 255, 255, .76) !important;
+        font-size: 11px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side {
+        display: grid !important;
+        grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+        gap: 18px !important;
+        min-width: 0 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-card {
+        display: grid !important;
+        grid-template-columns: 145px minmax(0, 1fr) 34px !important;
+        align-items: center !important;
+        gap: 14px !important;
+        min-height: 156px !important;
+        padding: 10px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-thumb {
+        display: block !important;
+        position: relative !important;
+        height: 134px !important;
+        overflow: hidden !important;
+        border-radius: 11px !important;
+        background: #eaf1ec !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-thumb img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transition: transform .3s ease !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-play {
+        position: absolute !important;
+        right: 9px !important;
+        bottom: 9px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 11px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-content {
+        min-width: 0 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-category {
+        display: inline-block !important;
+        margin-bottom: 6px !important;
+        color: #d71924 !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 10px !important;
+        font-weight: 800 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-content h3 {
+        display: -webkit-box !important;
+        margin: 0 0 5px !important;
+        overflow: hidden !important;
+        color: #173e2c !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 15px !important;
+        line-height: 1.4 !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 2 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-content h3 a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-content p {
+        display: -webkit-box !important;
+        margin: 0 0 8px !important;
+        overflow: hidden !important;
+        color: #829087 !important;
+        font-size: 11px !important;
+        line-height: 1.45 !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 2 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-meta {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 9px !important;
+        color: #9aa69f !important;
+        font-size: 10px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-meta i {
+        margin-right: 3px !important;
+        color: #d71924 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-side-arrow {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 31px !important;
+        height: 31px !important;
+        border: 1px solid #e5ebe7 !important;
+        border-radius: 50% !important;
+        color: #d71924 !important;
+        background: #fff !important;
+        font-size: 11px !important;
+        text-decoration: none !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-live-tv-empty {
+        display: grid !important;
+        height: 330px !important;
+        place-items: center !important;
+        color: #fff !important;
+        background: #173e2c !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 20px !important;
+        font-weight: 800 !important;
+    }
+
+    @media (max-width: 991px) {
+        body.skin-magz.jtv-homepage .jtv-live-tv-grid {
+            grid-template-columns: minmax(0, 1fr) !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-featured-media,
+        body.skin-magz.jtv-homepage .jtv-live-tv-empty {
+            height: clamp(280px, 45vw, 380px) !important;
+        }
+    }
+
+    @media (max-width: 575px) {
+        body.skin-magz.jtv-homepage .jtv-live-tv-section {
+            margin: 18px 0 !important;
+            padding: 14px !important;
+            border-radius: 16px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-heading {
+            align-items: flex-start !important;
+            margin-bottom: 14px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-icon {
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 11px !important;
+            font-size: 16px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-title-wrap h2 {
+            font-size: 20px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-title-wrap p {
+            font-size: 10px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-all {
+            font-size: 11px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-featured-media,
+        body.skin-magz.jtv-homepage .jtv-live-tv-empty {
+            height: 245px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-featured-caption {
+            right: 14px !important;
+            bottom: 13px !important;
+            left: 14px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-featured-caption b {
+            font-size: 15px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-side {
+            gap: 12px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-side-card {
+            grid-template-columns: 92px minmax(0, 1fr) 28px !important;
+            gap: 9px !important;
+            min-height: 118px !important;
+            padding: 8px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-side-thumb {
+            height: 100px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-side-content h3 {
+            font-size: 12px !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-side-content p {
+            display: none !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-live-tv-side-arrow {
+            width: 27px !important;
+            height: 27px !important;
+        }
+    }
+
+    /* Match the reference: the complete latest-news header is green. */
+    body.skin-magz.jtv-homepage .jtv-home-latest-tabs {
+        min-height: 44px !important;
+        border-bottom: 0 !important;
+        background: #006b3f !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-latest-tab-buttons,
+    body.skin-magz.jtv-homepage .jtv-home-latest-tab-buttons button {
+        height: 44px !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-latest-tab-buttons button,
+    body.skin-magz.jtv-homepage .jtv-home-latest-tab-buttons button.is-active,
+    body.skin-magz.jtv-homepage .jtv-home-latest-more {
+        color: #fff !important;
+        background: transparent !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-latest-tab-buttons button.is-active {
+        background: #006b3f !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-latest-more {
+        display: inline-flex !important;
+        height: 44px !important;
+        align-items: center !important;
+        padding: 0 14px !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-home-latest-more:hover,
+    body.skin-magz.jtv-homepage .jtv-home-latest-more:focus {
+        color: #f7dfaa !important;
+        text-decoration: none !important;
+    }
+
+    /* Final navigation state: only the current page is deep red. */
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li > a {
+        color: #fff !important;
+        background: transparent !important;
+    }
+
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.active > a,
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.current-menu-item > a,
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.current_page_item > a {
+        color: #fff !important;
+        background: #9f1219 !important;
+    }
+
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-home-link:not(.active) > a {
+        color: #fff !important;
+        background: transparent !important;
+    }
+
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li:not(.active):not(.current-menu-item):not(.current_page_item):hover > a,
+    body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li:not(.active):not(.current-menu-item):not(.current_page_item):focus-within > a {
+        color: #f7dfaa !important;
+        background: rgba(0, 45, 25, .28) !important;
+    }
 </style>
 @endpush
 
@@ -3012,6 +3592,19 @@
     $topicIcons = ['fa-globe', 'fa-landmark', 'fa-chart-column', 'fa-earth-asia', 'fa-futbol', 'fa-film', 'fa-stethoscope', 'fa-graduation-cap'];
     $featuredVideo = $jamunaVideos->first();
     $videoList = $jamunaVideos->slice(1, 3);
+    $videoTabOffsets = [
+        'latest' => 0,
+        'report' => 2,
+        'documentary' => 4,
+    ];
+    $videoTabs = collect($videoTabOffsets)->mapWithKeys(function ($offset, $tabKey) use ($jamunaVideos) {
+        $videos = $jamunaVideos->slice($offset)
+            ->concat($jamunaVideos->take($offset))
+            ->take(6)
+            ->values();
+
+        return [$tabKey => $videos];
+    })->all();
     $socialLinks = collect(json_decode(config('settings.links') ?: '[]'));
     $referencePosts = $jamunaPosts->slice(16, 4)->values();
     $gallerySlides = $jamunaPosts->slice(4, 15)->values()->chunk(5)->values();
@@ -3163,7 +3756,9 @@
                 </div>
                 <div class="jtv-photo-gallery-track" data-photo-gallery-track>
                     @foreach($gallerySlides as $slide)
-                        @php($featuredPhoto = $slide->first())
+                        @php
+                            $featuredPhoto = $slide->first();
+                        @endphp
                         <div class="jtv-photo-gallery-slide">
                             <article class="jtv-photo-gallery-featured">
                                 <a href="{{ $postHelper::getUriPost($featuredPhoto) }}">
@@ -3176,7 +3771,9 @@
                         </div>
                     @endforeach
                 </div>
-                @php($gallerySidePosts = $gallerySlides->first()->skip(1))
+                @php
+                    $gallerySidePosts = $gallerySlides->first()->skip(1);
+                @endphp
                 <div class="jtv-photo-gallery-side">
                     @foreach($gallerySidePosts as $post)
                         <article class="jtv-photo-gallery-card">
@@ -3223,80 +3820,97 @@
             </section>
         @endif
 
-        <section class="jtv-reference-section" aria-label="লাইভ টিভি ও সামাজিক যোগাযোগ">
-            <div class="jtv-reference-heading">
-                <h2>লাইভ টিভি</h2>
-                <a href="{{ url('/videos/latest') }}">সব ভিডিও <i class="fa-solid fa-arrow-right"></i></a>
+        @php
+            $liveSideVideos = collect([
+                $jamunaVideos->get(1) ?: $latestPosts->get(1),
+                $jamunaVideos->get(2) ?: $latestPosts->get(2),
+            ])->filter();
+        @endphp
+        <section class="jtv-live-tv-section" aria-label="লাইভ টিভি">
+            <div class="jtv-live-tv-heading">
+                <div class="jtv-live-tv-title-wrap">
+                    <span class="jtv-live-tv-icon"><i class="fa-solid fa-tv"></i></span>
+                    <div>
+                        <h2>লাইভ টিভি</h2>
+                        <p>সরাসরি দেখুন Jagoroni TV</p>
+                    </div>
+                </div>
+                <a class="jtv-live-tv-all" href="{{ url('/live-tv') }}">সব দেখুন <i class="fa-solid fa-arrow-right"></i></a>
             </div>
-            <div class="jtv-reference-live-grid">
-                <article class="jtv-reference-live-card">
+
+            <div class="jtv-live-tv-grid">
+                <article class="jtv-live-tv-featured">
                     @if($featuredVideo)
-                        <a class="jtv-reference-live-media" href="{{ $postHelper::getUriPost($featuredVideo) }}">
-                            <img src="{{ $postHelper::showThumbnail($featuredVideo, 720) }}" alt="{{ $featuredVideo->post_title }}">
-                            <span class="jtv-reference-live-badge"><i class="fa-solid fa-circle"></i> LIVE</span>
+                        <a class="jtv-live-tv-featured-media" href="{{ $postHelper::getUriPost($featuredVideo) }}">
+                            <img src="{{ $postHelper::showThumbnail($featuredVideo, 900) }}" alt="{{ $featuredVideo->post_title }}">
+                            <span class="jtv-live-tv-live-badge"><i class="fa-solid fa-circle"></i> LIVE</span>
+                            <span class="jtv-live-tv-play"><i class="fa-solid fa-play"></i></span>
+                            <span class="jtv-live-tv-featured-caption"><b>{{ $featuredVideo->post_title }}</b><small>সরাসরি সম্প্রচার ও সর্বশেষ সংবাদ</small></span>
                         </a>
                     @else
-                        <div class="jtv-reference-live-copy">
-                            <h3>জাগরণী টিভি লাইভ</h3>
-                            <p>সর্বশেষ সংবাদ ও বিশেষ প্রতিবেদন দেখুন।</p>
-                        </div>
+                        <div class="jtv-live-tv-empty">জাগরণী টিভি লাইভ</div>
                     @endif
                 </article>
 
-                <article class="jtv-reference-live-card">
-                    <div class="jtv-reference-live-copy">
-                        <h3>জাগরণী টিভি</h3>
-                        <p>সত্যের পথে, জনগণের পাশে, দেশের জন্য।</p>
-                        <a class="jtv-reference-live-button" href="{{ url('/contact') }}">যোগাযোগ করুন</a>
-                    </div>
-                </article>
-
-                <article class="jtv-reference-live-card">
-                    <ul class="jtv-reference-social-list">
-                        @foreach($socialLinks->take(3) as $link)
-                            <li>
-                                <a href="{{ $link->url }}" target="_blank" rel="noopener">
-                                    <i class="{{ $link->icon }}"></i>
-                                    <span>{{ $link->name ?? 'Jagoroni TV' }}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </article>
+                <div class="jtv-live-tv-side">
+                    @foreach($liveSideVideos as $sideVideo)
+                        <article class="jtv-live-tv-side-card">
+                            <a class="jtv-live-tv-side-thumb" href="{{ $postHelper::getUriPost($sideVideo) }}">
+                                <img src="{{ $postHelper::showThumbnail($sideVideo, 360) }}" alt="{{ $sideVideo->post_title }}" loading="lazy">
+                                <span class="jtv-live-tv-side-play"><i class="fa-solid fa-play"></i></span>
+                            </a>
+                            <div class="jtv-live-tv-side-content">
+                                <span class="jtv-live-tv-category">বিশেষ প্রতিবেদন</span>
+                                <h3><a href="{{ $postHelper::getUriPost($sideVideo) }}">{{ $sideVideo->post_title }}</a></h3>
+                                <p>{{ \Illuminate\Support\Str::limit(strip_tags($sideVideo->post_excerpt ?: 'জাগরণী টিভির সর্বশেষ সংবাদ ও প্রতিবেদন দেখুন।'), 85) }}</p>
+                                <div class="jtv-live-tv-meta">
+                                    <span><i class="fa-regular fa-clock"></i>{{ $sideVideo->created_at->locale(app()->getLocale())->diffForHumans() }}</span>
+                                    <span><i class="fa-regular fa-eye"></i>{{ number_format((int) ($sideVideo->post_hits ?: 4800) / 1000, 1) }}K</span>
+                                </div>
+                            </div>
+                            <a class="jtv-live-tv-side-arrow" href="{{ $postHelper::getUriPost($sideVideo) }}" aria-label="প্রতিবেদন দেখুন"><i class="fa-solid fa-arrow-right"></i></a>
+                        </article>
+                    @endforeach
+                </div>
             </div>
         </section>
 
         <section class="jtv-home-lower-grid">
             <div class="jtv-home-video-block">
                 <div class="jtv-home-video-tabs">
-                    <a class="jtv-home-video-tab is-active" href="{{ url('/videos/latest') }}"><i class="fa-brands fa-youtube"></i>সর্বশেষ ভিডিও</a>
-                    <span class="jtv-home-video-tab">বিশেষ প্রতিবেদন</span>
-                    <span class="jtv-home-video-tab">তথ্যচিত্র</span>
-                    <span class="jtv-home-video-tab">লাইভ</span>
+                    <button type="button" class="jtv-home-video-tab is-active" data-video-tab="latest" aria-selected="true"><i class="fa-brands fa-youtube"></i>সর্বশেষ ভিডিও</button>
+                    <button type="button" class="jtv-home-video-tab" data-video-tab="report" aria-selected="false">বিশেষ প্রতিবেদন</button>
+                    <button type="button" class="jtv-home-video-tab" data-video-tab="documentary" aria-selected="false">তথ্যচিত্র</button>
                 </div>
 
-                @if($featuredVideo)
-                    <div class="jtv-home-video-layout">
-                        <article class="jtv-home-video-feature">
-                            <a class="jtv-home-video-feature-thumb" href="{{ $postHelper::getUriPost($featuredVideo) }}">
-                                <img src="{{ $postHelper::showThumbnail($featuredVideo, 720) }}" alt="{{ $featuredVideo->post_title }}">
-                                <span class="jtv-home-video-play"><i class="fa-solid fa-play"></i></span>
-                            </a>
-                        </article>
+                @foreach($videoTabs as $tabKey => $tabVideos)
+                    @php
+                        $tabFeaturedVideo = $tabVideos->first();
+                        $tabVideoList = $tabVideos->slice(1, 3);
+                    @endphp
+                    @if($tabFeaturedVideo)
+                        <div class="jtv-home-video-layout{{ $tabKey !== 'latest' ? ' is-video-panel-hidden' : '' }}" data-video-panel="{{ $tabKey }}" aria-hidden="{{ $tabKey === 'latest' ? 'false' : 'true' }}">
+                            <article class="jtv-home-video-feature">
+                                <a class="jtv-home-video-feature-thumb" href="{{ $postHelper::getUriPost($tabFeaturedVideo) }}">
+                                    <img src="{{ $postHelper::showThumbnail($tabFeaturedVideo, 720) }}" alt="{{ $tabFeaturedVideo->post_title }}">
+                                    <span class="jtv-home-video-play"><i class="fa-solid fa-play"></i></span>
+                                </a>
+                            </article>
 
-                        <div class="jtv-home-video-list">
-                            @foreach($videoList as $video)
-                                <article class="jtv-home-video-list-item">
-                                    <a href="{{ $postHelper::getUriPost($video) }}"><img src="{{ $postHelper::showThumbnail($video, 220) }}" alt="{{ $video->post_title }}"></a>
-                                    <div>
-                                        <h4><a href="{{ $postHelper::getUriPost($video) }}">{{ $video->post_title }}</a></h4>
-                                        <p><i class="fa-regular fa-clock"></i>{{ $video->created_at->locale(app()->getLocale())->diffForHumans() }} • <i class="fa-regular fa-eye"></i>{{ number_format((int) ($video->post_hits ?: 4800) / 1000, 1) }}K</p>
-                                    </div>
-                                </article>
-                            @endforeach
+                            <div class="jtv-home-video-list">
+                                @foreach($tabVideoList as $video)
+                                    <article class="jtv-home-video-list-item">
+                                        <a href="{{ $postHelper::getUriPost($video) }}"><img src="{{ $postHelper::showThumbnail($video, 220) }}" alt="{{ $video->post_title }}"></a>
+                                        <div>
+                                            <h4><a href="{{ $postHelper::getUriPost($video) }}">{{ $video->post_title }}</a></h4>
+                                            <p><i class="fa-regular fa-clock"></i>{{ $video->created_at->locale(app()->getLocale())->diffForHumans() }} • <i class="fa-regular fa-eye"></i>{{ number_format((int) ($video->post_hits ?: 4800) / 1000, 1) }}K</p>
+                                        </div>
+                                    </article>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                @endforeach
             </div>
 
             <div class="jtv-home-side-widgets">
@@ -3306,7 +3920,7 @@
                         <div>
                             <strong>জাগরণী টিভি</strong>
                             <span>সবার আগে, সব খবর</span>
-                            <em>লাইভ দেখুন →</em>
+                            <a class="jtv-home-promo-live-link" href="{{ url('/live-tv') }}">লাইভ দেখুন →</a>
                         </div>
                     </div>
                 </div>
@@ -3423,6 +4037,26 @@
 
                 wrap.querySelectorAll('[data-home-panel]').forEach(function (panel) {
                     panel.classList.toggle('is-active', panel.getAttribute('data-home-panel') === target);
+                });
+            });
+        });
+
+        document.querySelectorAll('.jtv-home-video-block').forEach(function (videoBlock) {
+            const tabs = videoBlock.querySelectorAll('[data-video-tab]');
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    tabs.forEach(function (button) {
+                        const isActive = button === tab;
+                        button.classList.toggle('is-active', isActive);
+                        button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    });
+
+                    videoBlock.querySelectorAll('[data-video-panel]').forEach(function (videoPanel) {
+                        const isActivePanel = videoPanel.getAttribute('data-video-panel') === tab.getAttribute('data-video-tab');
+                        videoPanel.classList.toggle('is-video-panel-hidden', !isActivePanel);
+                        videoPanel.setAttribute('aria-hidden', isActivePanel ? 'false' : 'true');
+                    });
                 });
             });
         });

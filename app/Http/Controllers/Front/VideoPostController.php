@@ -10,7 +10,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class VideoPostController extends Controller
 {
     private $videoPostService;
-    
+
     /**
      * __construct
      *
@@ -21,7 +21,7 @@ class VideoPostController extends Controller
     {
         $this->videoPostService = $videoPostService;
     }
-    
+
     /**
      * index
      *
@@ -43,5 +43,17 @@ class VideoPostController extends Controller
         SeoHelper::getPage('video_post', $seoTitle);
 
         return view(SettingHelper::activeTheme('page/videos'), compact('posts'));
+    }
+
+    /**
+     * Display the dedicated live TV video page.
+     */
+    public function live()
+    {
+        $posts = $this->videoPostService->query()->latest()->paginate(12);
+
+        SeoHelper::getPage('video_post', 'লাইভ টিভি - ' . config('settings.site_name'));
+
+        return view(SettingHelper::activeTheme('page/live-tv'), compact('posts'));
     }
 }

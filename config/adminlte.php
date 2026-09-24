@@ -403,7 +403,7 @@ return [
             'can'  => 'read-comments',
             'active' => ['admin/manage/comments/*']
         ],
-       
+
         [
             'text' => 'contacts',
             'url'  => 'admin/manage/contacts',
@@ -423,12 +423,12 @@ return [
                     'can'    => 'read-menus',
                     'active' => ['admin/manage/menus/*/lang/*']
                 ],
-                [
-                    'text' => 'themes',
-                    'can'  => 'read-themes',
-                    'url'  => 'admin/manage/themes',
-                    'active' => ['admin/manage/themes/*']
-                ],
+                // [
+                //     'text' => 'themes',
+                //     'can'  => 'read-themes',
+                //     'url'  => 'admin/manage/themes',
+                //     'active' => ['admin/manage/themes/*']
+                // ],
             ]
         ],
         [

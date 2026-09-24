@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\{AnalyticHelper, SettingHelper,UtlHelper};
 use App\Http\Controllers\Controller;
-use App\Models\{Contact,Language};
+use App\Models\{Contact,Language,Post};
 use App\Services\{PageService,PermissionService,PostService,RoleService,TermService,UserService};
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
@@ -129,6 +129,12 @@ class DashboardController extends Controller
 
         $startDate = Carbon::today()->subDays(7)->startOfDay();
 
+        $recentPosts = Post::article()
+            ->publish()
+            ->latest('created_at')
+            ->take(4)
+            ->get();
+
         UtlHelper::update(config('retenvi.version'));
 
         return view('admin.dashboard',
@@ -148,7 +154,8 @@ class DashboardController extends Controller
                 'label_day',
                 'label_day_visitor',
                 'new_visitors',
-                'count'
+                'count',
+                'recentPosts'
             ));
     }
 

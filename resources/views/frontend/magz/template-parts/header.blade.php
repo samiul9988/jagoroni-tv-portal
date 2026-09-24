@@ -29,7 +29,7 @@
 <div class="firstbar jtv-masthead">
     <div class="container-md jtv-masthead-inner">
         <a class="jtv-masthead-brand" href="{{ url('/') }}" aria-label="Jagoroni TV home">
-            <img class="jtv-masthead-brand-mark" src="{{ $images::webIcon() }}" alt="Jagoroni TV">
+            <img class="jtv-masthead-brand-mark" src="{{ $images::webLogoLight() }}" alt="Jagoroni TV">
             <span class="jtv-masthead-brand-copy">
                 <strong>JAGORONI <b>TV</b></strong>
                 <small>সত্যের পথে | জনগণের পাশে | দেশের জন্য</small>

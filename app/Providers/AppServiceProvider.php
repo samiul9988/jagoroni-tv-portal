@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use App\Helpers\ImageHelper;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,11 +25,20 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Model::preventLazyLoading(! app()->isProduction());
-        
+
         if (Schema::hasTable('settings')) {
             $locale = config('settings.default_language');
             if ($locale) {
                 App::setLocale($locale);
+            }
+
+            $dashboardLogo = config('settings.logo_dashboard');
+            if ($dashboardLogo && ImageHelper::isExists('assets', $dashboardLogo)) {
+                config([
+                    'adminlte.logo_img' => 'storage/assets/' . $dashboardLogo,
+                    'adminlte.logo_img_alt' => config('settings.company_name', 'Jagoroni TV'),
+                    'adminlte.logo' => '<b>Jagoroni</b> TV',
+                ]);
             }
         }
     }

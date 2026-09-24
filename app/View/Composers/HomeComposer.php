@@ -67,7 +67,7 @@ class HomeComposer
             ->wherePostLanguage(LocalizationHelper::getCurrentLocaleId())
             ->wherePostStatus('publish')
             ->latest('created_at')
-            ->take(6)
+            ->take(24)
             ->get();
 
         $mostReadPosts = Post::post()

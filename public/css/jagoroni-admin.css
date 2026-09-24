@@ -1,0 +1,30 @@
+/* Shared Jagoroni TV admin shell. Loaded on every AdminLTE page. */
+body.admin-panel,
+body[class*="sidebar"] { background: #f3f7f5; }
+.main-sidebar { background: linear-gradient(180deg, #063f2d 0%, #032d22 100%) !important; }
+.brand-link { display: flex !important; align-items: center; min-height: 50px; border-bottom: 1px solid rgba(255,255,255,.12) !important; background: #063f2d !important; }
+.brand-link .brand-image { width: 34px; height: 34px; margin-left: .35rem; margin-right: .55rem; object-fit: contain; opacity: 1 !important; }
+.brand-link .brand-text { color: #fff !important; font-size: 15px; font-weight: 800 !important; }
+.main-header { border-bottom: 1px solid #e4ece8 !important; background: #fff !important; }
+.content-wrapper { background: #f3f7f5 !important; }
+.content-header { padding: 18px 24px 8px; }
+.content-header h1 { color: #173d2d; font-size: 25px; font-weight: 800; }
+.content { padding: 16px 24px 28px; }
+.nav-sidebar .nav-header { color: #b4d5c6 !important; font-size: 10px; font-weight: 800; letter-spacing: .4px; }
+.nav-sidebar .nav-link { margin: 2px 9px; border-radius: 5px; color: rgba(255,255,255,.78) !important; }
+.nav-sidebar .nav-link:hover,
+.nav-sidebar .nav-link.active { color: #fff !important; background: #d71e27 !important; }
+.nav-sidebar .nav-link p { font-size: 13px; }
+.card, .info-box { border: 1px solid #e0eae5; border-radius: 8px; box-shadow: 0 3px 12px rgba(10,61,42,.05) !important; }
+.card-header { border-bottom-color: #e7efea; background: #fff; }
+.card-title { color: #174936; font-weight: 700; }
+.btn-primary { border-color: #087849; background-color: #087849; }
+.btn-primary:hover, .btn-primary:focus { border-color: #06633d; background-color: #06633d; }
+.table thead th { color: #315646; background: #f2f8f5; border-bottom-color: #dce9e2; }
+.table td, .table th { vertical-align: middle; }
+.page-item.active .page-link { border-color: #087849; background-color: #087849; }
+.footer-copyright a { color: #087849 !important; }
+@media (max-width: 767px) {
+    .content { padding: 12px 10px 24px; }
+    .content-header { padding: 14px 10px 6px; }
+}

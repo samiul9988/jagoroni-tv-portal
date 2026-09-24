@@ -1,4 +1,12 @@
-<div class="col-lg-3 sidebar" id="sidebar">
+<div class="col-lg-3 sidebar jtv-single-sidebar" id="sidebar">
+    @php
+        $sidebarAdWidget = collect($sidebar)->first(function ($widgetData, $widgetName) {
+            return str_starts_with($widgetName, 'ads_sidebar');
+        });
+        $sidebarAdWidgetName = collect($sidebar)->keys()->first(function ($widgetName) {
+            return str_starts_with($widgetName, 'ads_sidebar');
+        });
+    @endphp
     @if(isset($categorySidebarMode) && $categorySidebarMode)
         @inject('categoryPostHelper', 'App\Helpers\PostHelper')
         <div class="jtv-category-news-panel">
@@ -36,4 +44,9 @@
         <x-dynamic-component :component="$themeHelper->getComponentName($widgetName)" page="home" layout="sidebar" :widgetName="$widgetName" :widgetData="$widgetData" :localeId="$localeId"/>
         @endif
     @endforeach
+    @if(($page ?? null) === 'single-post' && $sidebarAdWidgetName && $sidebarAdWidget && ($sidebarAdWidget['active'] ?? 'false') == 'true')
+        <div class="jtv-single-sidebar-bottom-ad">
+            <x-dynamic-component :component="$themeHelper->getComponentName($sidebarAdWidgetName)" page="home" layout="sidebar" :widgetName="$sidebarAdWidgetName" :widgetData="$sidebarAdWidget" :localeId="$localeId"/>
+        </div>
+    @endif
 </div>

@@ -200,8 +200,50 @@ class ArticleController extends Controller
 
         $comments->load('reply');
 
-        return view(SettingHelper::activeTheme('page/single'), compact(
-            'post', 'tags', 'comments'
+        $localeId = LocalizationHelper::getCurrentLocaleId();
+
+        $latestPosts = Post::with('categories')
+            ->article()
+            ->where('post_language', $localeId)
+            ->publish()
+            ->where('id', '!=', $post->id)
+            ->latest('created_at')
+            ->take(6)
+            ->get();
+
+        $popularPosts = Post::with('categories')
+            ->article()
+            ->where('post_language', $localeId)
+            ->publish()
+            ->where('id', '!=', $post->id)
+            ->orderByDesc('post_hits')
+            ->take(5)
+            ->get();
+
+        $categoryId = optional($post->terms()->category()->first())->id;
+
+        $relatedPosts = Post::with('categories')
+            ->article()
+            ->where('post_language', $localeId)
+            ->publish()
+            ->where('id', '!=', $post->id)
+            ->when($categoryId, function ($query) use ($categoryId) {
+                $query->whereHas('terms', function ($termQuery) use ($categoryId) {
+                    $termQuery->where('terms.id', $categoryId);
+                });
+            })
+            ->latest('created_at')
+            ->take(3)
+            ->get();
+
+        if ($relatedPosts->count() < 3) {
+            $relatedPosts = $relatedPosts->concat(
+                $latestPosts->whereNotIn('id', $relatedPosts->pluck('id'))->take(3 - $relatedPosts->count())
+            );
+        }
+
+        return view(SettingHelper::activeTheme('page/news-details'), compact(
+            'post', 'tags', 'comments', 'latestPosts', 'popularPosts', 'relatedPosts'
         ));
     }
 
