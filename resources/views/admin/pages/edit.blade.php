@@ -252,6 +252,7 @@
                             {{ __('form.help_public_visibility') }}
                         </small>
                     </div>
+                    @include('admin.pages._menu-field', ['inMenu' => \App\Models\MenuItem::where('menu_id', 1)->where('link', '/page/'.$page->post_name)->exists()])
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" name="publish" value="{{ __('button.update') }}">
                         <input class="btn btn-secondary float-right" type="submit" name="draft" value="{{ __('button.save_draft') }}">

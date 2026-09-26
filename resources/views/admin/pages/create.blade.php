@@ -172,6 +172,7 @@
                             {{ __('form.help_public_visibility') }}
                         </small>
                     </div>
+                    @include('admin.pages._menu-field')
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit" name="publish" value="1">{{ __('button.publish') }}</button>
                         <button class="btn btn-secondary float-right" type="submit" name="draft" value="1">{{ __('button.save_draft') }}</button>

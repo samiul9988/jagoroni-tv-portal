@@ -1,3 +1,4 @@
+@once
 <style>
     body.skin-magz.jtv-homepage footer.footer {
         padding: 0 !important;
@@ -55,3 +56,4 @@
         }
     }
 </style>
+@endonce

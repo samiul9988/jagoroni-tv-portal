@@ -71,6 +71,31 @@ Class PageService
         $page->save();
 
         $this->addTranslation($page, $request);
+        $this->syncMenuItem($page, $request->boolean('show_in_menu'));
+    }
+
+    private function syncMenuItem($page, bool $show): void
+    {
+        $link = '/page/' . $page->post_name;
+        $query = \App\Models\MenuItem::where('menu_id', 1)->where('link', $link);
+        if (!$show) {
+            $query->delete();
+            return;
+        }
+        if ($query->exists()) {
+            return;
+        }
+        $language = $page->post_language;
+        \App\Models\MenuItem::create([
+            'label' => $page->post_title,
+            'link' => $link,
+            'parent' => 0,
+            'sort' => (int) \App\Models\MenuItem::where('menu_id', 1)->where('language', $language)->where('parent', 0)->max('sort') + 1,
+            'class' => null,
+            'menu_id' => 1,
+            'language' => $language,
+            'depth' => 0,
+        ]);
     }
     
     /**
@@ -96,6 +121,7 @@ Class PageService
     public function modify($request, $id)
     {
         $page             = $this->page->findOrFail($id);
+        $oldName          = $page->post_name;
         $page->post_title = strip_tags($request->post_title);
         
         if ($request->has('slug')) {
@@ -147,6 +173,11 @@ Class PageService
         }
 
         $page->save();
+
+        if ($oldName !== $page->post_name) {
+            \App\Models\MenuItem::where('menu_id', 1)->where('link', '/page/' . $oldName)->update(['link' => '/page/' . $page->post_name]);
+        }
+        $this->syncMenuItem($page, $request->boolean('show_in_menu'));
     }
 
     /**

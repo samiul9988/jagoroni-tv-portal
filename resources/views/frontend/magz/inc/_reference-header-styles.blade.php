@@ -1,3 +1,4 @@
+@once
 <style>
 body.skin-magz.jtv-homepage header.primary,
     body.skin-magz.jtv-homepage .jtv-topbar,
@@ -843,3 +844,4 @@ body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-home-link 
         }
 }
 </style>
+@endonce

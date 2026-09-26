@@ -83,7 +83,9 @@ class Post extends Model
     {
         return [
             'post_name' => [
-                'source' => 'post_title'
+                'source' => 'post_title',
+                // Str::slug() returns '' for Bengali titles, so keep unicode letters/numbers instead.
+                'method' => fn (string $source, string $separator) => trim(preg_replace('/[^\p{L}\p{M}\p{N}]+/u', $separator, $source), $separator),
             ]
         ];
     }

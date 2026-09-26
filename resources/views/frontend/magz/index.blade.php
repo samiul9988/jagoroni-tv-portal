@@ -1,10 +1,17 @@
+@if(($page ?? null) !== 'home')
+    @prepend('styles')
+        @include('frontend.magz.inc._reference-header-styles')
+        @include('frontend.magz.inc._homepage-footer-styles')
+        @include('frontend.magz.inc._inner-page-styles')
+    @endprepend
+@endif
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" data-bs-theme="light">
 	<head>
         @include('frontend.magz.inc._head')
 	</head>
 
-	<body class="skin-magz @if(in_array(($page ?? null), ['home', 'single-post', 'category', 'team', 'live', 'search', 'contact'], true)) jtv-homepage @endif">
+	<body class="skin-magz jtv-homepage">
         <!-- Header -->
 		<header class="primary">
             @include('frontend.magz.template-parts.header')

@@ -3,7 +3,17 @@
 @inject('themeHelper', 'App\Helpers\ThemeHelper')
 @inject('postHelper', 'App\Helpers\PostHelper')
 
+@php
+    $rawContent = html_entity_decode($pages->post_content);
+    $fullDesign = preg_match('/<style|<html|<body|<section/i', $rawContent) === 1;
+@endphp
+
 @section('content')
+@if($fullDesign)
+<section class="jtv-custom-page" style="margin:0;padding:0;overflow:hidden;">
+    {!! $rawContent !!}
+</section>
+@else
 <section class="page top">
     <div class="container-md">
         <div class="row">
@@ -27,7 +37,7 @@
                     @endif
                 </figure>
                 <div class="page-description">
-                    {!! html_entity_decode($pages->post_content) !!}
+                    {!! $rawContent !!}
                 </div>
             </div>
             @if($sidebarPosition === "right" AND $sidebarActive)
@@ -36,4 +46,5 @@
         </div>
     </div>
 </section>
+@endif
 @stop

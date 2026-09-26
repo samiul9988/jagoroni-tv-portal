@@ -37,6 +37,7 @@ class CategoryController extends Controller
 
             $latestPosts = Post::query()
                 ->publish()
+                ->article()
                 ->where('post_language', $id)
                 ->with('categories')
                 ->latest()
@@ -45,6 +46,7 @@ class CategoryController extends Controller
 
             $mostReadPosts = Post::query()
                 ->publish()
+                ->article()
                 ->where('post_language', $id)
                 ->with('categories')
                 ->orderByDesc('post_hits')

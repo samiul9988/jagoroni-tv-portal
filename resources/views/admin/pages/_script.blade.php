@@ -64,8 +64,13 @@
 
         tinymce.init({
             selector: 'textarea[name=post_content]',
-            valid_children: '+body[style],+body[style]>p[style],+body[style]>p[style]>span,*[class]',
-            extended_valid_elements: 'iframe[class=responsive-iframe|title|src|frameborder="0"|allowfullscreen], div[class|id]',
+            verify_html: false,
+            valid_elements: '*[*]',
+            extended_valid_elements: '*[*]',
+            valid_children: '+body[style],+div[style],+section[style]',
+            entity_encoding: 'raw',
+            convert_urls: false,
+            forced_root_block: false,
             skin: skin,
             content_css: contentCss,
             plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap emoticons',
