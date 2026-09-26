@@ -418,6 +418,14 @@ return [
             'active' => ['admin/manage/advertisements*'],
         ],
         [
+            'text' => 'Live Streaming',
+            'icon' => 'fas fa-broadcast-tower',
+            'submenu' => [
+                ['text' => 'Stream Settings', 'url' => 'admin/manage/live-stream', 'icon' => 'far fa-circle', 'active' => ['admin/manage/live-stream*']],
+                ['text' => 'Program Schedule', 'url' => 'admin/manage/live-programs', 'icon' => 'far fa-circle', 'active' => ['admin/manage/live-programs*']],
+            ],
+        ],
+        [
             'text' => 'Homepage Photos',
             'url'  => 'admin/manage/home-photos',
             'icon' => 'fas fa-images',

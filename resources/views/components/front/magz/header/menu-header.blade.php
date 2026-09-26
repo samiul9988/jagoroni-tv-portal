@@ -16,8 +16,17 @@
                     </li>
                     @foreach($menus as $menu)
                         @php($isCurrentMenu = !empty($menu['link']) && url()->current() === url($menu['link']))
-                        <li class="@if($menu['child'])dropdown magz-dropdown @endif @if($isCurrentMenu)active current-menu-item @endif">
-                            <a href="{{ $menu['link'] }}" title="">{{ $menu['label'] }} @if($menu['child'])<i class="arrow-right"></i>@endif</a>
+                        @php($isLiveMenu = !empty($menu['link']) && \Illuminate\Support\Str::endsWith(rtrim($menu['link'], '/'), '/live-tv'))
+                        <li class="@if($menu['child'])dropdown magz-dropdown @endif @if($isCurrentMenu)active current-menu-item @endif @if($isLiveMenu)jtv-nav-live-item @endif">
+                            @if($isLiveMenu)
+                                <a href="{{ $menu['link'] }}" title="{{ $menu['label'] }}">
+                                    <span class="jtv-live-ico" aria-hidden="true"><i class="fa-solid fa-tower-broadcast"></i></span>
+                                    <span class="jtv-live-txt">{{ $menu['label'] }}</span>
+                                    <span class="jtv-live-tag">LIVE</span>
+                                </a>
+                            @else
+                                <a href="{{ $menu['link'] }}" title="">{{ $menu['label'] }} @if($menu['child'])<i class="arrow-right"></i>@endif</a>
+                            @endif
                             @if($menu['child'])
                                 @include('frontend.magz.inc._child', ['childs'=>$menu['child']])
                             @endif
@@ -75,3 +84,87 @@
         </div>
     </div>
 </nav>
+
+@once
+<style>
+    /* Live streaming menu item: amber badge (stands out on the green nav), pulsing icon, shine. */
+    body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item {
+        display: flex !important;
+        align-items: center !important;
+        padding: 0 6px !important;
+        background: transparent !important;
+    }
+    body.skin-magz.jtv-homepage.jtv-homepage.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item > a,
+    body.skin-magz.jtv-homepage.jtv-homepage.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item:hover > a,
+    body.skin-magz.jtv-homepage.jtv-homepage.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item.active > a,
+    body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item > a {
+        position: relative !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: auto !important;
+        height: 36px !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 12px 0 8px !important;
+        border-radius: 8px !important;
+        color: #0d3b22 !important;
+        font-weight: 800 !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+        background: linear-gradient(120deg, #ffd200, #ffae00, #ffd200) !important;
+        background-size: 200% 100% !important;
+        box-shadow: 0 0 0 0 rgba(255, 196, 0, .65) !important;
+        overflow: hidden !important;
+        animation: jtvLiveGlow 2s infinite, jtvLiveShift 4s linear infinite !important;
+    }
+    body.skin-magz.jtv-homepage.jtv-homepage.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item > a:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.06);
+    }
+    body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item > a::after {
+        content: '' !important;
+        position: absolute !important;
+        top: 0; bottom: 0; left: -60%;
+        width: 40%;
+        background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .7), transparent);
+        transform: skewX(-20deg);
+        animation: jtvLiveShine 3s ease-in-out infinite;
+        pointer-events: none;
+    }
+    body.skin-magz nav.jtv-main-nav .jtv-live-ico {
+        position: relative !important; flex: none !important; display: grid !important; place-items: center !important;
+        width: 24px !important; height: 24px !important; margin: 0 !important; padding: 0 !important; color: #0d3b22 !important; line-height: 1 !important;
+    }
+    body.skin-magz nav.jtv-main-nav .jtv-live-ico i {
+        position: static !important; display: block !important; width: auto !important; height: auto !important;
+        margin: 0 !important; padding: 0 !important; font-size: 14px !important; line-height: 1 !important; transform-origin: center !important;
+    }
+    body.skin-magz nav.jtv-main-nav .jtv-live-txt { margin: 0 !important; padding: 0 !important; line-height: 1 !important; }
+    body.skin-magz nav.jtv-main-nav .jtv-live-tag { margin: 0 !important; line-height: 1 !important; }
+    .jtv-live-ico::before, .jtv-live-ico::after {
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; box-sizing: border-box; border: 2px solid rgba(13, 59, 34, .55); border-radius: 50%; transform-origin: center;
+        animation: jtvLiveRing 1.8s ease-out infinite;
+    }
+    .jtv-live-ico::after { animation-delay: .9s; }
+    .jtv-live-ico i { animation: jtvLiveBeat 1.2s ease-in-out infinite; }
+    .jtv-live-txt { color: #0d3b22; font-size: 14px; font-weight: 800; }
+    .jtv-live-tag {
+        padding: 3px 6px; border-radius: 4px; background: #0d3b22; color: #ffd200;
+        font-size: 10px; font-weight: 900; letter-spacing: .8px; animation: jtvLiveBlink 1.2s ease-in-out infinite;
+    }
+    @keyframes jtvLiveRing { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+    @keyframes jtvLiveBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+    @keyframes jtvLiveBlink { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+    @keyframes jtvLiveGlow { 0% { box-shadow: 0 0 0 0 rgba(255, 196, 0, .6); } 70% { box-shadow: 0 0 0 9px rgba(255, 196, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 196, 0, 0); } }
+    @keyframes jtvLiveShift { 0% { background-position: 0 0; } 100% { background-position: 200% 0; } }
+    @keyframes jtvLiveShine { 0% { left: -60%; } 55%, 100% { left: 130%; } }
+    @media (prefers-reduced-motion: reduce) {
+        body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item > a, .jtv-live-ico::before, .jtv-live-ico::after, .jtv-live-ico i, .jtv-live-tag { animation: none !important; }
+        body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item > a::after { display: none !important; }
+    }
+    @media (max-width: 991px) {
+        body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item { padding: 6px 12px !important; }
+    }
+</style>
+@endonce

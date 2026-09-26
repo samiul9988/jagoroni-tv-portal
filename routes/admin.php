@@ -279,6 +279,11 @@ Route::prefix('admin/manage')->middleware('auth', 'auth.locale', 'is-ban', 'veri
     Route::resource('home-photos', \App\Http\Controllers\Admin\HomePhotoController::class)
         ->except(['show'])
         ->names('home-photos');
+    Route::get('live-stream', [\App\Http\Controllers\Admin\LiveStreamController::class, 'edit'])->name('live-stream.edit');
+    Route::put('live-stream', [\App\Http\Controllers\Admin\LiveStreamController::class, 'update'])->name('live-stream.update');
+    Route::resource('live-programs', \App\Http\Controllers\Admin\LiveProgramController::class)
+        ->except(['show'])
+        ->names('live-programs');
     Route::resource('team-members', \App\Http\Controllers\Admin\TeamMemberController::class)
         ->except(['show'])
         ->names('team-members');

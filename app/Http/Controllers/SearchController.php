@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\{Post, Term};
 use App\Services\PostService;
 use Hashids\Hashids;
 use App\Helpers\{SeoHelper, SettingHelper};
@@ -68,8 +69,37 @@ class SearchController extends Controller
             $query_search->where('upazila', $upazila);
         }
 
-        $posts       = $query_search->paginate(4);
-        $countResults  = $query_search->count();
+        // Time filter (24h / 7 days / 30 days / all time).
+        $period = (string) $request->get('period', 'all');
+        $since = ['day' => now()->subDay(), 'week' => now()->subDays(7), 'month' => now()->subDays(30)][$period] ?? null;
+        if ($since) {
+            $query_search->where('created_at', '>=', $since);
+        } else {
+            $period = 'all';
+        }
+
+        // Category counts reflect keyword + location + time, so tabs show how many results each has.
+        $allCategories = Term::category()->currentLanguage()->get();
+        $categoryCounts = $allCategories->map(function ($term) use ($query_search) {
+            $term->result_count = (clone $query_search)->whereHas('terms', fn ($q) => $q->where('terms.id', $term->id))->count();
+
+            return $term;
+        })->filter(fn ($term) => $term->result_count > 0)->sortByDesc('result_count')->values();
+        $totalBeforeCategory = (clone $query_search)->count();
+
+        $categorySlug = trim((string) $request->get('category', ''));
+        $activeCategory = $categorySlug !== '' ? $allCategories->firstWhere('slug', $categorySlug) : null;
+        if ($activeCategory) {
+            $query_search->whereHas('terms', fn ($q) => $q->where('terms.id', $activeCategory->id));
+        } else {
+            $categorySlug = '';
+        }
+
+        $posts       = $query_search->paginate(6);
+        $countResults  = $posts->total();
+
+        $sidebarLatest = Post::query()->article()->publish()->latest()->take(5)->get();
+        $popularTags = Term::tag()->currentLanguage()->withCount('posts')->orderByDesc('posts_count')->take(10)->get();
         $locationLabel = collect([$division, $district, $upazila])
             ->filter()
             ->implode(' / ');
@@ -96,6 +126,12 @@ class SearchController extends Controller
             'location',
             'searchLabel',
             'countResults',
+            'categoryCounts',
+            'totalBeforeCategory',
+            'categorySlug',
+            'period',
+            'sidebarLatest',
+            'popularTags',
             'hashids'));
     }
 }

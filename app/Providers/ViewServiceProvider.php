@@ -35,7 +35,10 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(['frontend.magz.page.single', 'frontend.magz.page.news-details'], SingleComposer::class);
         View::composer('frontend.magz.page.posts', postsComposer::class);
         View::composer('frontend.magz.page.videos', VideosComposer::class);
-        View::composer('frontend.magz.page.live-tv', VideosComposer::class);
+        View::composer('frontend.magz.page.live-tv', function ($view) {
+            app(PageComposer::class)->compose($view);
+            $view->with('page', 'live');
+        });
         View::composer('frontend.magz.page.audios', AudiosComposer::class);
         View::composer('frontend.magz.page.popular', PopularComposer::class);
         View::composer('frontend.magz.page.category', categoryComposer::class);
