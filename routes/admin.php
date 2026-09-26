@@ -272,5 +272,8 @@ Route::prefix('admin/manage')->middleware('auth', 'auth.locale', 'is-ban', 'veri
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('tags', \App\Http\Controllers\Admin\TagController::class);
     Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class);
+    Route::resource('advertisements', \App\Http\Controllers\Admin\AdvertisementController::class)
+        ->except(['show'])
+        ->names('advertisements');
 
 });

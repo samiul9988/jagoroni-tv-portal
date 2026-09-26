@@ -1,3 +1,55 @@
+/* Admin-managed advertisements */
+.jtv-managed-ads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 18px;
+}
+
+.jtv-managed-ad {
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.jtv-managed-ad img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.jtv-managed-ads-home_top,
+.jtv-managed-ads-home_middle,
+.jtv-managed-ads-footer {
+  padding: 10px;
+  border: 1px solid #dce8e1;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.jtv-managed-ads-sidebar_left,
+.jtv-managed-ads-sidebar_right {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.jtv-managed-ads-sidebar_left .jtv-managed-ad,
+.jtv-managed-ads-sidebar_right .jtv-managed-ad {
+  width: 100% !important;
+}
+
+.jtv-managed-ads-article_top { margin: 0 24px 12px; }
+.jtv-managed-ads-article_bottom { margin: 18px 24px 0; }
+
+@media (max-width: 575px) {
+  .jtv-managed-ads-article_top,
+  .jtv-managed-ads-article_bottom { margin-right: 12px; margin-left: 12px; }
+}
 /* Jagoroni TV - Jamuna style inspired frontend redesign */
 
 :root {

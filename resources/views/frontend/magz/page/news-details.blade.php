@@ -25,11 +25,7 @@
         <div class="jtv-details-layout">
             {{-- Left sidebar --}}
             <aside class="jtv-details-sidebar">
-                <div class="jtv-ad-slot">
-                    <span class="jtv-ad-slot-label">YOUR AD HERE</span>
-                    <span class="jtv-ad-slot-size">300 x 250</span>
-                    <a href="{{ url('/contact') }}" class="jtv-ad-slot-btn">Contact Us</a>
-                </div>
+                <x-front-advertisement position="sidebar_left" />
 
                 @if($latestPosts->count())
                 <div class="jtv-side-block">
@@ -61,6 +57,7 @@
 
             {{-- Main content --}}
             <article class="jtv-details-content">
+                <x-front-advertisement position="article_top" />
                 @if($categoryTerm)
                     <a href="{{ $termHelper->resolveUrl($post, $categoryTerm->slug) }}" class="jtv-details-badge">{{ $termHelper->resolveLabel($post, $categoryTerm->slug) }}</a>
                 @endif
@@ -89,6 +86,8 @@
                 <div class="jtv-details-body">
                     {!! $post->post_content !!}
                 </div>
+
+                <x-front-advertisement position="article_bottom" />
 
                 <div class="jtv-details-share">
                     <span>শেয়ার করুন:</span>
@@ -131,6 +130,7 @@
 
             {{-- Right sidebar --}}
             <aside class="jtv-details-sidebar">
+                <x-front-advertisement position="sidebar_right" />
                 <h3 class="jtv-side-title jtv-side-title-plain">বিজ্ঞাপন</h3>
                 <div class="jtv-promo-block jtv-promo-red">
                     <h4>দেশের খবর সবসময় জাগরনী টিভিতে</h4>
@@ -158,11 +158,6 @@
                 </div>
                 @endif
 
-                <div class="jtv-ad-slot">
-                    <span class="jtv-ad-slot-label">YOUR AD HERE</span>
-                    <span class="jtv-ad-slot-size">300 x 250</span>
-                    <a href="{{ url('/contact') }}" class="jtv-ad-slot-btn">Contact Us</a>
-                </div>
             </aside>
         </div>
     </div>
@@ -171,11 +166,100 @@
 
 @push('styles')
 @include('frontend.magz.inc._reference-header-styles')
+@include('frontend.magz.inc._homepage-footer-styles')
 <style>
     body.skin-magz .jtv-details-page {
         width: 100%;
         padding: 22px 0 56px;
         background: #f3f5f4;
+    }
+
+    /* Managed Ads use the same full-width content area as the details page. */
+    body.skin-magz .jtv-details-page .jtv-managed-ads {
+        display: flex !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        margin: 0 0 18px !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        overflow: visible !important;
+        border: 1px solid #dce8e1 !important;
+        border-radius: 6px !important;
+        background: #fff !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ad {
+        display: block !important;
+        width: auto !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        text-align: center !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ad[style] {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ad img {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: contain !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom {
+        display: block !important;
+        width: 100% !important;
+        padding: 10px !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top .jtv-managed-ad,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom .jtv-managed-ad,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top .jtv-managed-ad a,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom .jtv-managed-ad a {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-sidebar_left,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-sidebar_right {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-sidebar_left .jtv-managed-ad,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-sidebar_right .jtv-managed-ad {
+        width: 100% !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-sidebar_left img,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-sidebar_right img {
+        width: 100% !important;
+        max-height: 250px !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom {
+        max-width: 100% !important;
     }
 
     /* Same width/padding formula the reference nav, masthead and topbar
@@ -244,8 +328,8 @@
 
     body.skin-magz .jtv-details-layout {
         display: grid;
-        grid-template-columns: 340px minmax(0, 1fr) 340px;
-        gap: 24px;
+        grid-template-columns: minmax(180px, 260px) minmax(0, 1fr) minmax(180px, 260px);
+        gap: clamp(12px, 1.6vw, 24px);
         align-items: start;
     }
 
@@ -303,8 +387,9 @@
     body.skin-magz .jtv-details-figure img {
         display: block;
         width: 100%;
-        height: clamp(320px, 42vw, 560px);
-        object-fit: cover;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
         border-radius: 3px;
     }
 
@@ -332,6 +417,28 @@
 
     body.skin-magz .jtv-details-body p {
         margin: 0 0 16px;
+    }
+
+    /* Editor content often carries inline borders/padding/margins; flatten them. */
+    body.skin-magz .jtv-details-body *:not(img):not(iframe):not(video):not(a):not(strong):not(em):not(b):not(i):not(span) {
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        text-align: left !important;
+        text-indent: 0 !important;
+    }
+
+    body.skin-magz .jtv-details-body p:empty,
+    body.skin-magz .jtv-details-body div:empty {
+        display: none;
+    }
+
+    body.skin-magz .jtv-details-body p {
+        margin: 0 0 16px !important;
     }
 
     body.skin-magz .jtv-details-body img {
@@ -657,7 +764,7 @@
 
     @media (max-width: 1150px) {
         body.skin-magz .jtv-details-layout {
-            grid-template-columns: 260px minmax(0, 1fr) 260px;
+            grid-template-columns: minmax(160px, 220px) minmax(0, 1fr) minmax(160px, 220px);
             gap: 16px;
         }
     }
@@ -706,6 +813,90 @@
             flex-direction: column;
             align-items: flex-start;
         }
+    }
+
+    /* Full lead image, never cropped. */
+    body.skin-magz .jtv-details-page .jtv-details-figure,
+    body.skin-magz .jtv-details-page .jtv-details-figure img {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        aspect-ratio: auto !important;
+        object-fit: contain !important;
+    }
+
+    /* Full-width body text: no floats, fixed widths or leftover boxes. */
+    body.skin-magz .jtv-details-page .jtv-details-body,
+    body.skin-magz .jtv-details-page .jtv-details-body > *,
+    body.skin-magz .jtv-details-page .jtv-details-body div,
+    body.skin-magz .jtv-details-page .jtv-details-body p,
+    body.skin-magz .jtv-details-page .jtv-details-body section,
+    body.skin-magz .jtv-details-page .jtv-details-body article {
+        float: none !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        columns: auto !important;
+        column-count: 1 !important;
+        text-align: left !important;
+        text-align-last: auto !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-details-body :is(div, p):empty {
+        display: none !important;
+    }
+
+    /* Article ads: full width, whole image visible. */
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top .jtv-managed-ad,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom .jtv-managed-ad {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top img,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: contain !important;
+    }
+
+    /* Plain text only: strip every box style from the summary and body. */
+    body.skin-magz .jtv-details-page .jtv-details-content .jtv-details-body *:not(img):not(iframe):not(video),
+    body.skin-magz .jtv-details-page .jtv-details-content .jtv-details-summary * {
+        border: 0 !important;
+        border-radius: 0 !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        text-indent: 0 !important;
+        text-align: left !important;
+        text-align-last: auto !important;
+        word-spacing: normal !important;
+        letter-spacing: normal !important;
+        white-space: normal !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-details-content .jtv-details-body p,
+    body.skin-magz .jtv-details-page .jtv-details-content .jtv-details-summary p {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 0 14px !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-details-content .jtv-details-summary p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    body.skin-magz .jtv-details-page .jtv-details-content .jtv-details-summary {
+        padding: 14px 16px !important;
+        border-left: 4px solid #087342 !important;
+        background: #eef8f1 !important;
     }
 </style>
 @endpush

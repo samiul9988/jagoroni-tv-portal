@@ -411,6 +411,12 @@ return [
             'icon' => 'fa fa-envelope',
             'active' => ['admin/manage/contacts/*']
         ],
+        [
+            'text' => 'Ads',
+            'url'  => 'admin/manage/advertisements',
+            'icon' => 'fas fa-bullhorn',
+            'active' => ['admin/manage/advertisements*'],
+        ],
         ['header' => 'manage_appearance', 'can'  => ['read-menus', 'read-themes']],
         [
             'text' => 'appearance',

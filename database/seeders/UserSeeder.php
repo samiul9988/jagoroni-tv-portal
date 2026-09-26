@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $superAdmin = User::create([
             'name'       => 'Mark Otto',
             'username'   => 'superadmin',
-            'email'      => 'superadmin@retenvi.com',
+            'email'      => 'superadmin@jagoroni.com',
             'password'   => Hash::make('superadmin123'),
             'occupation' => 'Website Manager',
             'photo'      => 'mark-otto.jpg',

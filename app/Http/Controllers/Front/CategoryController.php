@@ -73,6 +73,6 @@ class CategoryController extends Controller
             $mostReadPosts = collect();
         }
 
-        return view(SettingHelper::activeTheme('page/category'), compact('posts', 'category', 'latestPosts', 'mostReadPosts'));
+        return view(SettingHelper::activeTheme('page/category'), compact('posts', 'category', 'latestPosts', 'mostReadPosts'))->with('page', 'category');
     }
 }

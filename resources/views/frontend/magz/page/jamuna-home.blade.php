@@ -3614,6 +3614,7 @@
 
 <main class="jtv-home-clone">
     <div class="jtv-home-shell">
+        <x-front-advertisement position="home_top" />
         @if($lead)
             <section class="jtv-home-hero-grid">
                 <article class="jtv-home-lead">
@@ -3719,6 +3720,8 @@
                 @endforeach
             </section>
         @endif
+
+        <x-front-advertisement position="home_middle" />
 
         <section class="jtv-location-finder" aria-labelledby="jtv-location-title">
             <div class="jtv-location-finder-copy">

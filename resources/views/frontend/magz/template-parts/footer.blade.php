@@ -1,6 +1,6 @@
 @inject('themeHelper', 'App\Helpers\ThemeHelper')
 
-@if(($page ?? null) === 'home')
+@if(in_array(($page ?? null), ['home', 'single-post', 'category'], true))
     <div class="jtv-homepage-footer-bar">
         <div class="jtv-homepage-footer-copy">&copy; {{ date('Y') }} Jagoroni TV. All rights reserved.</div>
         <ul class="jtv-homepage-footer-links">
@@ -13,6 +13,7 @@
     </div>
 @else
     <div class="jtv-modern-footer-inner container-md">
+        <x-front-advertisement position="footer" />
         @if($footerActive)
         <div class="row">
             @foreach($footer as $index => $column)

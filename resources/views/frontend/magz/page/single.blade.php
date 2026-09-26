@@ -9,7 +9,7 @@
     <div class="container-md jtv-single-container">
         <div class="row jtv-single-layout">
             @if($sidebarActive)
-                @include('frontend.magz.template-parts.sidebar')
+                @include('frontend.magz.template-parts.sidebar', ['advertisementPosition' => 'sidebar_left'])
             @endif
             <div class="jtv-single-content @if($sidebarActive === false) jtv-single-content-wide @endif">
             @if($post->post_title)
@@ -20,6 +20,7 @@
                     @endif
                 </ol>
                 <article class="article main-article">
+                    <x-front-advertisement position="article_top" />
                     <header>
                         <h1>{{ $post->post_title }}</h1>
                         <ul class="details">
@@ -122,6 +123,7 @@
                         @endif
 
                         {!! $post->post_content !!}
+                        <x-front-advertisement position="article_bottom" />
                     </div>
                     <footer>
                         <div class="col-m">
@@ -191,7 +193,7 @@
             @endif
             </div>
             @if($sidebarActive)
-                @include('frontend.magz.template-parts.sidebar')
+                @include('frontend.magz.template-parts.sidebar', ['advertisementPosition' => 'sidebar_right'])
             @endif
         </div>
     </div>
@@ -277,12 +279,33 @@
             width: 100% !important;
             max-width: 100% !important;
             height: auto !important;
-            max-height: 600px !important;
-            object-fit: cover !important;
+            max-height: none !important;
+            object-fit: contain !important;
         }
 
         body.skin-magz .jtv-single-page article.main-article .main > p,
         body.skin-magz .jtv-single-page article.main-article .main > ul,
+
+            /* Final article image rule: preserve the complete source image. */
+            body.skin-magz section.single.jtv-single-page article.main-article .main figure.figure {
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            body.skin-magz section.single.jtv-single-page article.main-article .main figure.figure img,
+            body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main figure.figure img {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                object-fit: fill !important;
+                object-position: center center !important;
+            }
         body.skin-magz .jtv-single-page article.main-article .main > ol {
             color: #303b36 !important;
             font-size: 16px !important;
@@ -691,9 +714,9 @@
             width: 100% !important;
             max-width: 100% !important;
             height: auto !important;
-            max-height: 660px !important;
+            max-height: none !important;
             border-radius: 3px !important;
-            object-fit: cover !important;
+            object-fit: contain !important;
         }
 
         body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main > p,
@@ -1125,6 +1148,76 @@
         body.skin-magz.jtv-homepage section.single.jtv-single-page .jtv-single-content,
         body.skin-magz.jtv-homepage section.single.jtv-single-page .jtv-single-sidebar {
             min-width: 0 !important;
+        }
+
+        /* Larger article image area while preserving the complete source image. */
+        body.skin-magz section.single.jtv-single-page article.main-article .main figure.figure {
+            min-height: 0 !important;
+            background: transparent !important;
+        }
+
+        body.skin-magz section.single.jtv-single-page article.main-article .main figure.figure img,
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main figure.figure img {
+            width: 100% !important;
+            height: auto !important;
+            max-height: none !important;
+            object-fit: contain !important;
+            object-position: center center !important;
+        }
+
+        @media (max-width: 767px) {
+            body.skin-magz section.single.jtv-single-page article.main-article .main figure.figure {
+                min-height: 0 !important;
+            }
+
+            body.skin-magz section.single.jtv-single-page article.main-article .main figure.figure img,
+            body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main figure.figure img {
+                height: auto !important;
+            }
+        }
+
+        /* Final overrides: full-height lead image and plain, borderless body text. */
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main figure.figure,
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main figure.figure a {
+            display: block !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+            aspect-ratio: auto !important;
+        }
+
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main figure.figure img.figure-img {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            aspect-ratio: auto !important;
+            object-fit: contain !important;
+        }
+
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main > *:not(.summary):not(figure):not(.player):not(.jtv-managed-ads):not(hr):not(iframe):not(video):not(img) ,
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main > *:not(.summary):not(figure):not(.player):not(.jtv-managed-ads) *:not(img):not(iframe):not(video):not(a):not(span):not(strong):not(em):not(b):not(i) {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding: 0 !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            outline: 0 !important;
+            text-align: left !important;
+            width: auto !important;
+            max-width: 100% !important;
+        }
+
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main > *:not(.summary):not(figure):not(.player):not(.jtv-managed-ads) p {
+            margin: 0 0 16px !important;
+            font-size: 16px !important;
+            line-height: 1.9 !important;
+        }
+
+        body.skin-magz.jtv-homepage section.single.jtv-single-page article.main-article .main > *:not(.summary):not(figure):not(.player):not(.jtv-managed-ads) :is(p, div):empty {
+            display: none !important;
         }
     </style>
 @endpush

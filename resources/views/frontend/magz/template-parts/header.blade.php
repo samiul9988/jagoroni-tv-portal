@@ -26,6 +26,8 @@
     </div>
 </div>
 
+<x-front-advertisement position="top" />
+
 <div class="firstbar jtv-masthead">
     <div class="container-md jtv-masthead-inner">
         <a class="jtv-masthead-brand" href="{{ url('/') }}" aria-label="Jagoroni TV home">

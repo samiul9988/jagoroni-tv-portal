@@ -1,4 +1,5 @@
 <div class="col-lg-3 sidebar jtv-single-sidebar" id="sidebar">
+    <x-front-advertisement :position="$advertisementPosition ?? 'sidebar_right'" />
     @php
         $sidebarAdWidget = collect($sidebar)->first(function ($widgetData, $widgetName) {
             return str_starts_with($widgetName, 'ads_sidebar');
