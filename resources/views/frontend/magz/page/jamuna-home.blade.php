@@ -3590,7 +3590,7 @@
     body.skin-magz.jtv-homepage .jtv-photo-gallery-card h3 {
         display: -webkit-box !important; height: 40px !important; max-height: 40px !important;
         font-size: 14px !important; line-height: 20px !important;
-        overflow: hidden !important; box-sizing: content-box !important; padding: 8px 10px !important;
+        overflow: hidden !important; box-sizing: content-box !important; padding: 8px 10px 0 !important; margin-bottom: 8px !important;
         -webkit-box-orient: vertical !important; -webkit-line-clamp: 2 !important;
     }
     body.skin-magz.jtv-homepage .jtv-photo-gallery-card h3 a { display: inline !important; }
