@@ -4,7 +4,7 @@
         @include('frontend.magz.inc._head')
 	</head>
 
-	<body class="skin-magz @if(in_array(($page ?? null), ['home', 'single-post', 'category', 'team', 'live', 'search'], true)) jtv-homepage @endif">
+	<body class="skin-magz @if(in_array(($page ?? null), ['home', 'single-post', 'category', 'team', 'live', 'search', 'contact'], true)) jtv-homepage @endif">
         <!-- Header -->
 		<header class="primary">
             @include('frontend.magz.template-parts.header')

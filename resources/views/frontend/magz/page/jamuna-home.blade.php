@@ -3594,6 +3594,52 @@
         -webkit-box-orient: vertical !important; -webkit-line-clamp: 2 !important;
     }
     body.skin-magz.jtv-homepage .jtv-photo-gallery-card h3 a { display: inline !important; }
+
+    /* Home ads: same banner size as the news-details ads (fixed low box, whole image visible,
+       blurred copy of the image fills any side space). */
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_top,
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_middle {
+        display: block !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_top .jtv-managed-ad,
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_middle .jtv-managed-ad {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        height: clamp(80px, 13vw, 150px) !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_top .jtv-managed-ad::before,
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_middle .jtv-managed-ad::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: -16px !important;
+        background: var(--ad-bg) center / cover no-repeat !important;
+        filter: blur(14px) saturate(1.1) !important;
+        transform: scale(1.05) !important;
+    }
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_top .jtv-managed-ad a,
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_middle .jtv-managed-ad a {
+        position: relative !important;
+        z-index: 1 !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_top img,
+    body.skin-magz.jtv-homepage .jtv-managed-ads-home_middle img {
+        position: relative !important;
+        z-index: 1 !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        object-fit: contain !important;
+        object-position: center !important;
+    }
 </style>
 @endpush
 

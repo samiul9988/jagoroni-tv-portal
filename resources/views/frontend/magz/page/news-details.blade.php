@@ -887,12 +887,36 @@
         margin: 0 auto !important;
     }
 
+    /* Fixed banner box; the whole ad image is always visible (never cropped). A blurred copy of the
+       same image fills any leftover side space so the banner still looks full width. */
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom { padding: 0 !important; overflow: hidden !important; }
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top .jtv-managed-ad,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom .jtv-managed-ad {
+        position: relative !important;
+        overflow: hidden !important;
+        height: clamp(80px, 13vw, 150px) !important;
+    }
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top .jtv-managed-ad::before,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom .jtv-managed-ad::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: -16px !important;
+        background: var(--ad-bg) center / cover no-repeat !important;
+        filter: blur(14px) saturate(1.1) !important;
+        transform: scale(1.05) !important;
+    }
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_top .jtv-managed-ad a,
+    body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom .jtv-managed-ad a { position: relative !important; z-index: 1 !important; height: 100% !important; }
     body.skin-magz .jtv-details-page .jtv-managed-ads-article_top img,
     body.skin-magz .jtv-details-page .jtv-managed-ads-article_bottom img {
+        position: relative !important;
+        z-index: 1 !important;
         width: 100% !important;
-        height: auto !important;
+        height: 100% !important;
         max-height: none !important;
         object-fit: contain !important;
+        object-position: center !important;
     }
 
     /* Plain text only: strip every box style from the summary and body. */

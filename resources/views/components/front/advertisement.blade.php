@@ -5,6 +5,7 @@
                 $style = collect([
                     $advertisement->width ? 'width:' . $advertisement->width . 'px' : null,
                     $advertisement->height ? 'height:' . $advertisement->height . 'px' : null,
+                    ($advertisement->type === 'image' && $advertisement->image) ? "--ad-bg:url('" . asset('storage/' . $advertisement->image) . "')" : null,
                 ])->filter()->implode(';');
             @endphp
             <div class="jtv-managed-ad" data-ad-position="{{ $position }}" @if($style) style="{{ $style }}" @endif>

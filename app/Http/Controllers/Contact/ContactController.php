@@ -47,6 +47,7 @@ class ContactController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:2|max:100',
             'email' => 'required|email',
+            'phone' => 'nullable|string|max:30',
             'subject' => 'nullable',
             'message' => 'required',
             'g-recaptcha-response' => 'sometimes|required|captcha'
@@ -67,11 +68,15 @@ class ContactController extends Controller
         $save = Contact::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'subject' => $request->subject,
             'message' => $request->message
         ]);
 
         if ($save) {
+            // Email the owner; a mail failure never blocks the visitor (the message is already saved).
+            app(\App\Services\ContactMailService::class)->sendContact($save);
+
             return response()->json([
                 'status' => true,
                 'data' => [

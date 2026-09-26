@@ -412,6 +412,12 @@ return [
             'active' => ['admin/manage/contacts/*']
         ],
         [
+            'text' => 'Contact Settings',
+            'url'  => 'admin/manage/contact-settings',
+            'icon' => 'fas fa-envelope-open-text',
+            'active' => ['admin/manage/contact-settings*'],
+        ],
+        [
             'text' => 'Ads',
             'url'  => 'admin/manage/advertisements',
             'icon' => 'fas fa-bullhorn',

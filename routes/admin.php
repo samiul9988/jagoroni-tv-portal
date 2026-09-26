@@ -284,6 +284,9 @@ Route::prefix('admin/manage')->middleware('auth', 'auth.locale', 'is-ban', 'veri
     Route::resource('live-programs', \App\Http\Controllers\Admin\LiveProgramController::class)
         ->except(['show'])
         ->names('live-programs');
+    Route::get('contact-settings', [\App\Http\Controllers\Admin\ContactSettingController::class, 'edit'])->name('contact-settings.edit');
+    Route::put('contact-settings', [\App\Http\Controllers\Admin\ContactSettingController::class, 'update'])->name('contact-settings.update');
+    Route::post('contact-settings/test', [\App\Http\Controllers\Admin\ContactSettingController::class, 'test'])->name('contact-settings.test');
     Route::resource('team-members', \App\Http\Controllers\Admin\TeamMemberController::class)
         ->except(['show'])
         ->names('team-members');

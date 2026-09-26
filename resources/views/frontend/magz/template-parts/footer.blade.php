@@ -1,6 +1,6 @@
 @inject('themeHelper', 'App\Helpers\ThemeHelper')
 
-@if(in_array(($page ?? null), ['home', 'single-post', 'category', 'team', 'live', 'search'], true))
+@if(in_array(($page ?? null), ['home', 'single-post', 'category', 'team', 'live', 'search', 'contact'], true))
     <div class="jtv-homepage-footer-bar">
         <div class="jtv-homepage-footer-copy">&copy; {{ date('Y') }} Jagoroni TV. All rights reserved.</div>
         <ul class="jtv-homepage-footer-links">
