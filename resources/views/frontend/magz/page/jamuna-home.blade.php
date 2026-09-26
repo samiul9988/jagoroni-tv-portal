@@ -3571,6 +3571,29 @@
         color: #f7dfaa !important;
         background: rgba(0, 45, 25, .28) !important;
     }
+
+    /* Photo gallery: show whole photo, keep side card titles inside their cards. */
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-featured > a { background: #0f1512 !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-featured img { object-fit: contain !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-featured:hover img { transform: none !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-featured > a::after { display: none !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-feature-caption { display: none !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-side { grid-template-rows: repeat(2, minmax(0, 1fr)) !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-side [hidden] { display: none !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-card { display: flex !important; flex-direction: column !important; min-height: 0 !important; overflow: hidden !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-card > a { flex: 1 1 auto !important; min-height: 0 !important; height: auto !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-card h3 {
+        flex: none !important; min-height: 0 !important; padding: 8px 10px !important;
+        font-size: 14px !important; line-height: 1.4 !important; -webkit-line-clamp: 2 !important;
+    }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-side .jtv-photo-gallery-card { height: 100% !important; }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-card h3 {
+        display: -webkit-box !important; height: 40px !important; max-height: 40px !important;
+        font-size: 14px !important; line-height: 20px !important;
+        overflow: hidden !important; box-sizing: content-box !important; padding: 8px 10px !important;
+        -webkit-box-orient: vertical !important; -webkit-line-clamp: 2 !important;
+    }
+    body.skin-magz.jtv-homepage .jtv-photo-gallery-card h3 a { display: inline !important; }
 </style>
 @endpush
 
@@ -3607,7 +3630,16 @@
     })->all();
     $socialLinks = collect(json_decode(config('settings.links') ?: '[]'));
     $referencePosts = $jamunaPosts->slice(16, 4)->values();
-    $gallerySlides = $jamunaPosts->slice(4, 15)->values()->chunk(5)->values();
+    $homePhotos = \App\Models\HomePhoto::visibleToday()->orderBy('sort_order')->orderByDesc('id')->take(15)->get();
+    $gallerySlides = ($homePhotos->isNotEmpty()
+        ? $homePhotos->map(fn ($photo) => (object) ['title' => $photo->title, 'image' => $photo->image_url, 'url' => $photo->url ?: '#'])
+        : $jamunaPosts->slice(4, 15)->map(fn ($post) => (object) [
+            'title' => $post->post_title,
+            'image' => $postHelper::showThumbnail($post, 720),
+            'thumb' => $postHelper::showThumbnail($post, 420),
+            'url' => $postHelper::getUriPost($post),
+        ])
+    )->values()->chunk(1)->values();
     $bnDigits = ['0' => '০', '1' => '১', '2' => '২', '3' => '৩', '4' => '৪', '5' => '৫', '6' => '৬', '7' => '৭', '8' => '৮', '9' => '৯'];
     $leadSummary = $lead ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($lead->post_summary ?: $lead->post_content, ENT_QUOTES | ENT_HTML5, 'UTF-8')))), 220) : '';
 @endphp
@@ -3764,27 +3796,27 @@
                         @endphp
                         <div class="jtv-photo-gallery-slide">
                             <article class="jtv-photo-gallery-featured">
-                                <a href="{{ $postHelper::getUriPost($featuredPhoto) }}">
-                                    <img src="{{ $postHelper::showThumbnail($featuredPhoto, 720) }}" alt="{{ $featuredPhoto->post_title }}" loading="lazy">
+                                <a href="{{ $featuredPhoto->url }}">
+                                    <img src="{{ $featuredPhoto->image }}" alt="{{ $featuredPhoto->title }}" loading="lazy">
                                     <span class="jtv-photo-gallery-count">{{ strtr((string) $loop->iteration, $bnDigits) }} / {{ strtr((string) $gallerySlides->count(), $bnDigits) }}</span>
-                                    <span class="jtv-photo-gallery-feature-caption">{{ $featuredPhoto->post_title }}</span>
+                                    <span class="jtv-photo-gallery-feature-caption">{{ $featuredPhoto->title }}</span>
                                 </a>
-                                <h3><a href="{{ $postHelper::getUriPost($featuredPhoto) }}">{{ $featuredPhoto->post_title }}</a></h3>
+                                <h3><a href="{{ $featuredPhoto->url }}">{{ $featuredPhoto->title }}</a></h3>
                             </article>
                         </div>
                     @endforeach
                 </div>
                 @php
-                    $gallerySidePosts = $gallerySlides->first()->skip(1);
+                    $galleryAll = $gallerySlides->map(fn ($slide) => $slide->first())->values();
                 @endphp
-                <div class="jtv-photo-gallery-side">
-                    @foreach($gallerySidePosts as $post)
-                        <article class="jtv-photo-gallery-card">
-                            <a href="{{ $postHelper::getUriPost($post) }}">
-                                <img src="{{ $postHelper::showThumbnail($post, 420) }}" alt="{{ $post->post_title }}" loading="lazy">
+                <div class="jtv-photo-gallery-side" data-photo-gallery-side>
+                    @foreach($galleryAll as $index => $post)
+                        <article class="jtv-photo-gallery-card" data-index="{{ $index }}" @if($index === 0 || $index > 4) hidden @endif>
+                            <a href="{{ $post->url }}">
+                                <img src="{{ $post->thumb ?? $post->image }}" alt="{{ $post->title }}" loading="lazy">
                                 <span class="jtv-photo-gallery-icon"><i class="fa-regular fa-image"></i></span>
                             </a>
-                            <h3><a href="{{ $postHelper::getUriPost($post) }}">{{ $post->post_title }}</a></h3>
+                            <h3><a href="{{ $post->url }}">{{ $post->title }}</a></h3>
                         </article>
                     @endforeach
                 </div>
@@ -4111,7 +4143,41 @@
                 Array.from(dots.children).forEach(function (dot, index) {
                     dot.classList.toggle('is-active', index === currentPage);
                 });
+                updateSide();
             };
+
+            // Side cards always show the four photos that follow the featured one.
+            const sideBox = gallery.querySelector('[data-photo-gallery-side]');
+            const sideCards = sideBox ? Array.from(sideBox.querySelectorAll('[data-index]')) : [];
+            const applySide = function () {
+                const total = sideCards.length;
+                sideCards.forEach(function (card) {
+                    const offset = (parseInt(card.dataset.index, 10) - currentPage + total) % total;
+                    card.hidden = !(offset >= 1 && offset <= 4);
+                    card.style.order = String(offset);
+                });
+            };
+            let sideTimer = null;
+            // The side cards are fixed (photos 2-5) so nothing moves when the slider changes.
+            const updateSide = function () {};
+
+            // Stretch the side cards down to the bottom of the featured photo box.
+            const matchSideHeight = function () {
+                if (!sideBox) {
+                    return;
+                }
+                if (window.getComputedStyle(sideBox).position !== 'absolute') {
+                    sideBox.style.removeProperty('height');
+                    return;
+                }
+                sideBox.style.setProperty('height', track.offsetHeight + 'px', 'important');
+            };
+            matchSideHeight();
+            window.addEventListener('load', matchSideHeight);
+            window.addEventListener('resize', matchSideHeight);
+            if (window.ResizeObserver) {
+                new ResizeObserver(matchSideHeight).observe(track);
+            }
 
             previous.addEventListener('click', function () {
                 updateSlider(currentPage - 1);
@@ -4145,10 +4211,12 @@
                     Array.from(dots.children).forEach(function (dot, index) {
                         dot.classList.toggle('is-active', index === currentPage);
                     });
+                    updateSide();
                 }
             }, { passive: true });
 
             renderDots();
+            updateSide(true);
             window.addEventListener('resize', renderDots);
 
             const restartAutoSlide = function () {

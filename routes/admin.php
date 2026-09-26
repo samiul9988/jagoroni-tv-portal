@@ -275,5 +275,12 @@ Route::prefix('admin/manage')->middleware('auth', 'auth.locale', 'is-ban', 'veri
     Route::resource('advertisements', \App\Http\Controllers\Admin\AdvertisementController::class)
         ->except(['show'])
         ->names('advertisements');
+    Route::patch('home-photos/{home_photo}/toggle', [\App\Http\Controllers\Admin\HomePhotoController::class, 'toggle'])->name('home-photos.toggle');
+    Route::resource('home-photos', \App\Http\Controllers\Admin\HomePhotoController::class)
+        ->except(['show'])
+        ->names('home-photos');
+    Route::resource('team-members', \App\Http\Controllers\Admin\TeamMemberController::class)
+        ->except(['show'])
+        ->names('team-members');
 
 });

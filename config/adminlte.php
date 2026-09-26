@@ -417,6 +417,18 @@ return [
             'icon' => 'fas fa-bullhorn',
             'active' => ['admin/manage/advertisements*'],
         ],
+        [
+            'text' => 'Homepage Photos',
+            'url'  => 'admin/manage/home-photos',
+            'icon' => 'fas fa-images',
+            'active' => ['admin/manage/home-photos*'],
+        ],
+        [
+            'text' => 'Team Members',
+            'url'  => 'admin/manage/team-members',
+            'icon' => 'fas fa-users',
+            'active' => ['admin/manage/team-members*'],
+        ],
         ['header' => 'manage_appearance', 'can'  => ['read-menus', 'read-themes']],
         [
             'text' => 'appearance',

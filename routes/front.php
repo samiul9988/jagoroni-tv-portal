@@ -47,8 +47,20 @@ Route::prefix(LaravelLocalization::setLocale())->middleware('public', 'XSS', 'lo
 
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/team', \App\Http\Controllers\Front\TeamController::class)->name('team');
     Route::get('/news/latest', [ArticleController::class, 'index'])->name('articles.latest');
     Route::get('/news/popular', [ArticleController::class, 'showPopular'])->name('article.popular');
+
+    // /news/{slug} is either a category (menu links) or an article (custom permalink).
+    Route::get('/news/{slug}', function ($slug) {
+        if (\App\Models\Term::category()->where('slug', $slug)->exists()) {
+            return (new CategoryController)->__invoke($slug);
+        }
+
+        $post = Post::videoAudioPost()->where('post_name', $slug)->firstOrFail();
+
+        return app('App\Http\Controllers\Front\ArticleController')->show($post);
+    })->name('category.news');
     Route::get('/videos/latest', [VideoPostController::class, 'index'])->name('videos.latest');
     Route::get('/live-tv', [VideoPostController::class, 'live'])->name('live.tv');
     Route::get('/{slug}',[HomeController::class, 'show'])->name('show');

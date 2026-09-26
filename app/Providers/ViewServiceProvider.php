@@ -40,6 +40,11 @@ class ViewServiceProvider extends ServiceProvider
         View::composer('frontend.magz.page.popular', PopularComposer::class);
         View::composer('frontend.magz.page.category', categoryComposer::class);
         View::composer('frontend.magz.page.tag', TagComposer::class);
+        View::composer('frontend.magz.page.team', function ($view) {
+            // Reuse the generic page layout settings (footer/sidebar), then flag this as the team page.
+            app(PageComposer::class)->compose($view);
+            $view->with('page', 'team');
+        });
         View::composer('frontend.magz.page.page', PageComposer::class);
         View::composer('frontend.magz.page.contact', ContactComposer::class);
         View::composer('frontend.magz.page.search', SearchComposer::class);

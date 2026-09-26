@@ -70,13 +70,42 @@
                     <li><i class="fa-regular fa-eye"></i> {{ $viewsLabel }} বার দেখা হয়েছে</li>
                 </ul>
 
-                @if(!empty($post->post_image) || $postHelper::isImageUrlAvailable($post))
-                <figure class="jtv-details-figure">
-                    <img src="{{ $postHelper::displayThumbnailForSinglePost($post) }}" alt="{{ $post->post_title }}">
-                    @if($post->post_image_meta && $postHelper::getPostThumbnailCaption($post->post_image_meta))
-                        <figcaption>{!! $postHelper::getPostThumbnailCaption($post->post_image_meta) !!}</figcaption>
+                @if(in_array($post->post_type, ['page', 'post']))
+                    @if(!empty($post->post_image) || $postHelper::isImageUrlAvailable($post))
+                    <figure class="jtv-details-figure">
+                        <img src="{{ $postHelper::displayThumbnailForSinglePost($post) }}" alt="{{ $post->post_title }}">
+                        @if($post->post_image_meta && $postHelper::getPostThumbnailCaption($post->post_image_meta))
+                            <figcaption>{!! $postHelper::getPostThumbnailCaption($post->post_image_meta) !!}</figcaption>
+                        @endif
+                    </figure>
                     @endif
-                </figure>
+                @else
+                    @php
+                        $postSource = json_decode($post->post_source);
+                        $hasMetaImage = $postHelper::isImageUrlAvailable($post);
+                        $poster = $hasMetaImage
+                            ? json_decode($post->post_image_meta)->image_url
+                            : ($post->post_image ? asset('storage/images/' . $post->post_image) : asset('img/cover-video.webp'));
+                    @endphp
+                    <div class="jtv-details-player">
+                        @if($post->post_type === 'video_embed')
+                            <div id="player" data-plyr-provider="{{ $postSource->provider }}" data-plyr-embed-id="{{ $postSource->embed_id }}" data-poster="{{ $poster }}" style="--plyr-color-main: #d61f26;"></div>
+                        @elseif($post->post_type === 'audio_embed')
+                            <div class="plyr__audio-embed" id="player" style="--plyr-color-main: #d61f26;">{!! $post->post_source !!}</div>
+                        @elseif(in_array($post->post_type, ['audio_file', 'audio_url']))
+                            @php $audioSource = $post->post_type === 'audio_file' ? asset('storage/audios/' . $post->post_source) : $post->post_source; @endphp
+                            @if($post->post_image || $hasMetaImage)
+                                <img class="jtv-details-player-cover" src="{{ $poster }}" alt="{{ $post->post_title }}">
+                            @endif
+                            <audio id="player" style="--plyr-color-main: #d61f26;" controls><source src="{{ $audioSource }}"></audio>
+                        @elseif($post->post_type === 'video_url')
+                            <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="{{ $post->post_source }}" data-poster="{{ $poster }}" style="--plyr-color-main: #d61f26;"></div>
+                        @else
+                            <video id="player" playsinline controls data-plyr-config='{ "ratio": "16:9" }' data-poster="{{ $poster }}" style="--plyr-color-main: #d61f26;">
+                                <source src="{{ asset('storage/videos/' . $post->post_source) }}">
+                            </video>
+                        @endif
+                    </div>
                 @endif
 
                 @if($post->post_summary)
@@ -165,6 +194,7 @@
 @endsection
 
 @push('styles')
+<link rel="stylesheet" href="{{ asset('vendor/plyr/plyr.min.css') }}" />
 @include('frontend.magz.inc._reference-header-styles')
 @include('frontend.magz.inc._homepage-footer-styles')
 <style>
@@ -898,5 +928,14 @@
         border-left: 4px solid #087342 !important;
         background: #eef8f1 !important;
     }
+    body.skin-magz .jtv-details-player { margin: 0 0 18px; border-radius: 4px; overflow: hidden; }
+    body.skin-magz .jtv-details-player-cover { display: block; width: 100%; height: auto; margin-bottom: 12px; }
 </style>
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('vendor/plyr/plyr.min.js') }}"></script>
+    <script>
+        if (document.getElementById('player')) { new Plyr('#player'); }
+    </script>
 @endpush

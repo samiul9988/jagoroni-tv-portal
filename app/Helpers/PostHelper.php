@@ -195,7 +195,7 @@ Class PostHelper
      */
     public static function getPostThumbnailCaption($postImageMeta)
     {
-        return $postImageMeta ? json_decode($postImageMeta)->caption : null;
+        return $postImageMeta ? (json_decode($postImageMeta)->caption ?? null) : null;
     }
 
     /**
