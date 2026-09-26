@@ -290,5 +290,8 @@ Route::prefix('admin/manage')->middleware('auth', 'auth.locale', 'is-ban', 'veri
     Route::resource('team-members', \App\Http\Controllers\Admin\TeamMemberController::class)
         ->except(['show'])
         ->names('team-members');
+    Route::resource('publishers', \App\Http\Controllers\Admin\PublisherController::class)
+        ->except(['show'])
+        ->names('publishers');
 
 });

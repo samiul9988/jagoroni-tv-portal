@@ -29,7 +29,8 @@ class PostRequest extends FormRequest
             'image_url' => 'nullable|url:http,https',
             'division' => 'nullable|string|max:100',
             'district' => 'nullable|string|max:100',
-            'upazila' => 'nullable|string|max:100'
+            'upazila' => 'nullable|string|max:100',
+            'publisher_id' => 'nullable|exists:publishers,id'
         ];
     }
 }

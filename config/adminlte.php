@@ -443,6 +443,12 @@ return [
             'icon' => 'fas fa-users',
             'active' => ['admin/manage/team-members*'],
         ],
+        [
+            'text' => 'Publishers',
+            'url'  => 'admin/manage/publishers',
+            'icon' => 'fas fa-user-pen',
+            'active' => ['admin/manage/publishers*'],
+        ],
         ['header' => 'manage_appearance', 'can'  => ['read-menus', 'read-themes']],
         [
             'text' => 'appearance',

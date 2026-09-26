@@ -45,8 +45,14 @@ class Post extends Model
         'post_source',
         'division',
         'district',
-        'upazila'
+        'upazila',
+        'publisher_id'
     ];
+
+    public function publisher(): BelongsTo
+    {
+        return $this->belongsTo(Publisher::class);
+    }
 
     /**
      * @return string

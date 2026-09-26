@@ -118,6 +118,9 @@
 
                 <x-front-advertisement position="article_bottom" />
 
+                @if($post->publisher)
+                <p class="jtv-details-publisher" style="margin:16px 0;font-weight:600"><i class="fa-solid fa-user-pen"></i> প্রকাশক: {{ $post->publisher->name }}@if($post->publisher->location), {{ $post->publisher->location }}@endif</p>
+                @endif
                 <div class="jtv-details-share">
                     <span>শেয়ার করুন:</span>
                     {!! Share::page(request()->url(), $post->post_title, [], '<ul class="jtv-details-share-list">', '</ul>')

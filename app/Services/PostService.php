@@ -72,7 +72,8 @@ Class PostService
             'post_image_meta'  => $postImageMeta,
             'division'         => $request->input('division'),
             'district'         => $request->input('district'),
-            'upazila'          => $request->input('upazila')
+            'upazila'          => $request->input('upazila'),
+            'publisher_id'     => $request->input('publisher_id') ?: null
         ]);
 
         $this->addTranslation($post, $request);
@@ -117,6 +118,7 @@ Class PostService
             'division'         => $request->input('division'),
             'district'         => $request->input('district'),
             'upazila'          => $request->input('upazila'),
+            'publisher_id'     => $request->input('publisher_id') ?: null,
             'created_at'       => $this->createDateTimeFromRequest($request),
             'updated_at'       => Carbon::now()
         );
