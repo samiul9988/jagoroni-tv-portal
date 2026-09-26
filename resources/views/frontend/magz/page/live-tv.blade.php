@@ -119,7 +119,7 @@
     body.skin-magz .jtv-live-cta a { flex: none; padding: 8px 16px; border-radius: 999px; background: #d61f26; color: #fff; font-size: 13px; font-weight: 800; text-decoration: none; }
 
     @media (max-width: 1100px) { body.skin-magz .jtv-live-prog { flex-basis: calc((100% - 32px) / 3); } }
-    @media (max-width: 991px) { body.skin-magz .jtv-live-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 991px) { body.skin-magz .jtv-live-grid { grid-template-columns: minmax(0, 1fr); } }
     @media (max-width: 640px) { body.skin-magz .jtv-live-prog { flex-basis: calc((100% - 16px) / 2); } body.skin-magz .jtv-live-ways-row { grid-template-columns: 1fr; } body.skin-magz .jtv-live-badges { top: 8px; left: 8px; } }
 </style>
 @endpush

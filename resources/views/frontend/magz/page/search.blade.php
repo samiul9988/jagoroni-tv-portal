@@ -105,7 +105,7 @@
     body.skin-magz .jtv-s-recent a { color: #17231c; font-size: 13px; font-weight: 700; line-height: 1.4; text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     body.skin-magz .jtv-s-recent time { display: block; margin-top: 3px; color: #8a968f; font-size: 11px; }
 
-    @media (max-width: 991px) { body.skin-magz .jtv-s-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 991px) { body.skin-magz .jtv-s-grid { grid-template-columns: minmax(0, 1fr); } }
     @media (max-width: 640px) {
         body.skin-magz .jtv-s-shell { padding: 12px; }
         body.skin-magz .jtv-s-item { grid-template-columns: 110px minmax(0, 1fr); gap: 12px; }

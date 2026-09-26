@@ -35,7 +35,7 @@
                 </ul>
             @endif
             <ul class="float-end">
-                <li class="jtv-nav-live"><a href="#">Live</a></li>
+                <li class="jtv-nav-live"><a href="{{ url('/live-tv') }}">Live</a></li>
                 <li class="jtv-nav-search">
                     <form class="jtv-search-form" action="{{ url('/search') }}" method="GET" role="search">
                         <input id="jtv-search-input" type="search" name="q" value="{{ request('q') }}" placeholder="খুঁজুন" aria-label="Search">

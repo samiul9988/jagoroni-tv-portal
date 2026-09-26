@@ -1,3 +1,6 @@
+@push('styles')
+    @include('frontend.magz.inc._responsive-fixes')
+@endpush
 @if(($page ?? null) !== 'home')
     @prepend('styles')
         @include('frontend.magz.inc._reference-header-styles')

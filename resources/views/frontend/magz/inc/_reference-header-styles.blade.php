@@ -836,6 +836,19 @@ body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list {
             transform: none !important;
         }
 
+body.skin-magz.jtv-homepage nav.jtv-main-nav #menu-list.jtv-nav-list-wrap {
+            height: auto !important;
+            min-height: 0 !important;
+        }
+
+body.skin-magz.jtv-homepage nav.jtv-main-nav #menu-list.jtv-nav-list-wrap > ul.nav-list {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 68px !important;
+            flex-wrap: wrap !important;
+        }
+
 body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-home-link > a,
         body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-home-link:hover > a,
         body.skin-magz.jtv-homepage nav.jtv-main-nav ul.nav-list > li.jtv-nav-home-link:focus-within > a {
