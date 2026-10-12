@@ -5,6 +5,10 @@
       <stop offset="0.55" stop-color="#e2202c"/>
       <stop offset="1" stop-color="#a80f1a"/>
     </radialGradient>
+    <linearGradient id="mastGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f6b3f"/>
+      <stop offset="1" stop-color="#083b25"/>
+    </linearGradient>
     <linearGradient id="ribbonGreen" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#0b6b3a"/>
       <stop offset="1" stop-color="#0f8a4b"/>
@@ -15,10 +19,13 @@
     </linearGradient>
   </defs>
 
-  <circle cx="150" cy="20" r="27" fill="#e2202c" fill-opacity="0.14"/>
-  <circle cx="150" cy="20" r="17" fill="url(#sunGrad)"/>
+  <line x1="150" y1="30" x2="165.55555555555554" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="134.44444444444446" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="181.11111111111111" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="118.88888888888889" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="196.66666666666666" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="103.33333333333334" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="212.22222222222223" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="87.77777777777777" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="227.77777777777777" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="72.22222222222221" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="243.33333333333331" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="56.66666666666667" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="258.8888888888889" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="41.111111111111114" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="274.44444444444446" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="25.555555555555557" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="290.0" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/><line x1="150" y1="30" x2="10.0" y2="148" stroke="#0c4a30" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
 
-  <polygon points="150,114 300,148 0,148" fill="#0a3324"/><polygon points="150,100 268,148 32,148" fill="#0c4530"/><polygon points="150,84 236,148 64,148" fill="#0f5c3c"/><polygon points="150,64 204,148 96,148" fill="#0b6b3a"/><polygon points="150,36 174,148 126,148" fill="#0e7f46"/>
+  <rect x="145" y="18" width="10" height="130" rx="3" fill="url(#mastGrad)"/>
+  <polygon points="150,4 144,22 156,22" fill="url(#mastGrad)"/>
+
+  <circle cx="184" cy="30" r="26" fill="#e2202c" fill-opacity="0.16"/>
+  <circle cx="184" cy="30" r="17" fill="url(#sunGrad)"/>
 
   <g>
     <path d="M -10 158 Q 90 142 190 156 T 370 150 L 370 174 Q 190 182 90 168 T -10 182 Z" fill="url(#ribbonGreen)"/>

@@ -442,7 +442,7 @@
         padding: 8px 0 9px !important;
         border-bottom: 0 !important;
         background:
-            url('{{ asset('themes/magz/images/jtv-masthead-worldmap.svg') }}') left -20px top -60px / 760px auto no-repeat,
+            url('{{ asset('themes/magz/images/jtv-masthead-worldmap.svg') }}') left -30px top -70px / 980px auto no-repeat,
             radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
             linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
     }
@@ -1713,6 +1713,11 @@
 
         body.skin-magz.jtv-homepage .jtv-masthead-art-img {
             display: none !important;
+        }
+
+        body.skin-magz.jtv-homepage .firstbar.jtv-masthead {
+            background-size: 560px auto, auto, auto !important;
+            background-position: left -10px top -30px, center, center !important;
         }
 
         body.skin-magz.jtv-homepage .jtv-masthead-art {
