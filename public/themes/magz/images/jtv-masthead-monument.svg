@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="170" viewBox="0 0 360 170">
+  <defs>
+    <radialGradient id="sunGrad" cx="32%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#ff9a8a"/>
+      <stop offset="0.55" stop-color="#e2202c"/>
+      <stop offset="1" stop-color="#a80f1a"/>
+    </radialGradient>
+    <linearGradient id="ribbonGreen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0b6b3a"/>
+      <stop offset="1" stop-color="#0f8a4b"/>
+    </linearGradient>
+    <linearGradient id="ribbonRed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b80f1a"/>
+      <stop offset="1" stop-color="#e2202c"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="150" cy="20" r="27" fill="#e2202c" fill-opacity="0.14"/>
+  <circle cx="150" cy="20" r="17" fill="url(#sunGrad)"/>
+
+  <polygon points="150,114 300,148 0,148" fill="#0a3324"/><polygon points="150,100 268,148 32,148" fill="#0c4530"/><polygon points="150,84 236,148 64,148" fill="#0f5c3c"/><polygon points="150,64 204,148 96,148" fill="#0b6b3a"/><polygon points="150,36 174,148 126,148" fill="#0e7f46"/>
+
+  <g>
+    <path d="M -10 158 Q 90 142 190 156 T 370 150 L 370 174 Q 190 182 90 168 T -10 182 Z" fill="url(#ribbonGreen)"/>
+    <path d="M -10 172 Q 100 154 200 170 T 370 166 L 370 182 Q 200 194 100 182 T -10 194 Z" fill="#f7faf8"/>
+    <path d="M -10 184 Q 110 164 210 182 T 370 178 L 370 194 Q 210 204 110 194 T -10 206 Z" fill="url(#ribbonRed)"/>
+  </g>
+</svg>

@@ -442,6 +442,7 @@
         padding: 8px 0 9px !important;
         border-bottom: 0 !important;
         background:
+            url('{{ asset('themes/magz/images/jtv-masthead-worldmap.svg') }}') left -20px top -60px / 760px auto no-repeat,
             radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
             linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
     }
@@ -526,60 +527,75 @@
 
     body.skin-magz.jtv-homepage .jtv-masthead-art {
         position: relative !important;
-        height: 88px !important;
-        overflow: hidden !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: flex-end !important;
+        gap: 10px !important;
+        height: 94px !important;
+        overflow: visible !important;
     }
 
-    body.skin-magz.jtv-homepage .jtv-art-sun {
-        position: absolute;
-        right: 46px;
-        top: 18px;
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #ff8f81, #e2202c 70%, #b80f1a 100%);
-        box-shadow: 0 0 0 8px rgba(226, 32, 44, .13);
+    body.skin-magz.jtv-homepage .jtv-masthead-art-img {
+        display: block !important;
+        width: 150px !important;
+        height: auto !important;
+        flex: 0 0 auto !important;
     }
 
-    body.skin-magz.jtv-homepage .jtv-art-wave {
-        position: absolute;
-        right: -10px;
-        border-radius: 999px 0 0 999px;
-        transform: rotate(-8deg);
+    body.skin-magz.jtv-homepage .jtv-masthead-live-badge {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+        margin-bottom: 14px !important;
+        text-decoration: none !important;
     }
 
-    body.skin-magz.jtv-homepage .jtv-art-wave-one {
-        right: -12px;
-        bottom: 8px;
-        width: 190px;
-        height: 18px;
-        background: #0b6b3a;
+    body.skin-magz.jtv-homepage .jtv-masthead-live-tag {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        padding: 2px 9px !important;
+        border-radius: 999px !important;
+        background: #e2202c !important;
+        color: #fff !important;
+        font-family: Arial, sans-serif !important;
+        font-size: 10px !important;
+        font-weight: 800 !important;
+        letter-spacing: .06em !important;
     }
 
-    body.skin-magz.jtv-homepage .jtv-art-wave-two {
-        right: -16px;
-        bottom: 19px;
-        width: 178px;
-        height: 12px;
-        background: #f8faf9;
+    body.skin-magz.jtv-homepage .jtv-masthead-live-tag::before {
+        content: '' !important;
+        width: 6px !important;
+        height: 6px !important;
+        border-radius: 50% !important;
+        background: #fff !important;
+        animation: jtvMastheadPulse 1.4s infinite !important;
     }
 
-    body.skin-magz.jtv-homepage .jtv-art-wave-three {
-        right: -18px;
-        bottom: 28px;
-        width: 175px;
-        height: 14px;
-        background: #d61f26;
+    @keyframes jtvMastheadPulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: .35; }
     }
 
-    body.skin-magz.jtv-homepage .jtv-art-monument {
-        position: absolute;
-        right: 96px;
-        bottom: 10px;
-        width: 54px;
-        height: 68px;
-        background: linear-gradient(180deg, #3e6254, #18362b);
-        clip-path: polygon(50% 0, 57% 14%, 62% 45%, 71% 100%, 53% 100%, 50% 57%, 47% 100%, 29% 100%, 38% 45%, 43% 14%);
+    body.skin-magz.jtv-homepage .jtv-masthead-live-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 6px 14px !important;
+        border-radius: 999px !important;
+        background: #0b2a1d !important;
+        color: #fff !important;
+        font-family: "Noto Sans Bengali", Arial, sans-serif !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        white-space: nowrap !important;
+        transition: background .15s ease !important;
+    }
+
+    body.skin-magz.jtv-homepage .jtv-masthead-live-badge:hover .jtv-masthead-live-btn {
+        background: #0b6b3a !important;
     }
 
     body.skin-magz.jtv-homepage nav.jtv-main-nav {
@@ -1693,6 +1709,14 @@
         body.skin-magz.jtv-homepage .jtv-masthead-inner {
             grid-template-columns: minmax(210px, 1.1fr) minmax(180px, 1fr) minmax(180px, .8fr) !important;
             text-align: left !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-masthead-art-img {
+            display: none !important;
+        }
+
+        body.skin-magz.jtv-homepage .jtv-masthead-art {
+            justify-content: flex-end !important;
         }
 
         body.skin-magz.jtv-homepage .jtv-home-hero-grid {
