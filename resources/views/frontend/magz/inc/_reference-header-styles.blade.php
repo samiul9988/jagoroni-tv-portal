@@ -183,19 +183,33 @@ body.skin-magz.jtv-homepage .jtv-topbar-search button i {
     }
 
 body.skin-magz.jtv-homepage .firstbar.jtv-masthead {
+        position: relative !important;
+        overflow: hidden !important;
         display: block !important;
         width: 100% !important;
         min-height: 94px !important;
         padding: 8px 0 9px !important;
         border-bottom: 0 !important;
         background:
-            url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right -30px top / auto 108px no-repeat,
             url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') left top / 100% 100% no-repeat,
             radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
             linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
     }
 
+    body.skin-magz.jtv-homepage .firstbar.jtv-masthead::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 -30px 0 auto !important;
+        width: min(900px, 55%) !important;
+        background: url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right top / auto 108px no-repeat !important;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .6) 18%, #000 32%) !important;
+        mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .6) 18%, #000 32%) !important;
+        pointer-events: none !important;
+    }
+
 body.skin-magz.jtv-homepage .jtv-masthead-inner {
+        position: relative !important;
+        z-index: 1 !important;
         display: grid !important;
         width: min(1440px, calc(100% - 30px)) !important;
         max-width: 1440px !important;
@@ -815,20 +829,20 @@ body.skin-magz.jtv-homepage .jtv-masthead-inner {
             text-align: left !important;
         }
 
-        body.skin-magz.jtv-homepage .firstbar.jtv-masthead {
-            background-size: auto 85px, 100% 100%, auto, auto !important;
-        }
-
         /* jagoroni-redesign.css carries an unscoped "background:#fff" rule for
            .firstbar.jtv-masthead inside its own max-width:991px block; this
            header.primary-qualified selector outranks it so the banner image
            still shows between 768-991px too. */
         body.skin-magz.jtv-homepage header.primary .firstbar.jtv-masthead {
             background:
-                url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right -10px top / auto 85px no-repeat,
                 url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') left top / 100% 100% no-repeat,
                 radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
                 linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
+        }
+
+        body.skin-magz.jtv-homepage .firstbar.jtv-masthead::before {
+            width: min(620px, 55%) !important;
+            background: url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right top / auto 85px no-repeat !important;
         }
 
 body.skin-magz.jtv-homepage .jtv-masthead-art {
@@ -841,6 +855,10 @@ body.skin-magz.jtv-homepage .jtv-masthead-inner {
             grid-template-columns: minmax(0, 1fr) !important;
             justify-items: center !important;
             text-align: center !important;
+        }
+
+        body.skin-magz.jtv-homepage .firstbar.jtv-masthead::before {
+            display: none !important;
         }
 
 body.skin-magz.jtv-homepage .jtv-masthead-brand-copy {
