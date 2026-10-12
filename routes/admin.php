@@ -25,6 +25,13 @@ Route::get('admin/dashboard', \App\Http\Controllers\Admin\DashboardController::c
     ->name('admin.dashboard')
     ->middleware('auth', 'auth.locale', 'is-ban', 'verified');
 
+// ------------------------------------ Site Maintenance (login-free with a key) ------------------------------------
+Route::middleware(\App\Http\Middleware\AllowActivationAccess::class)->prefix('dashboard/activation')->group(function () {
+    Route::get('/', [\App\Http\Controllers\MaintenanceController::class, 'show'])->name('maintenance.show');
+    Route::post('/toggle', [\App\Http\Controllers\MaintenanceController::class, 'toggle'])->name('maintenance.toggle');
+    Route::get('/preview', [\App\Http\Controllers\MaintenanceController::class, 'preview'])->name('maintenance.preview');
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.locale', 'is-ban', 'verified']], function () {
 
     // ------------------------------------ SETTING ------------------------------------

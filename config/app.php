@@ -62,6 +62,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Maintenance Mode Activation Secret
+    |--------------------------------------------------------------------------
+    |
+    | Lets the maintenance-mode toggle page (dashboard/activation) be reached
+    | with a secret key in the URL, so the site can always be switched back
+    | on even if login itself is broken or unavailable.
+    |
+    */
+
+    'activation_secret' => env('ACTIVATION_SECRET'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
