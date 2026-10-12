@@ -443,6 +443,7 @@
         border-bottom: 0 !important;
         background:
             url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right -30px top / auto 108px no-repeat,
+            url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') left top / 100% 100% no-repeat,
             radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
             linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
     }
@@ -1706,7 +1707,7 @@
         }
 
         body.skin-magz.jtv-homepage .firstbar.jtv-masthead {
-            background-size: auto 85px, auto, auto !important;
+            background-size: auto 85px, 100% 100%, auto, auto !important;
         }
 
         /* jagoroni-redesign.css carries an unscoped "background:#fff" rule for
@@ -1716,6 +1717,7 @@
         body.skin-magz.jtv-homepage header.primary .firstbar.jtv-masthead {
             background:
                 url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right -10px top / auto 85px no-repeat,
+                url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') left top / 100% 100% no-repeat,
                 radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
                 linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
         }
