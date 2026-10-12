@@ -47,7 +47,6 @@
                 <span class="jtv-masthead-live-tag">LIVE</span>
                 <span class="jtv-masthead-live-btn">লাইভ দেখুন <i class="fa-solid fa-arrow-right"></i></span>
             </a>
-            <img class="jtv-masthead-art-img" src="{{ asset('themes/magz/images/jtv-masthead-monument.svg') }}" alt="" aria-hidden="true">
         </div>
     </div>
 </div>

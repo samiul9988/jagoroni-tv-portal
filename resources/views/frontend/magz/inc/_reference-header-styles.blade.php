@@ -189,7 +189,7 @@ body.skin-magz.jtv-homepage .firstbar.jtv-masthead {
         padding: 8px 0 9px !important;
         border-bottom: 0 !important;
         background:
-            url('{{ asset('themes/magz/images/jtv-masthead-worldmap.svg') }}') left -30px top -70px / 980px auto no-repeat,
+            url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right -30px top / auto 108px no-repeat,
             radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
             linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
     }
@@ -275,18 +275,12 @@ body.skin-magz.jtv-homepage .jtv-masthead-message strong,
 body.skin-magz.jtv-homepage .jtv-masthead-art {
         position: relative !important;
         display: flex !important;
-        align-items: flex-end !important;
+        align-items: center !important;
         justify-content: flex-end !important;
         gap: 10px !important;
         height: 94px !important;
+        padding-right: 150px !important;
         overflow: visible !important;
-    }
-
-body.skin-magz.jtv-homepage .jtv-masthead-art-img {
-        display: block !important;
-        width: 150px !important;
-        height: auto !important;
-        flex: 0 0 auto !important;
     }
 
 body.skin-magz.jtv-homepage .jtv-masthead-live-badge {
@@ -820,13 +814,19 @@ body.skin-magz.jtv-homepage .jtv-masthead-inner {
             text-align: left !important;
         }
 
-body.skin-magz.jtv-homepage .jtv-masthead-art-img {
-            display: none !important;
+        body.skin-magz.jtv-homepage .firstbar.jtv-masthead {
+            background-size: auto 85px, auto, auto !important;
         }
 
-        body.skin-magz.jtv-homepage .firstbar.jtv-masthead {
-            background-size: 560px auto, auto, auto !important;
-            background-position: left -10px top -30px, center, center !important;
+        /* jagoroni-redesign.css carries an unscoped "background:#fff" rule for
+           .firstbar.jtv-masthead inside its own max-width:991px block; this
+           header.primary-qualified selector outranks it so the banner image
+           still shows between 768-991px too. */
+        body.skin-magz.jtv-homepage header.primary .firstbar.jtv-masthead {
+            background:
+                url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right -10px top / auto 85px no-repeat,
+                radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
+                linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
         }
 
 body.skin-magz.jtv-homepage .jtv-masthead-art {
