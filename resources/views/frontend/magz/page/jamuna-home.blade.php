@@ -444,7 +444,7 @@
         padding: 8px 0 9px !important;
         border-bottom: 0 !important;
         background:
-            url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') left top / 100% 100% no-repeat,
+            url('{{ asset('themes/magz/images/jtv-masthead-map-only.webp') }}') left top / 100% 100% no-repeat,
             radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
             linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
     }
@@ -452,11 +452,9 @@
     body.skin-magz.jtv-homepage .firstbar.jtv-masthead::before {
         content: '' !important;
         position: absolute !important;
-        inset: 0 -30px 0 auto !important;
-        width: min(900px, 55%) !important;
-        background: url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right top / auto 108px no-repeat !important;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .6) 18%, #000 32%) !important;
-        mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .6) 18%, #000 32%) !important;
+        inset: 0 -10px 0 auto !important;
+        width: min(620px, 55%) !important;
+        background: url('{{ asset('themes/magz/images/jtv-masthead-monument-crop.webp') }}') right top / auto 108px no-repeat !important;
         pointer-events: none !important;
     }
 
@@ -1726,14 +1724,14 @@
            still shows between 768-991px too. */
         body.skin-magz.jtv-homepage header.primary .firstbar.jtv-masthead {
             background:
-                url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') left top / 100% 100% no-repeat,
+                url('{{ asset('themes/magz/images/jtv-masthead-map-only.webp') }}') left top / 100% 100% no-repeat,
                 radial-gradient(circle at 36% 30%, rgba(11, 107, 58, .08), transparent 24%),
                 linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%) !important;
         }
 
         body.skin-magz.jtv-homepage .firstbar.jtv-masthead::before {
             width: min(620px, 55%) !important;
-            background: url('{{ asset('themes/magz/images/jtv-masthead-banner.webp') }}') right top / auto 85px no-repeat !important;
+            background: url('{{ asset('themes/magz/images/jtv-masthead-monument-crop.webp') }}') right top / auto 85px no-repeat !important;
         }
 
         body.skin-magz.jtv-homepage .jtv-masthead-art {
