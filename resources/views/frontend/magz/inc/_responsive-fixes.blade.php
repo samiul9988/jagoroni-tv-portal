@@ -148,5 +148,29 @@
         body.skin-magz.jtv-homepage.jtv-homepage .jtv-topbar-actions form,
         body.skin-magz.jtv-homepage.jtv-homepage .jtv-topbar-actions input[type="search"] { min-width: 0 !important; max-width: 100% !important; }
     }
+
+    /* Site-wide: bold, consistent near-black body copy (titles, excerpts, meta,
+       lists, footer text). Deliberately leaves nav links, buttons and badge/tag
+       pills alone — those rely on their own (often white-on-color) text to stay
+       readable, and turning them black would make them disappear into their
+       backgrounds. */
+    body.skin-magz :where(
+        p, h1, h2, h3, h4, h5, h6, li, dt, dd, time, small, label, blockquote, caption, figcaption
+    ):not(nav *):not(.btn):not(button) {
+        font-weight: 700 !important;
+        color: #000 !important;
+    }
+
+    body.skin-magz :where(span, a):not(nav *):not(.btn):not(button):not([class*="badge"]):not([class*="tag"]):not([class*="pill"]):not([class*="btn"]) {
+        font-weight: 700 !important;
+        color: #000 !important;
+    }
+
+    body.skin-magz input,
+    body.skin-magz textarea,
+    body.skin-magz select {
+        font-weight: 700 !important;
+        color: #000 !important;
+    }
 </style>
 @endonce
