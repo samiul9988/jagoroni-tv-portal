@@ -1905,8 +1905,8 @@
         body.skin-magz.jtv-homepage .jtv-home-lead-overlay {
             position: static !important;
             inset: auto !important;
-            padding: 36px 16px 14px !important;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .72) 55%, rgba(0, 0, 0, .86) 100%) !important;
+            padding: 60px 16px 16px !important;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .35) 30%, rgba(0, 0, 0, .8) 65%, rgba(0, 0, 0, .92) 100%) !important;
             pointer-events: auto !important;
         }
 
@@ -1922,6 +1922,7 @@
             color: #fff !important;
             font-size: 17px !important;
             text-align: left !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, .9), 0 0 14px rgba(0, 0, 0, .7) !important;
         }
 
         body.skin-magz.jtv-homepage .jtv-home-stack-card,
