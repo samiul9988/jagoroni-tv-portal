@@ -296,6 +296,14 @@ body.skin-magz.jtv-homepage .jtv-masthead-art {
         overflow: visible !important;
     }
 
+body.skin-magz.jtv-homepage .jtv-masthead-mobile-search {
+        display: none !important;
+    }
+
+body.skin-magz.jtv-homepage .jtv-nav-home-label {
+        display: none !important;
+    }
+
 body.skin-magz.jtv-homepage .jtv-masthead-live-badge {
         display: flex !important;
         flex-direction: column !important;
@@ -850,7 +858,18 @@ body.skin-magz.jtv-homepage .jtv-masthead-art {
 @media (max-width: 767px) {
 body.skin-magz.jtv-homepage header.primary .firstbar.jtv-masthead {
             min-height: 0 !important;
-            padding: 10px 0 !important;
+            padding: 8px 0 !important;
+        }
+
+body.skin-magz.jtv-homepage .jtv-masthead-mobile-search {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 28px !important;
+            height: 28px !important;
+            color: #173a2a !important;
+            font-size: 15px !important;
+            text-decoration: none !important;
         }
 
 body.skin-magz.jtv-homepage header.primary .jtv-masthead-inner {
@@ -864,7 +883,11 @@ body.skin-magz.jtv-homepage header.primary .jtv-masthead-inner {
         }
 
         body.skin-magz.jtv-homepage .firstbar.jtv-masthead::before {
-            display: none !important;
+            display: block !important;
+            inset: 0 -6px 0 auto !important;
+            width: 185px !important;
+            background: url('{{ asset('themes/magz/images/jtv-masthead-monument-crop.webp') }}') right top / auto 100% no-repeat !important;
+            opacity: 1 !important;
         }
 
 body.skin-magz.jtv-homepage .jtv-masthead-brand {
