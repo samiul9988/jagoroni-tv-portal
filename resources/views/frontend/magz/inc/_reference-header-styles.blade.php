@@ -668,17 +668,16 @@ body.skin-magz.jtv-homepage .jtv-topbar-title {
         }
 
 body.skin-magz.jtv-homepage .jtv-topbar-meta {
-            max-width: 31vw !important;
-            overflow: hidden !important;
+            max-width: none !important;
+            overflow: visible !important;
+            gap: 6px !important;
+            font-size: 11px !important;
+            white-space: nowrap !important;
         }
 
-body.skin-magz.jtv-homepage .jtv-topbar-actions {
-            min-width: 0 !important;
-            flex: 0 0 auto !important;
-            gap: 4px !important;
-        }
-
-body.skin-magz.jtv-homepage .jtv-topbar-social {
+body.skin-magz.jtv-homepage .jtv-topbar-actions,
+        body.skin-magz.jtv-homepage .jtv-topbar-search,
+        body.skin-magz.jtv-homepage .jtv-topbar-social {
             display: none !important;
         }
 }
@@ -849,22 +848,75 @@ body.skin-magz.jtv-homepage .jtv-masthead-art {
 }
 
 @media (max-width: 767px) {
-body.skin-magz.jtv-homepage .jtv-masthead-inner {
-            grid-template-columns: minmax(0, 1fr) !important;
-            justify-items: center !important;
-            text-align: center !important;
+body.skin-magz.jtv-homepage header.primary .firstbar.jtv-masthead {
+            min-height: 0 !important;
+            padding: 10px 0 !important;
+        }
+
+body.skin-magz.jtv-homepage header.primary .jtv-masthead-inner {
+            display: flex !important;
+            grid-template-columns: none !important;
+            justify-items: initial !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 10px !important;
+            text-align: left !important;
         }
 
         body.skin-magz.jtv-homepage .firstbar.jtv-masthead::before {
             display: none !important;
         }
 
-body.skin-magz.jtv-homepage .jtv-masthead-brand-copy {
-            min-width: 0 !important;
+body.skin-magz.jtv-homepage .jtv-masthead-brand {
+            justify-content: flex-start !important;
         }
 
-body.skin-magz.jtv-homepage .jtv-masthead-brand-copy strong {
-            font-size: clamp(22px, 7vw, 31px) !important;
+body.skin-magz.jtv-homepage header.primary .jtv-masthead-brand-mark {
+            width: 48px !important;
+            height: 48px !important;
+            max-width: 48px !important;
+        }
+
+body.skin-magz.jtv-homepage .jtv-masthead-brand-copy {
+            min-width: 0 !important;
+            padding-top: 0 !important;
+        }
+
+body.skin-magz.jtv-homepage header.primary .jtv-masthead-brand-copy strong {
+            font-size: clamp(18px, 6vw, 24px) !important;
+        }
+
+body.skin-magz.jtv-homepage header.primary .jtv-masthead-brand-copy small {
+            font-size: 9px !important;
+            white-space: normal !important;
+        }
+
+body.skin-magz.jtv-homepage .jtv-masthead-message {
+            display: none !important;
+        }
+
+body.skin-magz.jtv-homepage header.primary .jtv-masthead-art {
+            display: flex !important;
+            flex: 0 0 auto !important;
+            height: auto !important;
+            padding-right: 0 !important;
+            justify-content: flex-end !important;
+        }
+
+body.skin-magz.jtv-homepage .jtv-masthead-live-badge {
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 6px !important;
+            margin-bottom: 0 !important;
+        }
+
+body.skin-magz.jtv-homepage .jtv-masthead-live-btn {
+            display: none !important;
+        }
+
+body.skin-magz.jtv-homepage .jtv-masthead-live-tag {
+            padding: 4px 11px !important;
+            font-size: 11px !important;
         }
 }
 

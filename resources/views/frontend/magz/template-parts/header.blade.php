@@ -47,6 +47,9 @@
                 <span class="jtv-masthead-live-tag">LIVE</span>
                 <span class="jtv-masthead-live-btn">লাইভ দেখুন <i class="fa-solid fa-arrow-right"></i></span>
             </a>
+            <a class="jtv-masthead-mobile-search" href="{{ url('/search') }}" aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
         </div>
     </div>
 </div>

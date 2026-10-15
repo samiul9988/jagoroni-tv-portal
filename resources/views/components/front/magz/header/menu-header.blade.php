@@ -12,7 +12,7 @@
                 <ul class="nav-list">
                     @php($isHome = request()->is('/') || request()->is(''))
                     <li class="jtv-nav-home-link @if($isHome)active current-menu-item @endif">
-                        <a href="{{ url('/') }}" title="Home" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+                        <a href="{{ url('/') }}" title="Home" aria-label="Home"><i class="fa-solid fa-house"></i><span class="jtv-nav-home-label">প্রচ্ছদ</span></a>
                     </li>
                     @foreach($menus as $menu)
                         @php($isCurrentMenu = !empty($menu['link']) && url()->current() === url($menu['link']))
