@@ -272,12 +272,12 @@
        backgrounds. */
     body.skin-magz :where(
         p, h1, h2, h3, h4, h5, h6, li, dt, dd, time, small, label, blockquote, caption, figcaption
-    ):not(nav *):not(.btn):not(button):not([class*="overlay"] *):not([class*="overlay"]):not(.category):not(.category *):not([class*="badge"]):not([class*="badge"] *) {
+    ):not(nav *):not(.btn):not(button):not([class*="overlay"] *):not([class*="overlay"]):not(.category):not(.category *):not([class*="badge"]):not([class*="badge"] *):not(.jtv-cat-banner):not(.jtv-cat-banner *) {
         font-weight: 700 !important;
         color: #000 !important;
     }
 
-    body.skin-magz :where(span, a):not(nav *):not(.btn):not(button):not([class*="badge"]):not([class*="badge"] *):not([class*="tag"]):not([class*="pill"]):not([class*="btn"]):not([class*="overlay"] *):not(.category):not(.category *) {
+    body.skin-magz :where(span, a):not(nav *):not(.btn):not(button):not([class*="badge"]):not([class*="badge"] *):not([class*="tag"]):not([class*="pill"]):not([class*="btn"]):not([class*="overlay"] *):not(.category):not(.category *):not(.jtv-cat-banner):not(.jtv-cat-banner *) {
         font-weight: 700 !important;
         color: #000 !important;
     }

@@ -10,13 +10,22 @@
             @php $menus = $menuHeader @endphp
             @if($menus)
                 <ul class="nav-list">
-                    @php($isHome = request()->is('/') || request()->is(''))
+                    @php $isHome = request()->is('/') || request()->is(''); @endphp
                     <li class="jtv-nav-home-link @if($isHome)active current-menu-item @endif">
                         <a href="{{ url('/') }}" title="Home" aria-label="Home"><i class="fa-solid fa-house"></i><span class="jtv-nav-home-label">প্রচ্ছদ</span></a>
                     </li>
                     @foreach($menus as $menu)
-                        @php($isCurrentMenu = !empty($menu['link']) && url()->current() === url($menu['link']))
-                        @php($isLiveMenu = !empty($menu['link']) && \Illuminate\Support\Str::endsWith(rtrim($menu['link'], '/'), '/live-tv'))
+                        @php
+                            $isCurrentMenu = false;
+                            if (!empty($menu['link'])) {
+                                $menuSlug = trim((string) parse_url($menu['link'], PHP_URL_PATH), '/');
+                                $menuSlug = $menuSlug !== '' ? basename($menuSlug) : '';
+                                $currentSlug = basename(trim(request()->path(), '/'));
+                                $isCurrentMenu = url()->current() === url($menu['link'])
+                                    || ($menuSlug !== '' && $menuSlug === $currentSlug);
+                            }
+                        @endphp
+                        @php $isLiveMenu = !empty($menu['link']) && \Illuminate\Support\Str::endsWith(rtrim($menu['link'], '/'), '/live-tv'); @endphp
                         <li class="@if($menu['child'])dropdown magz-dropdown @endif @if($isCurrentMenu)active current-menu-item @endif @if($isLiveMenu)jtv-nav-live-item @endif">
                             @if($isLiveMenu)
                                 <a href="{{ $menu['link'] }}" title="{{ $menu['label'] }}">
