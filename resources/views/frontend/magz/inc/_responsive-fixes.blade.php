@@ -18,6 +18,18 @@
     body.skin-magz .col-lg-8 iframe[src*="youtube"], body.skin-magz .col-lg-8 iframe[src*="facebook"],
     body.skin-magz .col-lg-8 iframe[src*="vimeo"] { width: 100%; aspect-ratio: 16 / 9; height: auto; }
 
+    /* Hide the masthead "লাইভ দেখুন" button and the nav's "লাইভ স্ট্রিমিং" pill site-wide. */
+    body.skin-magz .jtv-masthead-live-btn,
+    body.skin-magz.jtv-homepage.jtv-homepage .jtv-masthead-live-btn,
+    body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item.jtv-nav-live-item {
+        display: none !important;
+    }
+
+    /* Category banner: drop the "Home > Category" breadcrumb, keep just the heading + subtitle. */
+    body.skin-magz .jtv-cat-crumb {
+        display: none !important;
+    }
+
     @media (max-width: 767px) {
         body.skin-magz input, body.skin-magz select, body.skin-magz textarea { max-width: 100%; font-size: 16px; }
         body.skin-magz .btn, body.skin-magz button { min-height: 40px; }
