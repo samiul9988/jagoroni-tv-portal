@@ -180,7 +180,11 @@
         }
 
         body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav .mobile-toggle {
+            margin-left: 0 !important;
             margin-right: 8px !important;
+        }
+        body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav .jtv-nav-container {
+            padding-left: 8px !important;
         }
         body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav #menu-list > ul.nav-list > li > a,
         body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav #menu-list > ul.nav-list > li.jtv-nav-home-link > a {
