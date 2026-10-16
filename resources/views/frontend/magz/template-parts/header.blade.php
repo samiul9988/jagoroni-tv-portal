@@ -12,6 +12,10 @@
             <span><i class="fa-regular fa-clock"></i> {{ now()->format('h:i A') }}</span>
         </div>
         <div class="jtv-topbar-title">বাংলাদেশ সরকারের অনলাইনভিত্তিক বেসরকারি টেলিভিশন চ্যানেল</div>
+        <div class="jtv-lang-toggle" role="group" aria-label="Language">
+            <button type="button" class="jtv-lang-btn" data-lang="bn">বাং</button>
+            <button type="button" class="jtv-lang-btn" data-lang="en">EN</button>
+        </div>
         <div class="jtv-topbar-actions">
             <ul class="jtv-topbar-social">
                 @foreach($socialLinks->take(5) as $link)

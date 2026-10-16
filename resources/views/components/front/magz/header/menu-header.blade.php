@@ -30,11 +30,11 @@
                             @if($isLiveMenu)
                                 <a href="{{ $menu['link'] }}" title="{{ $menu['label'] }}">
                                     <span class="jtv-live-ico" aria-hidden="true"><i class="fa-solid fa-tower-broadcast"></i></span>
-                                    <span class="jtv-live-txt">{{ $menu['label'] }}</span>
+                                    <span class="jtv-live-txt jtv-i18n" data-bn="{{ $menu['label'] }}" data-en="{{ \App\Helpers\MenuTranslationHelper::toEnglish($menu['label']) }}">{{ $menu['label'] }}</span>
                                     <span class="jtv-live-tag">LIVE</span>
                                 </a>
                             @else
-                                <a href="{{ $menu['link'] }}" title="">{{ $menu['label'] }} @if($menu['child'])<i class="arrow-right"></i>@endif</a>
+                                <a href="{{ $menu['link'] }}" title=""><span class="jtv-i18n" data-bn="{{ $menu['label'] }}" data-en="{{ \App\Helpers\MenuTranslationHelper::toEnglish($menu['label']) }}">{{ $menu['label'] }}</span> @if($menu['child'])<i class="arrow-right"></i>@endif</a>
                             @endif
                             @if($menu['child'])
                                 @include('frontend.magz.inc._child', ['childs'=>$menu['child']])
@@ -175,5 +175,69 @@
     @media (max-width: 991px) {
         body.skin-magz nav.jtv-main-nav ul.nav-list > li.jtv-nav-live-item { padding: 6px 12px !important; }
     }
+
+    /* Bangla/English toggle for header menu labels (menu text only — articles stay Bangla). */
+    .jtv-lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        flex: none;
+        gap: 2px;
+        padding: 2px;
+        border-radius: 999px;
+        background: rgba(11, 107, 58, .08);
+    }
+    .jtv-lang-btn {
+        appearance: none;
+        border: 0;
+        margin: 0;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: transparent;
+        color: #294739;
+        font-size: 11px;
+        font-weight: 800;
+        line-height: 1.4;
+        cursor: pointer;
+    }
+    .jtv-lang-btn.is-active {
+        background: #0b6b3a;
+        color: #fff;
+    }
+    @media (max-width: 767px) {
+        .jtv-lang-toggle { padding: 1px; }
+        .jtv-lang-btn { padding: 2px 8px; font-size: 10px; }
+    }
 </style>
+<script>
+(function () {
+    var STORAGE_KEY = 'jtvSiteLang';
+
+    function currentLang() {
+        try { return localStorage.getItem(STORAGE_KEY) || 'bn'; } catch (e) { return 'bn'; }
+    }
+
+    function applyLang(lang) {
+        document.querySelectorAll('.jtv-i18n').forEach(function (el) {
+            var bn = el.getAttribute('data-bn');
+            var en = el.getAttribute('data-en');
+            el.textContent = (lang === 'en' && en) ? en : bn;
+        });
+        document.querySelectorAll('.jtv-lang-btn').forEach(function (btn) {
+            btn.classList.toggle('is-active', btn.getAttribute('data-lang') === lang);
+        });
+        document.documentElement.setAttribute('data-site-lang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        applyLang(currentLang());
+        document.querySelectorAll('.jtv-lang-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var lang = btn.getAttribute('data-lang');
+                try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+                applyLang(lang);
+            });
+        });
+    });
+})();
+</script>
 @endonce

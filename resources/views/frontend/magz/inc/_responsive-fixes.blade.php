@@ -253,8 +253,11 @@
             justify-content: space-between !important; gap: 8px !important; text-align: left !important;
         }
         body.skin-magz.jtv-homepage.jtv-homepage .jtv-topbar-inner > .jtv-topbar-meta {
-            flex: 1 1 auto !important; min-width: 0 !important; width: auto !important; font-size: 11px !important;
+            flex: 0 0 auto !important; min-width: max-content !important; width: auto !important; font-size: 11px !important;
             white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important;
+        }
+        body.skin-magz.jtv-homepage.jtv-homepage .jtv-topbar-inner > .jtv-lang-toggle {
+            flex: none !important; margin-left: auto !important;
         }
         body.skin-magz.jtv-homepage.jtv-homepage .jtv-topbar-inner > .jtv-topbar-actions {
             flex: 0 1 150px !important; min-width: 0 !important; width: auto !important;
