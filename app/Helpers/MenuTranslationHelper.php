@@ -27,6 +27,18 @@ class MenuTranslationHelper
         'অর্থনীতি' => 'Economy',
         'স্বাস্থ্য' => 'Health',
         'প্রযুক্তি' => 'Technology',
+        'যোগাযোগ' => 'Contact',
+        'বাংলাদেশ' => 'Bangladesh',
+        'বিশ্ব' => 'World',
+        'ব্যবসা' => 'Business',
+        'বিজ্ঞান' => 'Science',
+        'ভ্রমণ' => 'Travel',
+        'ফিচার' => 'Feature',
+        'ধর্ম' => 'Religion',
+        'চাকরি' => 'Jobs',
+        'সাহিত্য' => 'Literature',
+        'ক্যাম্পাস' => 'Campus',
+        'পরিবেশ' => 'Environment',
     ];
 
     public static function toEnglish(?string $label): string
