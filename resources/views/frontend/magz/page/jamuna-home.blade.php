@@ -1588,6 +1588,7 @@
         }
 
         body.skin-magz.jtv-homepage .jtv-topbar-actions,
+        body.skin-magz.jtv-homepage .jtv-topbar-inner > .jtv-topbar-actions,
         body.skin-magz.jtv-homepage .jtv-topbar-search,
         body.skin-magz.jtv-homepage .jtv-topbar-social {
             display: none !important;

@@ -180,10 +180,20 @@
         }
 
         body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav .mobile-toggle {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+        body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav .mobile-toggle:first-child {
             flex: 0 0 auto !important;
             min-width: 28px !important;
-            margin-left: 0 !important;
-            margin-right: 8px !important;
+            margin-right: 4px !important;
+        }
+        body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav .mobile-toggle:not(:first-child) {
+            flex: 0 0 0px !important;
+            min-width: 0 !important;
+            width: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
         }
         body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav .jtv-nav-container {
             padding-left: 8px !important;

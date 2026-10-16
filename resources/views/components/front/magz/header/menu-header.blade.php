@@ -208,8 +208,8 @@
         color: #fff;
     }
     @media (max-width: 767px) {
-        .jtv-lang-toggle { padding: 1px; flex-shrink: 0 !important; }
-        .jtv-lang-btn { padding: 2px 8px; font-size: 10px; }
+        .jtv-lang-toggle { padding: 1px; flex-shrink: 0 !important; gap: 1px; }
+        .jtv-lang-btn { padding: 2px 6px; font-size: 9px; }
     }
 </style>
 <script>
