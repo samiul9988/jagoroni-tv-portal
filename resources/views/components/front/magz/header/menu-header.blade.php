@@ -179,12 +179,15 @@
     /* Bangla/English toggle for header menu labels (menu text only — articles stay Bangla). */
     .jtv-lang-toggle {
         display: inline-flex;
-        align-items: center;
         flex: none;
+        align-items: center;
+        flex-shrink: 0;
         gap: 2px;
         padding: 2px;
+        border: 1px solid rgba(11, 107, 58, .25);
         border-radius: 999px;
         background: rgba(11, 107, 58, .08);
+        white-space: nowrap;
     }
     .jtv-lang-btn {
         appearance: none;
@@ -197,6 +200,7 @@
         font-size: 11px;
         font-weight: 800;
         line-height: 1.4;
+        white-space: nowrap;
         cursor: pointer;
     }
     .jtv-lang-btn.is-active {
@@ -204,7 +208,7 @@
         color: #fff;
     }
     @media (max-width: 767px) {
-        .jtv-lang-toggle { padding: 1px; }
+        .jtv-lang-toggle { padding: 1px; flex-shrink: 0 !important; }
         .jtv-lang-btn { padding: 2px 8px; font-size: 10px; }
     }
 </style>

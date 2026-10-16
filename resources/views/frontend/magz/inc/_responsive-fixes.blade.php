@@ -180,6 +180,8 @@
         }
 
         body.skin-magz.jtv-homepage.jtv-homepage nav.jtv-main-nav .mobile-toggle {
+            flex: 0 0 auto !important;
+            min-width: 28px !important;
             margin-left: 0 !important;
             margin-right: 8px !important;
         }
