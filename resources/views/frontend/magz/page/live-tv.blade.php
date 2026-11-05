@@ -271,13 +271,37 @@
     }
 
     function attachVideo(video, src, type) {
-        video.addEventListener('error', showFallback);
         var isHls = type === 'hls' || /\.m3u8(\?|$)/i.test(src);
+        // hls.js drives playback via MediaSource for HLS; let its own ERROR
+        // handler decide what's fatal instead of the native <video> error
+        // event, which can fire during an hls.js-internal recovery and would
+        // otherwise show the fallback over a stream that's actually fine.
+        if (!(isHls && !video.canPlayType('application/vnd.apple.mpegurl'))) {
+            video.addEventListener('error', showFallback);
+        }
         if (isHls && !video.canPlayType('application/vnd.apple.mpegurl')) {
             var go = function () {
                 if (window.Hls && Hls.isSupported()) {
                     var hls = new Hls();
-                    hls.on(Hls.Events.ERROR, function (e, data) { if (data && data.fatal) { showFallback(); } });
+                    var netRetries = 0;
+                    hls.on(Hls.Events.ERROR, function (e, data) {
+                        if (!data || !data.fatal) { return; }
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                // Transient manifest/segment hiccups are normal on a live
+                                // stream; retry a few times before giving up.
+                                if (netRetries++ < 5) { setTimeout(function () { hls.startLoad(); }, 1000); }
+                                else { hls.destroy(); showFallback(); }
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                hls.destroy();
+                                showFallback();
+                        }
+                    });
+                    hls.on(Hls.Events.MANIFEST_PARSED, function () { netRetries = 0; });
                     hls.loadSource(src); hls.attachMedia(video);
                 } else { showFallback(); }
             };
