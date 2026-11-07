@@ -116,18 +116,25 @@ class PostsDataTable extends DataTable
      */
     public function query(ArticleService $article, Post $model)
     {
-        $posts = $model::article();
-
-        $q = (is_null(request('filter')) || request('filter') == '0')
-            ? $posts->languageCurrentAuthSession()
-            : $posts->wherePostLanguage(request('filter'));
-
         /** @var object User */
         $currentUser = Auth::user();
-        
-        return $currentUser->hasRole('super-admin')
-            ? $q->latest()->newQuery()
-            : $article->qryDataTable($q);
+        $filter = request('filter');
+        $hasFilter = !is_null($filter) && $filter !== '0';
+
+        if ($currentUser->hasRole('super-admin')) {
+            // A super-admin sees everything regardless of their own account's
+            // language, unless they've explicitly picked one from the filter.
+            $base = $model::article()->latest();
+
+            return $hasFilter ? $base->wherePostLanguage($filter) : $base;
+        }
+
+        $posts = $model::article();
+        $q = $hasFilter
+            ? $posts->wherePostLanguage($filter)
+            : $posts->languageCurrentAuthSession();
+
+        return $article->qryDataTable($q);
     }
 
     /**
