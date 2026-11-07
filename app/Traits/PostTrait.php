@@ -264,11 +264,13 @@ trait PostTrait
      */
     public function deletePost($item)
     {
-        $transId     = $item->translations->first()->id;
-        $translation = Translation::find($transId);
-        $valueArr    = json_decode($translation->value, true);
+        // Older posts can predate the translation-group pivot (post_translations);
+        // treat a missing one as "nothing else shares these images" rather than
+        // fatal-erroring on null.
+        $translation = $item->translations->first();
+        $valueArr    = $translation ? (json_decode($translation->value, true) ?: []) : [];
 
-        if (count($valueArr) == 1) {
+        if (count($valueArr) <= 1) {
             if ($item->post_image) {
                 $this->deleteImage('images', $item->post_image);
                 $this->deleteImage('images/80', $item->post_image);
@@ -283,14 +285,17 @@ trait PostTrait
                 $this->deleteImage('images', $image);
             }
         }
-        $key = array_search($item->id, $valueArr, true);
 
-        if ($key !== false) {
-            unset($valueArr[$key]);
+        if ($translation) {
+            $key = array_search($item->id, $valueArr, true);
+
+            if ($key !== false) {
+                unset($valueArr[$key]);
+            }
+
+            $translation->value = json_encode($valueArr);
+            $translation->save();
         }
-
-        $translation->value = json_encode($valueArr);
-        $translation->save();
     }
 
     /**
