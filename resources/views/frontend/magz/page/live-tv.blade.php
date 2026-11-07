@@ -288,29 +288,100 @@
         }
         if (isHls && !video.canPlayType('application/vnd.apple.mpegurl')) {
             var go = function () {
-                if (window.Hls && Hls.isSupported()) {
-                    var hls = new Hls();
+                if (!(window.Hls && Hls.isSupported())) { showFallback(); return; }
+
+                // A 24/7 live feed should never need a manual page reload to
+                // come back — always reconnect instead of giving up. A fatal
+                // error just means "rebuild the hls.js instance", not "stop".
+                var hls = null;
+                var reinitTimer = null;
+                var watchdogTimer = null;
+                var mediaErrorRetries = 0;
+                var lastTime = -1;
+                var stuckTicks = 0;
+
+                function teardown() {
+                    clearInterval(watchdogTimer);
+                    clearTimeout(reinitTimer);
+                    if (hls) {
+                        try { hls.destroy(); } catch (err) { /* ignore */ }
+                        hls = null;
+                    }
+                }
+
+                function scheduleReinit(delay) {
+                    clearTimeout(reinitTimer);
+                    reinitTimer = setTimeout(init, delay);
+                }
+
+                function init() {
+                    teardown();
+                    hls = new Hls();
                     var netRetries = 0;
+
                     hls.on(Hls.Events.ERROR, function (e, data) {
                         if (!data || !data.fatal) { return; }
                         switch (data.type) {
                             case Hls.ErrorTypes.NETWORK_ERROR:
-                                // Transient manifest/segment hiccups are normal on a live
-                                // stream; retry a few times before giving up.
-                                if (netRetries++ < 5) { setTimeout(function () { hls.startLoad(); }, 1000); }
-                                else { hls.destroy(); showFallback(); }
+                                // Manifest/segment hiccups are normal on a live stream.
+                                // Back off a little more each time, but never stop trying.
+                                netRetries++;
+                                setTimeout(function () {
+                                    if (!hls) { return; }
+                                    if (netRetries > 6) { scheduleReinit(500); }
+                                    else {
+                                        try { hls.startLoad(); }
+                                        catch (err) { scheduleReinit(500); }
+                                    }
+                                }, Math.min(1000 * netRetries, 10000));
                                 break;
                             case Hls.ErrorTypes.MEDIA_ERROR:
-                                hls.recoverMediaError();
+                                mediaErrorRetries++;
+                                if (mediaErrorRetries > 4) {
+                                    mediaErrorRetries = 0;
+                                    scheduleReinit(500);
+                                } else {
+                                    try { hls.recoverMediaError(); }
+                                    catch (err) { scheduleReinit(500); }
+                                }
                                 break;
                             default:
-                                hls.destroy();
-                                showFallback();
+                                scheduleReinit(1000);
                         }
                     });
-                    hls.on(Hls.Events.MANIFEST_PARSED, function () { netRetries = 0; });
-                    hls.loadSource(src); hls.attachMedia(video);
-                } else { showFallback(); }
+
+                    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                        netRetries = 0;
+                        hideFallback();
+                        var p = video.play();
+                        if (p && p.catch) { p.catch(function () { /* autoplay may need a click */ }); }
+                    });
+
+                    hls.loadSource(src);
+                    hls.attachMedia(video);
+
+                    // Belt-and-braces: if playback silently freezes (currentTime
+                    // stops advancing) without hls.js ever reporting a fatal
+                    // error, force a reconnect anyway instead of sitting dead.
+                    clearInterval(watchdogTimer);
+                    lastTime = -1;
+                    stuckTicks = 0;
+                    watchdogTimer = setInterval(function () {
+                        if (video.paused || video.seeking || video.ended) { return; }
+                        if (video.currentTime === lastTime) {
+                            stuckTicks++;
+                            if (stuckTicks >= 3) {
+                                stuckTicks = 0;
+                                scheduleReinit(300);
+                            }
+                        } else {
+                            stuckTicks = 0;
+                            lastTime = video.currentTime;
+                        }
+                    }, 5000);
+                }
+
+                init();
             };
             if (window.Hls) { go(); return; }
             var s = document.createElement('script');
