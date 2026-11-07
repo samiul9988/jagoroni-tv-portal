@@ -2,12 +2,16 @@
 
 @php
     $socialLinks = collect(json_decode(config('settings.links') ?: '[]'));
+
+    $bnDigits = ['0' => '০', '1' => '১', '2' => '২', '3' => '৩', '4' => '৪', '5' => '৫', '6' => '৬', '7' => '৭', '8' => '৮', '9' => '৯'];
+    \Carbon\Carbon::setLocale('bn');
+    $todayBn = strtr(now()->translatedFormat('l, j F Y'), $bnDigits);
 @endphp
 
 <div class="jtv-topbar">
     <div class="jtv-topbar-inner">
         <div class="jtv-topbar-meta">
-            <span class="jtv-date"><i class="fa-regular fa-calendar-days"></i> বুধবার, ১৭ সেপ্টেম্বর ২০২৫</span>
+            <span class="jtv-date"><i class="fa-regular fa-calendar-days"></i> {{ $todayBn }}</span>
             <span class="jtv-dot">|</span>
             <span><i class="fa-regular fa-clock"></i> {{ now()->format('h:i A') }}</span>
         </div>
