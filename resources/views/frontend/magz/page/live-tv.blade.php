@@ -5,6 +5,13 @@
     $bnTime = fn ($t) => strtr((string) $t, $bn);
     $iframe = $stream->iframe_url;
     $hasSource = $stream->stream_type === 'embed' ? filled($stream->embed_code) : filled($stream->stream_url);
+    // The stream origin is plain http:// with no cert for its bare IP, which
+    // browsers block as mixed content on this https:// page. Route HLS
+    // through our own same-origin proxy instead of hitting it directly.
+    $playableStreamUrl = $stream->stream_url;
+    if ($stream->stream_type === 'hls' && $stream->stream_url && str_starts_with($stream->stream_url, 'http://')) {
+        $playableStreamUrl = route('live.stream.proxy', ['path' => 'index.m3u8']);
+    }
     $shown = $current ?? $upcoming;
     $posterUrl = $stream->poster_url ?: asset('img/cover-video.webp');
 @endphp
@@ -149,7 +156,7 @@
                         @elseif($iframe)
                             <iframe id="jtvLiveFrame" src="{{ $iframe }}{{ $stream->stream_type === 'youtube' ? '&enablejsapi=1&origin=' . urlencode(url('/')) : '' }}" title="{{ $stream->title }}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
                         @else
-                            <video id="jtvLiveVideo" controls playsinline autoplay muted @if($stream->poster_url) poster="{{ $stream->poster_url }}" @endif data-src="{{ $stream->stream_url }}" data-type="{{ $stream->stream_type }}"></video>
+                            <video id="jtvLiveVideo" controls playsinline autoplay muted @if($stream->poster_url) poster="{{ $stream->poster_url }}" @endif data-src="{{ $playableStreamUrl }}" data-type="{{ $stream->stream_type }}"></video>
                         @endif
                     @else
                         <div class="jtv-live-off jtv-live-off-poster" style="background-image: linear-gradient(rgba(5,11,9,.35), rgba(5,11,9,.7)), url('{{ $posterUrl }}')">

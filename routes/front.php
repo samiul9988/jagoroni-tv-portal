@@ -63,6 +63,9 @@ Route::prefix(LaravelLocalization::setLocale())->middleware('public', 'XSS', 'lo
     })->name('category.news');
     Route::get('/videos/latest', [VideoPostController::class, 'index'])->name('videos.latest');
     Route::get('/live-tv', \App\Http\Controllers\Front\LiveController::class)->name('live.tv');
+    Route::get('/live-stream-proxy/{path?}', [\App\Http\Controllers\Front\LiveStreamProxyController::class, 'stream'])
+        ->where('path', '.*')
+        ->name('live.stream.proxy');
     Route::get('/{slug}',[HomeController::class, 'show'])->name('show');
     Route::get('/audios/latest', [AudioPostController::class, 'index'])->name('audios.latest');
     Route::get('/tag/{tag}', [TagController::class, 'index'])->name('tag.show');
