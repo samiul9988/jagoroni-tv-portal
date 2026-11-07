@@ -28,13 +28,15 @@ class VideoPostRequest extends FormRequest
             {
                 return [
                     'post_source' => 'required',
-                    'post_title' => 'required|min:3'
+                    'post_title' => 'required|min:3',
+                    'post_image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp|max:10240',
                 ];
             }
             case 'PUT':
                 return [
                     'post_source' => 'required',
-                    'post_title' => 'required|min:3'
+                    'post_title' => 'required|min:3',
+                    'post_image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,webp|max:10240',
                 ];
             default: break;
         }
