@@ -19,6 +19,28 @@ Class SeoHelper
     }
 
     /**
+     * Some crawlers (WhatsApp among them) skip rendering a link-preview
+     * thumbnail entirely if og:image:width/height aren't present, even
+     * when the image itself loads fine. Read the real dimensions off disk
+     * so we can always declare them.
+     *
+     * @return array{width:int,height:int}
+     */
+    public static function getImageDimensions()
+    {
+        $path = config('settings.og_image')
+            ? storage_path('app/public/assets/' . config('settings.og_image'))
+            : public_path('img/cover.webp');
+
+        $size = @getimagesize($path);
+
+        return [
+            'width' => $size[0] ?? 1200,
+            'height' => $size[1] ?? 630,
+        ];
+    }
+
+    /**
      * getImagePage
      *
      * @param  mixed $page
@@ -64,9 +86,13 @@ Class SeoHelper
         SEOTools::opengraph()->setDescription($description ?: config('settings.site_description'));
         SEOTools::opengraph()->setUrl($url ?: config('settings.site_url'));
         SEOTools::opengraph()->setSiteName($siteName ?:  config('settings.site_name'));
-        SEOTools::opengraph()->addImage($image ?: self::getImage());
+        if ($image) {
+            SEOTools::opengraph()->addImage($image);
+        } else {
+            SEOTools::opengraph()->addImage(self::getImage(), self::getImageDimensions());
+        }
     }
-    
+
     /**
      * getOpenGraphPage
      *
@@ -117,7 +143,11 @@ Class SeoHelper
         SEOTools::opengraph()->setDescription($description ?: config('settings.site_description'));
         SEOTools::opengraph()->setUrl($url ?: config('settings.site_url'));
         SEOTools::opengraph()->setSiteName($siteName ?:  config('settings.site_name'));
-        SEOTools::opengraph()->addImage($image ?: self::getImage());
+        if ($image) {
+            SEOTools::opengraph()->addImage($image);
+        } else {
+            SEOTools::opengraph()->addImage(self::getImage(), self::getImageDimensions());
+        }
     }
 
     /**
