@@ -5,13 +5,28 @@
     $bnTime = fn ($t) => strtr((string) $t, $bn);
     $iframe = $stream->iframe_url;
     $hasSource = $stream->stream_type === 'embed' ? filled($stream->embed_code) : filled($stream->stream_url);
-    // The stream origin is plain http:// with no cert for its bare IP, which
-    // browsers block as mixed content on this https:// page. Route HLS
-    // through our own same-origin proxy instead of hitting it directly.
+
+    // This stream origin is unreliable to embed inline, for two unrelated
+    // reasons we can't fix from this app's code:
+    //  - Over https:// (live), the browser blocks the plain http:// stream
+    //    outright as mixed content, and our same-origin proxy can't stand in
+    //    for it because this host's outbound connections to that origin IP
+    //    are themselves firewalled (confirmed: connection refused, not just
+    //    slow) — a network-level block between two servers.
+    //  - Over http:// (local dev) mixed content isn't an issue, but the
+    //    origin intermittently serves a "gap" filler segment that comes
+    //    back 401 and gets blocked by the browser before hls.js can treat
+    //    it as a recoverable error, killing playback outright.
+    // The one thing that reliably works either way (confirmed manually) is a
+    // full top-level navigation to the stream origin's own built-in player
+    // page — mixed-content rules only apply to subresources loaded inside a
+    // page, never to navigating the tab itself, and the origin's own player
+    // handles its gap segments correctly. So: always hand off to that
+    // instead of attempting a fragile inline embed.
+    $isHlsHttp = $stream->stream_type === 'hls' && $stream->stream_url && str_starts_with($stream->stream_url, 'http://');
+    $mixedContentRisk = $isHlsHttp;
     $playableStreamUrl = $stream->stream_url;
-    if ($stream->stream_type === 'hls' && $stream->stream_url && str_starts_with($stream->stream_url, 'http://')) {
-        $playableStreamUrl = route('live.stream.proxy', ['path' => 'index.m3u8']);
-    }
+    $externalWatchUrl = $isHlsHttp ? preg_replace('#/[^/]*$#', '/', $stream->stream_url) : null;
     $shown = $current ?? $upcoming;
     $posterUrl = $stream->poster_url ?: asset('img/cover-video.webp');
 @endphp
@@ -67,6 +82,10 @@
     body.skin-magz .jtv-live-prog:hover .jtv-live-prog-img::after, body.skin-magz .jtv-live-prog:focus-visible .jtv-live-prog-img::after { opacity: 1; }
     body.skin-magz .jtv-live-prog.is-playing .jtv-live-prog-tag { background: #2b5cff; }
     body.skin-magz .jtv-live-off-poster, body.skin-magz .jtv-live-fallback { background-size: cover; background-position: center; }
+    body.skin-magz .jtv-live-external { background-size: cover; background-position: center; text-decoration: none; cursor: pointer; transition: filter .15s; }
+    body.skin-magz .jtv-live-external:hover, body.skin-magz .jtv-live-external:focus-visible { filter: brightness(1.15); }
+    body.skin-magz .jtv-live-external i { color: #ffd200; }
+    body.skin-magz .jtv-live-external span { max-width: 420px; }
     body.skin-magz .jtv-live-fallback { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 20px; text-align: center; color: #fff; }
     body.skin-magz .jtv-live-fallback[hidden] { display: none; }
     body.skin-magz .jtv-live-fallback i { font-size: 40px; color: #ffd200; }
@@ -155,6 +174,12 @@
                             <div class="jtv-live-embed">{!! $stream->embed_code !!}</div>
                         @elseif($iframe)
                             <iframe id="jtvLiveFrame" src="{{ $iframe }}{{ $stream->stream_type === 'youtube' ? '&enablejsapi=1&origin=' . urlencode(url('/')) : '' }}" title="{{ $stream->title }}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
+                        @elseif($mixedContentRisk)
+                            <a class="jtv-live-off jtv-live-external" href="{{ $externalWatchUrl }}" target="_blank" rel="noopener" style="background-image: linear-gradient(rgba(5,11,9,.45), rgba(5,11,9,.8)), url('{{ $posterUrl }}')">
+                                <i class="fa-solid fa-circle-play"></i>
+                                <strong>নতুন ট্যাবে লাইভ দেখুন</strong>
+                                <span>এই পেজে সরাসরি দেখানো যাচ্ছে না — উপরে ক্লিক করে নতুন ট্যাবে লাইভ দেখুন</span>
+                            </a>
                         @else
                             <video id="jtvLiveVideo" controls playsinline autoplay muted @if($stream->poster_url) poster="{{ $stream->poster_url }}" @endif data-src="{{ $playableStreamUrl }}" data-type="{{ $stream->stream_type }}"></video>
                         @endif
