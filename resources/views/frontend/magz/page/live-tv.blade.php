@@ -27,6 +27,11 @@
     $mixedContentRisk = $isHlsHttp;
     $playableStreamUrl = $stream->stream_url;
     $externalWatchUrl = $isHlsHttp ? preg_replace('#/[^/]*$#', '/', $stream->stream_url) : null;
+    // Only over http:// (local dev) can the origin's own player page be
+    // embedded inline at all — over https:// (live) the browser blocks an
+    // http:// iframe exactly as it blocks an http:// video, so there the
+    // click-through link below is the only thing that actually works.
+    $canEmbedInline = $isHlsHttp && !request()->secure();
     $shown = $current ?? $upcoming;
     $posterUrl = $stream->poster_url ?: asset('img/cover-video.webp');
 @endphp
@@ -174,6 +179,8 @@
                             <div class="jtv-live-embed">{!! $stream->embed_code !!}</div>
                         @elseif($iframe)
                             <iframe id="jtvLiveFrame" src="{{ $iframe }}{{ $stream->stream_type === 'youtube' ? '&enablejsapi=1&origin=' . urlencode(url('/')) : '' }}" title="{{ $stream->title }}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
+                        @elseif($canEmbedInline)
+                            <iframe id="jtvLiveFrame" src="{{ $externalWatchUrl }}" title="{{ $stream->title }}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
                         @elseif($mixedContentRisk)
                             <a class="jtv-live-off jtv-live-external" href="{{ $externalWatchUrl }}" target="_blank" rel="noopener" style="background-image: linear-gradient(rgba(5,11,9,.45), rgba(5,11,9,.8)), url('{{ $posterUrl }}')">
                                 <i class="fa-solid fa-circle-play"></i>
