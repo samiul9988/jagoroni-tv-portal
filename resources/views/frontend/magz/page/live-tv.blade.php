@@ -320,7 +320,12 @@
         }
         if (isHls && !video.canPlayType('application/vnd.apple.mpegurl')) {
             var go = function () {
-                if (!(window.Hls && Hls.isSupported())) { showFallback(); return; }
+                if (!(window.Hls && Hls.isSupported())) {
+                    // MediaSource can be transiently unavailable right after
+                    // a background-tab resume; retry rather than giving up.
+                    setTimeout(go, 2000);
+                    return;
+                }
 
                 // A 24/7 live feed should never need a manual page reload to
                 // come back — always reconnect instead of giving up. A fatal
@@ -416,9 +421,27 @@
                 init();
             };
             if (window.Hls) { go(); return; }
-            var s = document.createElement('script');
-            s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1'; s.onload = go; s.onerror = showFallback;
-            document.head.appendChild(s);
+
+            // A failed CDN fetch (one dropped request, a transient DNS blip)
+            // used to call showFallback() once and stop there permanently —
+            // the only fix was a manual page refresh. Keep retrying instead,
+            // alternating CDNs, so a 24/7 feed never needs that refresh.
+            var hlsCdns = [
+                'https://cdn.jsdelivr.net/npm/hls.js@1',
+                'https://unpkg.com/hls.js@1'
+            ];
+            var cdnAttempt = 0;
+            function loadHlsScript() {
+                var s = document.createElement('script');
+                s.src = hlsCdns[cdnAttempt % hlsCdns.length];
+                s.onload = function () { hideFallback(); go(); };
+                s.onerror = function () {
+                    cdnAttempt++;
+                    setTimeout(loadHlsScript, Math.min(2000 * cdnAttempt, 15000));
+                };
+                document.head.appendChild(s);
+            }
+            loadHlsScript();
         } else {
             video.src = src;
         }
